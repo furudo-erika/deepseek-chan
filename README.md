@@ -11,7 +11,7 @@
 
 DeepSeek-chan is a fan-made desktop pet built with SwiftUI and AppKit. She lives on your desktop, reacts to head pats and little conversations, and occasionally comes over with a tiny story of her own. No AI account is needed to enjoy her company.
 
-**Available now: macOS. Windows and Linux are planned.** This repository currently contains the native Mac implementation; there are no Windows or Linux builds yet.
+**Available now: macOS and Windows x64. Linux is planned.** macOS uses native SwiftUI/AppKit; the first Windows port uses Electron and shares the illustrated pose library.
 
 <p align="center">
   <img src="docs/images/halloween.png" width="420" alt="Nine Halloween poses: candy basket, bat cookie, pumpkin hugs, and more">
@@ -39,8 +39,10 @@ Get the DMG and its SHA-256 checksum from [Releases](https://github.com/furudo-e
 | --- | --- |
 | macOS 26+, Apple Silicon | Available as an ARM64 DMG |
 | macOS, Intel | No tested or published binary |
-| Windows | Planned; no EXE available |
+| Windows 10/11, x64 | EXE installer; first Windows release |
 | Linux | Planned; no package available |
+
+For Windows, download the EXE installer and follow the [Windows guide](docs/windows.md). For macOS:
 
 1. Open the DMG.
 2. Drag **DeepSeek-chan.app** into **Applications**.
@@ -51,16 +53,16 @@ Get the DMG and its SHA-256 checksum from [Releases](https://github.com/furudo-e
 To verify a download, put the DMG and its `.sha256` file in the same folder and run:
 
 ```sh
-shasum -a 256 -c DeepSeek-chan-1.8.1-arm64.dmg.sha256
+shasum -a 256 -c DeepSeek-chan-1.9.0-arm64.dmg.sha256
 ```
 
-## Task buddies (development build)
+## Task buddies
 
 Connect coding agents so she reacts to their tasks: typing while they work, a wave when they need you, and a tiny celebration when a turn finishes. The new **Task buddies** panel includes setup commands for Codex, Claude Code, Cursor, Pi, OMP, Grok Build, dsh, and T3 Code.
 
 Claude Code/Cursor/Grok use lifecycle hooks; Pi/OMP/dsh use native extensions; Codex supports MCP and a completion hook. T3 Code connects through a read-only MCP watcher. Grok uses confirmed idle rather than celebrating a vetoable stop hook. Pet feedback stays local and uses no AI API. See the [connection guide](docs/task-buddies.md) for setup and limitations.
 
-**Build from source to try this feature; the 1.8.1 release DMG does not include it.**
+Included in 1.9.0. Windows supports local snapshots and generic MCP; native hook installers and the automatic T3 watcher remain macOS-only. See the [Windows guide](docs/windows.md) for port differences.
 
 ## Say hello
 
@@ -154,13 +156,14 @@ The historical bundle identifier and internal executable name are retained for c
 
 ## Roadmap
 
-- [ ] Windows desktop implementation and testing on real Windows hardware.
+- [x] Windows x64 desktop implementation and automated installer checks.
+- [ ] Broader Windows hardware, DPI and feature-parity testing.
 - [ ] Linux desktop implementation and testing across supported desktops.
 - [ ] Developer ID signing and notarized macOS releases.
 - [ ] More outfits, richer connected animations, and new local story collections.
 - [ ] More hardware coverage for multiple displays, full-screen apps, and sleep/wake.
 
-Windows and Linux support require platform-specific desktop-window, input, and packaging work. The Mac code cannot currently be compiled into an EXE or a Linux app. Contributions and testers are welcome; cross-platform release dates are not promised.
+Windows uses a separate Electron implementation with shared artwork; it is not a cross-compile of the Swift app. Linux still needs platform testing and packaging. Contributions and Windows testers are welcome.
 
 ## Contributing and license
 

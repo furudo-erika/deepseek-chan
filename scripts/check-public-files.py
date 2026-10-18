@@ -11,13 +11,22 @@ import sys
 root = Path(__file__).resolve().parents[1]
 files = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
 private_dirs = {'.build', 'dist', '.codex', '.claude', '.cursor', '.grok', '.deepseek-chan', '.mcp-auth'}
-private_suffixes = {'.pem', '.key', '.p12', '.p8', '.keychain', '.mobileprovision', '.dmg', '.log'}
+private_suffixes = {'.pem', '.key', '.p12', '.p8', '.keychain', '.mobileprovision', '.dmg', '.log', '.exe', '.pdb', '.asar', '.map'}
 patterns = {
     'personal home path': re.compile(rb'/(?:Users|home)/[A-Za-z0-9_.-]+/'),
     'private key': re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
     'provider credential': re.compile(rb'(?:sk-or-v1-[a-f0-9]{32,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})'),
 }
 failures = []
+# Email metadata is public even when the source tree itself contains no address.
+for row in subprocess.check_output(['git', 'log', '--all', '--format=%h%x00%ae%x00%ce'], cwd=root).decode().splitlines():
+    commit, author, committer = row.split('\0')
+    if any(not email.endswith('@users.noreply.github.com') and email != 'noreply@github.com' for email in (author, committer)):
+        failures.append(('commit ' + commit, 'non-private author/committer email'))
+for row in subprocess.check_output(['git', 'for-each-ref', 'refs/tags', '--format=%(refname:short)%00%(taggeremail:trim)'], cwd=root).decode().splitlines():
+    tag, email = row.split('\0')
+    if email and not email.endswith('@users.noreply.github.com') and email != 'noreply@github.com':
+        failures.append(('tag ' + tag, 'non-private tagger email'))
 for name in filter(None, files):
     path = Path(name)
     if private_dirs.intersection(path.parts) or path.suffix in private_suffixes or path.name.startswith('.env'):

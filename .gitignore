@@ -29,3 +29,9 @@ dist/
 
 __pycache__/
 *.pyc
+
+# Windows desktop dependencies and packages
+node_modules/
+*.exe
+*.blockmap
+*.pdb

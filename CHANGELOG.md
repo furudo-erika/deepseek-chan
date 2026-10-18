@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased — 1.9.0 development
+## 1.9.0 — 2026-10-18
+
+- First Windows x64 installer: shared artwork, Halloween, chat, proactive stories, drag and eye-break reminders.
+- Windows local task snapshots and MCP reporting, encrypted optional AI key storage.
+- Automated Windows packaged-app, installer and uninstall checks; allowlisted release resources.
 
 - Task buddies: local task states, quiet working poses, and outfit-aware task reactions.
 - Codex MCP/completion adapter, Claude Code/Cursor hooks, and Pi/OMP extensions.

@@ -1,0 +1,85 @@
+{
+  "name": "deepseek-chan-desktop",
+  "version": "1.9.0",
+  "description": "A playful desktop companion with eye-break reminders",
+  "author": "DeepSeek-chan contributors",
+  "license": "MIT",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/core.test.cjs",
+    "test:app": "node test/app-smoke.cjs",
+    "dist:win": "electron-builder --win nsis --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "44.9.0",
+    "electron-builder": "26.15.3",
+    "playwright": "1.64.1",
+    "@electron/asar": "4.0.1"
+  },
+  "build": {
+    "appId": "io.github.furudo-erika.deepseek-chan",
+    "productName": "DeepSeek-chan",
+    "copyright": "Copyright \u00a9 2026 DeepSeek-chan contributors",
+    "directories": {
+      "output": "../dist/windows"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../Assets",
+        "to": "assets",
+        "filter": [
+          "action-library.json",
+          "atlas-layout.json",
+          "atlas-cutouts.json",
+          "atlas-regions.json",
+          "deepseek-chan-daily-atlas.png",
+          "deepseek-chan-dance-atlas.png",
+          "companion-icon-dark.png",
+          "actions/*.png"
+        ]
+      },
+      {
+        "from": "../integrations",
+        "to": "integrations",
+        "filter": [
+          "*.py",
+          "*.mjs",
+          "*.ts"
+        ]
+      },
+      {
+        "from": "../LICENSE",
+        "to": "LICENSE"
+      },
+      {
+        "from": "../NOTICE",
+        "to": "NOTICE"
+      }
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "win": {
+      "icon": "../Assets/companion-icon-dark.png",
+      "target": [
+        "nsis"
+      ],
+      "signAndEditExecutable": true,
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "runAfterFinish": false,
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "DeepSeek-chan-${version}-windows-x64-setup.${ext}"
+    }
+  }
+}

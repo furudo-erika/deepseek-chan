@@ -176,6 +176,9 @@ class Observer:
 
 
 def interactive():
+    if os.name == 'nt':
+        print('The automatic T3 watcher is currently macOS-only. Use the report_task MCP connector on Windows.', file=sys.stderr)
+        return 2
     print('T3 Code → Settings → Connections → environment menu → Copy MCP URL.')
     print('This uses the pinned mcp-remote OAuth bridge from npm. Choose Read only at sign-in.')
     client = None

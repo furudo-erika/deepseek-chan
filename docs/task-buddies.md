@@ -2,7 +2,7 @@
 
 DeepSeek-chan can follow coding tasks on the same Mac. She types while an agent works, waves when it needs you, celebrates a finished turn, and offers a little comfort when something fails. This is an external desktop companion, not a replacement for Codex's built-in pet.
 
-**Requires the new source/development build. The published 1.8.1 DMG does not contain this feature.** Build with `zsh scripts/package-debug.sh`, then open `dist/DeepSeek-chan.app`. Python 3.9+ is required for connectors; Pi/OMP/dsh also need their own runtime. T3 needs Node.js/npm and an authorized T3 MCP connection. No Python packages or model API keys are needed.
+**Included in the 1.9.0 macOS release.** To develop locally, build with `zsh scripts/package-debug.sh`, then open `dist/DeepSeek-chan.app`. Windows supports local snapshots and generic MCP; see the [Windows guide](windows.md) for its current adapter limits. Python 3.9+ is required for connectors; Pi/OMP/dsh also need their own runtime. T3 needs Node.js/npm and an authorized T3 MCP connection. No Python packages or model API keys are needed.
 
 Open **Task buddies** using the terminal icon in the dashboard, the pet's context menu, or the menu-bar menu. Copy a setup command, run it in Terminal, and follow the tool-specific instructions below. Install the app in its permanent location first: moving it later changes connector paths.
 
@@ -164,7 +164,7 @@ This fallback observes process lifetime only, not individual interactive turns o
 - Use **React to agent tasks** to pause reactions and reads. This does not stop agents or remove their hooks. Turn **Little hellos** off separately if you also want to stop unrelated pet chatter.
 - To disconnect, remove only the entries containing `chan.py` from the relevant client's hook config, remove the Codex MCP entry (`codex mcp remove deepseek-chan`), or launch Pi/OMP without the extension. Launch dsh without its patch; stop the T3 watcher with Ctrl+C and revoke its authorization in T3 if no longer needed. Remove an optional Codex `notify` entry only if you added it. Keep unrelated settings intact.
 
-For isolated tests, set `DEEPSEEK_CHAN_HOME` to a temporary absolute directory in both the writer and app process. The JSON protocol is intentionally small and independent of Swift so future Windows/Linux apps can consume the same states; the current writer uses a POSIX file lock and the desktop app remains macOS-only.
+For isolated tests, set `DEEPSEEK_CHAN_HOME` to a temporary absolute directory in both the writer and app process. The JSON protocol is intentionally small and independent of Swift so desktop ports can consume the same states; the writer uses a POSIX lock on macOS and a byte-range lock on Windows. The Windows port reads the same protocol; Linux is not yet packaged.
 
 ## Verification boundary
 

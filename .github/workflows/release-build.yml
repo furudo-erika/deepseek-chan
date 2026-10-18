@@ -1,0 +1,93 @@
+name: Release packages
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - name: Public source checks
+        run: python scripts/check-public-files.py
+      - name: Install pinned dependencies
+        run: npm ci --prefix desktop
+      - name: Behavior checks
+        run: |
+          npm --prefix desktop test
+          python -m unittest discover -s Tests -p test_task_bridge.py
+      - name: Package Windows x64 installer
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm --prefix desktop run dist:win
+      - name: Verify unpacked application resources
+        run: node desktop/scripts/audit-package.cjs dist/windows/win-unpacked/resources
+      - name: Test packaged Windows application
+        shell: pwsh
+        run: |
+          $env:CHAN_EXE = (Resolve-Path 'dist/windows/win-unpacked/DeepSeek-chan.exe').Path
+          $env:CHAN_SCREENSHOT = Join-Path $env:RUNNER_TEMP 'windows-pet.png'
+          npm --prefix desktop run test:app
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Install and launch the actual installer
+        shell: pwsh
+        run: |
+          $installer = (Get-ChildItem dist/windows/*setup.exe)[0].FullName
+          $installDir = Join-Path $env:RUNNER_TEMP 'DeepSeekChanInstalled'
+          $p = Start-Process -FilePath $installer -ArgumentList @('/S', "/D=$installDir") -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "Installer failed: $($p.ExitCode)" }
+          $env:CHAN_EXE = Join-Path $installDir 'DeepSeek-chan.exe'
+          if (!(Test-Path $env:CHAN_EXE)) { throw 'Installed executable missing' }
+          npm --prefix desktop run test:app
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $uninstaller = Get-ChildItem $installDir -Filter '*Uninstall*.exe' | Select-Object -First 1
+          if (!$uninstaller) { throw 'Uninstaller missing' }
+          $u = Start-Process $uninstaller.FullName -ArgumentList '/S' -Wait -PassThru
+          if ($u.ExitCode -ne 0) { throw "Uninstaller failed: $($u.ExitCode)" }
+      - name: Hash release file
+        shell: pwsh
+        run: |
+          Get-ChildItem dist/windows/*setup.exe | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
+            "$hash  $($_.Name)" | Set-Content "$($_.FullName).sha256" -Encoding ascii
+          }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: windows-release
+          path: |
+            dist/windows/*setup.exe
+            dist/windows/*setup.exe.sha256
+          if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: windows-visual-check
+          path: ${{ runner.temp }}/windows-pet.png
+          if-no-files-found: error
+  macos:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Behavior checks
+        run: zsh scripts/check.sh
+      - name: Build release and DMG
+        run: |
+          zsh scripts/package-release.sh
+          zsh scripts/export-dmg.sh "$PWD/dist/DeepSeek-chan-1.9.0-arm64.dmg"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: macos-release
+          path: |
+            dist/*.dmg
+            dist/*.dmg.sha256
+          if-no-files-found: error

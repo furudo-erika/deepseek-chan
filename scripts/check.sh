@@ -22,3 +22,5 @@ swiftc -Onone -parse-as-library Sources/ActionLibrary.swift Sources/PetPersonali
 .build/checks/TaskBridge
 python3 -m unittest discover -s Tests -p 'test_*.py'
 node --test Tests/*.test.mjs
+
+node --test desktop/test/core.test.cjs

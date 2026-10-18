@@ -81,7 +81,8 @@ class HarnessChecks(unittest.TestCase):
         result = subprocess.run([sys.executable, script, 'dsh-patch'], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0)
         patch_file = Path(self.temp.name) / 'dsh-pet.patch.json'
-        self.assertEqual(patch_file.stat().st_mode & 0o777, 0o600)
+        if os.name != 'nt':
+            self.assertEqual(patch_file.stat().st_mode & 0o777, 0o600)
         self.assertTrue(Path(json.loads(patch_file.read_text())[0]['insert'][0]['name']).is_file())
         for payload in ['not JSON', '{}', '{"sessionId": "a", "hookEventName": []}']:
             result = subprocess.run([sys.executable, script, 'hook', 'grok'], input=payload, capture_output=True, text=True)

@@ -26,7 +26,7 @@ class BridgeChecks(unittest.TestCase):
         self.temp.cleanup()
 
     def events(self):
-        return [json.loads(p.read_text()) for p in (Path(self.temp.name) / 'tasks').glob('*.json')]
+        return [json.loads(p.read_text(encoding='utf-8')) for p in (Path(self.temp.name) / 'tasks').glob('*.json')]
 
     def call(self, *args, **kwargs):
         return subprocess.run([sys.executable, str(SCRIPT), *args], capture_output=True, text=True, **kwargs)
@@ -38,9 +38,10 @@ class BridgeChecks(unittest.TestCase):
             self.assertTrue(all(r.returncode == 0 for r in pool.map(write, range(140))))
         self.assertEqual(len(self.events()), 128)
         self.assertTrue(all(e['status'] == 'working' for e in self.events()))
-        self.assertEqual((Path(self.temp.name) / 'tasks').stat().st_mode & 0o777, 0o700)
-        for f in (Path(self.temp.name) / 'tasks').glob('*.json'):
-            self.assertEqual(f.stat().st_mode & 0o777, 0o600)
+        if os.name != 'nt':  # Windows uses inherited user-profile ACLs, not POSIX modes.
+            self.assertEqual((Path(self.temp.name) / 'tasks').stat().st_mode & 0o777, 0o700)
+            for f in (Path(self.temp.name) / 'tasks').glob('*.json'):
+                self.assertEqual(f.stat().st_mode & 0o777, 0o600)
 
     def test_latest_snapshot_and_source_isolation(self):
         chan.emit('codex', '../../escape', 'working')
@@ -49,6 +50,14 @@ class BridgeChecks(unittest.TestCase):
         self.assertEqual(len(self.events()), 2)
         self.assertEqual({e['status'] for e in self.events()}, {'completed', 'waiting'})
         self.assertFalse((Path(self.temp.name).parent / 'escape').exists())
+
+    def test_multilingual_snapshot_is_utf8(self):
+        title = '修复界面 · お疲れさま 🐳'
+        chan.emit('codex', 'unicode', 'working', title)
+        chan.emit('codex', 'unicode', 'completed', title)
+        self.assertEqual(self.events()[0]['title'], title)
+        raw = next((Path(self.temp.name) / 'tasks').glob('*.json')).read_bytes()
+        self.assertEqual(json.loads(raw.decode('utf-8'))['title'], title)
 
     def test_hook_mapping_and_private_payload_is_dropped(self):
         base = {'session_id': 'private-session', 'prompt': 'SECRET PROMPT', 'transcript_path': '/secret/log', 'tool_input': {'secret': 'KEY'}}
@@ -75,6 +84,7 @@ class BridgeChecks(unittest.TestCase):
             result = self.call('hook', 'claude', input=value)
             self.assertEqual((result.returncode, result.stdout), (0, ''))
 
+    @unittest.skipIf(os.name == 'nt', 'Native hook setup is macOS-only in this release')
     def test_install_preserves_and_backs_up_config_and_is_idempotent(self):
         root = Path(self.temp.name)
         target = root / '.claude/settings.json'
@@ -90,6 +100,7 @@ class BridgeChecks(unittest.TestCase):
         self.assertEqual(len(result['hooks']['Stop']), 2)
         self.assertEqual(len(list(target.parent.glob('*.bak'))), 1)
 
+    @unittest.skipIf(os.name == 'nt', 'Native hook setup is macOS-only in this release')
     def test_cursor_install_preserves_other_hooks_and_rejects_unknown_version(self):
         root = Path(self.temp.name)
         target = root / '.cursor/hooks.json'
@@ -137,7 +148,12 @@ class BridgeChecks(unittest.TestCase):
                 chan.emit('codex', 'a', 'working', title)
         target = Path(self.temp.name) / 'untouched'
         target.write_text('keep')
-        (Path(self.temp.name) / '.writer.lock').symlink_to(target)
+        try:
+            (Path(self.temp.name) / '.writer.lock').symlink_to(target)
+        except OSError:
+            if os.name == 'nt':
+                self.skipTest('Windows account cannot create symlinks')
+            raise
         with self.assertRaises(OSError):
             chan.emit('codex', 'a', 'working')
         self.assertEqual(target.read_text(), 'keep')

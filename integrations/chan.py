@@ -3,6 +3,7 @@
 Python 3.9+, standard library only. Never reads transcripts or sends network requests.
 """
 import argparse
+from contextlib import contextmanager
 import hashlib
 import json
 import os
@@ -35,6 +36,29 @@ def clean(value, limit):
     return value
 
 
+@contextmanager
+def writer_lock():
+    target = home() / '.writer.lock'
+    if target.is_symlink():
+        raise OSError('Lock must not be a symbolic link')
+    fd = os.open(target, os.O_CREAT | os.O_RDWR | getattr(os, 'O_NOFOLLOW', 0), 0o600)
+    with os.fdopen(fd, 'r+b') as lock:
+        if os.name == 'nt':
+            import msvcrt
+            if os.fstat(lock.fileno()).st_size == 0:
+                lock.write(b'\0'); lock.flush()
+            lock.seek(0)
+            msvcrt.locking(lock.fileno(), msvcrt.LK_LOCK, 1)
+            try:
+                yield
+            finally:
+                lock.seek(0); msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+            yield
+
+
 def emit(source, task_id, status, title='Current turn', *, turn_id=None, begin=False, settle=False):
     if source not in SOURCES or status not in STATUSES:
         raise ValueError('Unknown source or task state')
@@ -45,16 +69,13 @@ def emit(source, task_id, status, title='Current turn', *, turn_id=None, begin=F
     os.chmod(directory, 0o700)
     key = hashlib.sha256((source + ':' + task_id).encode()).hexdigest()
     # Serialize writers, including cleanup, so concurrent sessions cannot partially overwrite a snapshot.
-    import fcntl
-    fd = os.open(home() / '.writer.lock', os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(fd, 'w') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with writer_lock():
         prior = None
         destination = directory / (key + '.json')
         if turn_id is not None or settle:
             try:
                 if destination.stat().st_size <= 8192:
-                    prior = json.loads(destination.read_text())
+                    prior = json.loads(destination.read_text(encoding='utf-8'))
             except (OSError, ValueError):
                 pass
             if not isinstance(prior, dict):
@@ -71,7 +92,7 @@ def emit(source, task_id, status, title='Current turn', *, turn_id=None, begin=F
             event['turn_id'] = prior['turn_id']
         temp_fd, name = tempfile.mkstemp(prefix='.pending-', dir=directory)
         try:
-            with os.fdopen(temp_fd, 'w') as output:
+            with os.fdopen(temp_fd, 'w', encoding='utf-8') as output:
                 json.dump(event, output, ensure_ascii=False, allow_nan=False)
                 output.write('\n')
             os.replace(name, directory / (key + '.json'))
@@ -152,6 +173,8 @@ def grok_hook(payload):
 
 
 def hook_config(source):
+    if os.name == 'nt':
+        raise ValueError('Native hook installation is not yet supported on Windows. Use the report_task MCP connector or emit command.')
     command = shlex.join([sys.executable, str(Path(__file__).resolve()), 'hook', source])
     if source in ('claude', 'grok'):
         hooks = {event: [{'hooks': [{'type': 'command', 'command': command, 'timeout': 3}]}]
@@ -173,7 +196,7 @@ def hook_config(source):
 def install_hooks(source):
     target = Path.home() / {'claude': '.claude/settings.json', 'cursor': '.cursor/hooks.json', 'grok': '.grok/hooks/deepseek-chan.json'}[source]
     target.parent.mkdir(parents=True, exist_ok=True)
-    original = target.read_text() if target.exists() else None
+    original = target.read_text(encoding='utf-8') if target.exists() else None
     current = json.loads(original) if original else {}
     if not isinstance(current, dict) or not isinstance(current.get('hooks', {}), dict):
         raise ValueError('Existing config has an unexpected format; left unchanged')
@@ -196,10 +219,10 @@ def install_hooks(source):
         return
     if original is not None:
         backup = target.with_name(target.name + '.deepseek-chan-' + str(time.time_ns()) + '.bak')
-        backup.write_text(original)
+        backup.write_text(original, encoding='utf-8')
         backup.chmod(0o600)
     fd, name = tempfile.mkstemp(prefix='.chan-config-', dir=target.parent)
-    with os.fdopen(fd, 'w') as output:
+    with os.fdopen(fd, 'w', encoding='utf-8') as output:
         output.write(updated)
     os.replace(name, target)
     print('Connected. Existing hooks preserved; restart the client. Config: ' + str(target))
