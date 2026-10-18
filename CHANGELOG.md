@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — 1.9.0 development
+
+- Task buddies: local task states, quiet working poses, and outfit-aware task reactions.
+- Codex MCP/completion adapter, Claude Code/Cursor hooks, and Pi/OMP extensions.
+- CLI process wrapper and explicit event interface for Grok, dsh, and other tools.
+- Concurrent task isolation, private bounded snapshots, stale status, and interruption-aware reaction queues.
+- Connection panel with setup commands and an English integration guide.
+
 ## 1.8.1 — 2026-10-18
 
 First public source release. macOS only; Windows and Linux are on the roadmap.

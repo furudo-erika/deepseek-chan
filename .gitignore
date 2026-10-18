@@ -16,3 +16,6 @@ dist/
 *.p12
 *.p8
 *.mobileprovision
+
+__pycache__/
+*.pyc

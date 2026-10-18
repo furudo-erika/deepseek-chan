@@ -54,6 +54,14 @@ To verify a download, put the DMG and its `.sha256` file in the same folder and 
 shasum -a 256 -c DeepSeek-chan-1.8.1-arm64.dmg.sha256
 ```
 
+## Task buddies (development build)
+
+Connect coding agents so she reacts to their tasks: typing while they work, a wave when they need you, and a tiny celebration when a turn finishes. The new **Task buddies** panel includes setup commands for Codex, Claude Code, Cursor, Pi, OMP, Grok, and dsh.
+
+Claude Code/Cursor use hooks; Pi/OMP use extensions; Codex supports MCP and a completion hook. Grok/dsh currently use a process wrapper or explicit task events, rather than native per-turn detection. All feedback stays local and uses no AI API. See the [connection guide](docs/task-buddies.md) for setup and limitations.
+
+**Build from source to try this feature; the 1.8.1 release DMG does not include it.**
+
 ## Say hello
 
 Click her for a head pat. Right-click for **Chat**, **Tiny show**, **Dance**, the action library, and other interactions.
@@ -103,7 +111,7 @@ The Debug build uses `-Onone -g`. It is ad-hoc signed locally. All runtime artwo
 zsh scripts/check.sh
 ```
 
-This runs the timer, dialogue, drag geometry, action catalog, personality, proactive scheduling, and Halloween checks. Dialogue tests use a mock transport and require no key or paid requests. CI also builds the Debug app on macOS.
+This runs the timer, dialogue, drag geometry, action catalog, personality, proactive scheduling, Halloween, and task-connection checks. The connector checks require Python 3.9+ and Node.js 18+. Dialogue tests use a mock transport and require no key or paid requests. CI also builds the Debug app on macOS.
 
 To inspect production sprite clipping visually:
 
@@ -139,6 +147,8 @@ The historical bundle identifier and internal executable name are retained for c
 | `Sources/TimerEngine.swift` | Focus and eye-break state machine |
 | `Sources/DialogueService.swift` | Optional OpenRouter client and Keychain storage |
 | `Assets/` | Bundled illustrations, manifests, crop metadata, and generation prompts |
+| `integrations/` | Local task CLI, MCP server, hooks, and Pi/OMP extensions |
+| `Sources/TaskBridge.swift` | Local task snapshots, reaction queue, and task dialogue |
 | `Tests/` | Focused behavior checks and artwork preview rendering |
 | `scripts/` | Build, check, icon, and DMG packaging tools |
 

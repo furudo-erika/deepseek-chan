@@ -49,6 +49,8 @@ struct Dashboard: View {
             HStack {
                 Text("DeepSeek-chan").font(.system(size: 19, weight: .bold, design: .rounded))
                 Spacer()
+                Button { model.taskBuddiesPresented = true } label: { Image(systemName: "terminal").font(.system(size: 17)) }
+                    .buttonStyle(.plain).accessibilityLabel("Task buddies")
                 Picker("Outfit", selection: $model.halloweenMode) {
                     Text("Classic").tag(false)
                     Text("Halloween 🎃").tag(true)
@@ -77,7 +79,7 @@ struct Dashboard: View {
                 }.frame(width: 210, alignment: .leading)
                 VStack(spacing: 12) {
                     SpeechBubble(text: model.speech).frame(width: 265)
-                    CompanionView(sleeping: model.isResting, still: !model.dashboardVisible || model.actionsPresented || model.settingsPresented || model.systemSuspended, action: model.petAction, replay: model.replay, calm: model.calmMode, halloween: model.halloweenMode).frame(width: 220, height: 220)
+                    CompanionView(sleeping: model.isResting, still: !model.dashboardVisible || model.actionsPresented || model.settingsPresented || model.taskBuddiesPresented || model.systemSuspended, action: model.petAction, replay: model.replay, calm: model.calmMode, halloween: model.halloweenMode).frame(width: 220, height: 220)
                         .onTapGesture { model.interact(action: 8, context: .pat) }.accessibilityAddTraits(.isButton)
                         .accessibilityHint("Give her a head pat")
                 }
@@ -110,6 +112,7 @@ struct Dashboard: View {
         .background(LinearGradient(colors: [Color(red: 0.94, green: 0.97, blue: 1), Color(red: 0.93, green: 0.94, blue: 1)], startPoint: .topLeading, endPoint: .bottomTrailing))
         .preferredColorScheme(.light)
         .sheet(isPresented: $model.settingsPresented) { AISettingsView(model: model, service: model.dialogue) }
+        .sheet(isPresented: $model.taskBuddiesPresented) { TaskBuddiesView(model: model) }
         .sheet(isPresented: $model.actionsPresented) { ActionLibraryView(model: model) }
     }
 }
@@ -146,6 +149,7 @@ struct ReminderView: View {
                     Button("Tiny show ✧") { model.tinyShow() }
                     Toggle("Halloween outfit 🎃", isOn: $model.halloweenMode)
                     Toggle("Calm mode", isOn: $model.calmMode)
+                    Button("Task buddies…") { model.onTaskBuddies?() }
                     Button("Action library…") { model.onActions?() }
                     Menu("More actions") {
                         ForEach(ActionLibrary.categories, id: \.self) { category in

@@ -16,3 +16,8 @@ for name in Dialogue Drag Action Personality Proactive Halloween; do
   swiftc -Onone -parse-as-library "${SOURCES[@]}" "Tests/${name}Checks.swift" -o ".build/checks/$name"
   ".build/checks/$name"
 done
+
+swiftc -Onone -parse-as-library Sources/ActionLibrary.swift Sources/PetPersonality.swift Sources/TaskBridge.swift Tests/TaskBridgeChecks.swift -o .build/checks/TaskBridge
+.build/checks/TaskBridge
+python3 -m unittest discover -s Tests -p 'test_task_bridge.py'
+node --test Tests/task-extension.test.mjs

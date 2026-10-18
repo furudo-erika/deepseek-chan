@@ -13,6 +13,23 @@ import Combine
     @Published var ambient = false
     @Published var settingsPresented = false { didSet { if settingsPresented { dismissBubble() } } }
     @Published var actionsPresented = false { didSet { if actionsPresented { dismissBubble() } } }
+    @Published var taskBuddiesPresented = false { didSet { if taskBuddiesPresented { dismissBubble() } } }
+    @Published var taskFeedbackEnabled = UserDefaults.standard.object(forKey: "taskFeedbackEnabled") as? Bool ?? true {
+        didSet {
+            UserDefaults.standard.set(taskFeedbackEnabled, forKey: "taskFeedbackEnabled")
+            taskFeedback.reset(now: Date()); connectedTasks = []; taskReadGeneration += 1
+            if routineIsTask { dismissBubble() }
+        }
+    }
+    @Published private(set) var connectedTasks: [CompanionTask] = []
+    @Published private(set) var taskConnectionError: String?
+    private let taskInbox = TaskInbox()
+    private var taskFeedback = TaskFeedback()
+    private var taskPersonality = TaskPersonality()
+    private var nextTaskRead = Date.distantPast
+    private var taskReadInFlight = false
+    private var taskReadGeneration = 0
+    private var routineIsTask = false
     @Published var dashboardVisible = true
     @Published var calmMode = UserDefaults.standard.bool(forKey: "calmMode") {
         didSet {
@@ -62,6 +79,7 @@ import Combine
     var onPetDrag: ((Bool) -> Void)?
     var onSettings: (() -> Void)?
     var onActions: (() -> Void)?
+    var onTaskBuddies: (() -> Void)?
     @Published private(set) var isDragging = false
     private var dragBubbleSnapshot = false
     private var dragSizeSnapshot: NSSize?
@@ -179,6 +197,7 @@ import Combine
     private func tick() {
         guard !systemSuspended else { return }
         now = Date()
+        pollTaskBuddies()
         let before = engine.completedBreaks
         if now.timeIntervalSince(lastTick) > 10 { engine.wake(now: now) }
         lastTick = now
@@ -194,11 +213,13 @@ import Combine
             if let beat = routine.advance(now: now) { applyBeat(beat) }
             if wasActive && !routine.active { nextAction = now.addingTimeInterval(calmMode ? 25 : 12) }
         }
-        if !routine.active && (petVisible || dashboardVisible) && !isDragging && now >= nextAction && !isResting && !previewing && !actionsPresented && !settingsPresented && !chatting && engine.phase != .reminding {
+        if !routine.active && (petVisible || dashboardVisible) && !isDragging && now >= nextAction && !isResting && !previewing && !actionsPresented && !settingsPresented && !taskBuddiesPresented && !chatting && engine.phase != .reminding {
             let sleepy = halloweenMode ? HalloweenTheme.sleepyIndices : ActionLibrary.indices(category: "Sleepy time") + [5]
-            let choices = idle > 120 ? sleepy : idleActionChoices
+            let working = connectedTasks.contains { $0.status == .working && !$0.isStale(at: now) }
+            let workPoses = ActionLibrary.all.indices.filter { ["typing", "think", "magnify"].contains(ActionLibrary.all[$0].id) }.map { halloweenMode ? HalloweenTheme.wearingCostume($0) : $0 }
+            let choices = working && !favoritesOnly ? workPoses : idle > 120 ? sleepy : idleActionChoices
             idleTurns += 1
-            if idle < 120 && idleTurns % 4 == 0 && !favoritesOnly {
+            if !working && idle < 120 && idleTurns % 4 == 0 && !favoritesOnly {
                 startRoutine(personality.show(rememberReply: false, halloween: halloweenMode), speaks: false)
             } else { petAction = actionShuffle.next(in: choices, avoiding: petAction) }
             nextAction = now.addingTimeInterval(Double.random(in: calmMode ? 20...35 : 7...15))
@@ -212,7 +233,12 @@ import Combine
             ambient = false; chatting = false; say(.reminder)
         }
         if !isDragging && ambient && !chatting, let until = ambientUntil, now >= until { dismissBubble(reschedule: false) }
-        let chatterBlocked = !littleHellos || !petVisible || isDragging || actionsPresented || settingsPresented || previewing || isResting || engine.phase == .reminding || routine.active
+        let taskBlocked = !taskFeedbackEnabled || !petVisible || isDragging || actionsPresented || settingsPresented || taskBuddiesPresented || previewing || isResting || engine.phase == .reminding || routine.active || ambient && !chatting || chatHasDraft || now.timeIntervalSince(chatterSchedule.lastInput) < 30 || idle >= 600
+        if let event = taskFeedback.next(now: now, blocked: taskBlocked) {
+            startRoutine(taskPersonality.routine(for: event), speaks: true)
+            routineIsTask = true
+        }
+        let chatterBlocked = !littleHellos || !petVisible || isDragging || actionsPresented || settingsPresented || taskBuddiesPresented || previewing || isResting || engine.phase == .reminding || routine.active
         if chatterSchedule.shouldSpeak(now: now, chatOpen: chatting, ambientVisible: ambient, blocked: chatterBlocked, hasDraft: chatHasDraft, idle: min(idle, now.timeIntervalSince(lastPetInteraction))) {
             let story: PetRoutine?
             if halloweenMode {
@@ -229,6 +255,27 @@ import Combine
             } else { chatterSchedule.schedule(now: now) }
         }
         onChange?()
+    }
+    private func pollTaskBuddies() {
+        guard taskFeedbackEnabled, !taskReadInFlight, now >= nextTaskRead else { return }
+        taskReadInFlight = true; nextTaskRead = now.addingTimeInterval(2)
+        let generation = taskReadGeneration
+        Task { [weak self] in
+            guard let self else { return }
+            let snapshot = await taskInbox.read()
+            taskReadInFlight = false
+            guard taskFeedbackEnabled, taskReadGeneration == generation else { return }
+            taskConnectionError = snapshot.error
+            taskFeedback.ingest(snapshot.tasks, now: Date())
+            connectedTasks = taskFeedback.sortedTasks
+        }
+    }
+    func previewTaskBuddy() {
+        let sample = CompanionTask(version: 1, event_id: UUID().uuidString, source: "codex", task_id: "preview", title: "Task buddy preview", status: .completed, updated_at: Date().timeIntervalSince1970)
+        taskBuddiesPresented = false; petVisible = true
+        guard !isResting, engine.phase != .reminding, !isDragging else { return }
+        startRoutine(taskPersonality.routine(for: sample), speaks: true)
+        routineIsTask = true; onChange?()
     }
     func setMinutes(_ value: Int) {
         now = Date()
@@ -264,7 +311,7 @@ import Combine
         }
     }
     func dismissBubble(reschedule: Bool = true) {
-        routine.cancel(); chatHasDraft = false; routineIsProactive = false
+        routine.cancel(); chatHasDraft = false; routineIsProactive = false; routineIsTask = false
         if reschedule { chatterSchedule.schedule(now: Date()) }
         previewing = false; ambient = false; chatting = false; ambientUntil = nil
         speechGeneration += 1; speechTask?.cancel()
@@ -318,7 +365,7 @@ import Combine
         chatHasDraft = !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         guard chatHasDraft else { return }
         lastPetInteraction = Date(); chatterSchedule.typed(now: Date())
-        if routineIsProactive { routine.cancel(); routineIsProactive = false }
+        if routineIsProactive || routineIsTask { routine.cancel(); routineIsProactive = false; routineIsTask = false }
     }
     func sendChat(_ raw: String) {
         let text = String(raw.trimmingCharacters(in: .whitespacesAndNewlines).prefix(300))
@@ -339,6 +386,7 @@ import Combine
         if routineSpeaks && !routineUsesAI { speech = beat.line }
     }
     private func startRoutine(_ show: PetRoutine, speaks: Bool, proactive: Bool = false) {
+        routineIsTask = false
         routineIsProactive = proactive
         if speaks && !proactive { lastPetInteraction = Date() }
         speechGeneration += 1; speechTask?.cancel()
@@ -461,6 +509,7 @@ final class ReminderPanel: NSPanel {
         menu.addItem(withTitle: "Open DeepSeek-chan", action: #selector(showWindow), keyEquivalent: "")
         menu.addItem(withTitle: "Chat", action: #selector(chat), keyEquivalent: "")
         menu.addItem(withTitle: "Action library…", action: #selector(actions), keyEquivalent: "")
+        menu.addItem(withTitle: "Task buddies…", action: #selector(taskBuddies), keyEquivalent: "")
         menu.addItem(withTitle: "Show / hide companion", action: #selector(togglePet), keyEquivalent: "")
         menu.addItem(withTitle: "Say hi", action: #selector(hello), keyEquivalent: "")
         menu.addItem(withTitle: "AI Settings…", action: #selector(settings), keyEquivalent: "")
@@ -475,6 +524,7 @@ final class ReminderPanel: NSPanel {
         model.onPreview = { [weak self] in self?.panel.makeKeyAndOrderFront(nil) }
         model.onSettings = { [weak self] in self?.settings() }
         model.onActions = { [weak self] in self?.actions() }
+        model.onTaskBuddies = { [weak self] in self?.taskBuddies() }
         model.onPetDrag = { [weak self] ended in
             guard let self else { return }
             if ended && screenDrag == nil { return }
@@ -565,7 +615,8 @@ final class ReminderPanel: NSPanel {
     func windowDidMiniaturize(_ notification: Notification) { model.dashboardVisible = false }
     func windowDidDeminiaturize(_ notification: Notification) { model.dashboardVisible = true }
     @objc func closeWindow() {
-        if model.actionsPresented { model.actionsPresented = false }
+        if model.taskBuddiesPresented { model.taskBuddiesPresented = false }
+        else if model.actionsPresented { model.actionsPresented = false }
         else if model.settingsPresented { model.settingsPresented = false }
         else { window.close() }
     }
@@ -573,6 +624,7 @@ final class ReminderPanel: NSPanel {
     @objc func togglePet() { model.togglePet() }
     @objc func hello() { model.showHello() }
     @objc func settings() { showWindow(); model.settingsPresented = true }
+    @objc func taskBuddies() { showWindow(); model.taskBuddiesPresented = true }
     @objc func actions() { showWindow(); model.actionsPresented = true }
     @objc func preview() { model.preview() }
     @objc func rest() { model.rest() }
