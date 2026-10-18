@@ -1,0 +1,2517 @@
+{
+  "version": 2,
+  "actions": [
+    {
+      "id": "relax",
+      "name": "Relax",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 0,
+      "motion": "breathe",
+      "line": "I'll keep you company."
+    },
+    {
+      "id": "wave",
+      "name": "Wave",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 1,
+      "motion": "sway",
+      "line": "こんにちは ♡"
+    },
+    {
+      "id": "paws",
+      "name": "Kitten paws",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 2,
+      "motion": "shimmy",
+      "line": "にゃんにゃん！"
+    },
+    {
+      "id": "stretch",
+      "name": "Morning stretch",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 3,
+      "motion": "sway",
+      "line": "伸个懒腰～"
+    },
+    {
+      "id": "eat_rice",
+      "name": "Rice time",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 4,
+      "motion": "nod",
+      "line": "いただきます！"
+    },
+    {
+      "id": "nap",
+      "name": "Whale nap",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "すやすや…"
+    },
+    {
+      "id": "shy_peek",
+      "name": "Shy peek",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 6,
+      "motion": "peek",
+      "line": "偷看一眼 ♡"
+    },
+    {
+      "id": "twirl",
+      "name": "Skirt twirl",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 7,
+      "motion": "swing",
+      "line": "くるりん！"
+    },
+    {
+      "id": "happy_head_pat",
+      "name": "Happy head pats",
+      "category": "Everyday",
+      "atlas": "deepseek-chan-daily-atlas",
+      "frame": 8,
+      "motion": "hop",
+      "line": "えへへ ♡"
+    },
+    {
+      "id": "bow",
+      "name": "Little bow",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 0,
+      "motion": "bow",
+      "line": "よろしくね ♡"
+    },
+    {
+      "id": "salute",
+      "name": "Tiny salute",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 1,
+      "motion": "nod",
+      "line": "Reporting for cuteness!"
+    },
+    {
+      "id": "kiss",
+      "name": "Blow a kiss",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 2,
+      "motion": "float",
+      "line": "啾 ♡"
+    },
+    {
+      "id": "high_five",
+      "name": "High five",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 3,
+      "motion": "hop",
+      "line": "High five!"
+    },
+    {
+      "id": "hand_heart",
+      "name": "Big heart",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 4,
+      "motion": "sway",
+      "line": "だいすき ♡"
+    },
+    {
+      "id": "curtsy",
+      "name": "Curtsy",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 5,
+      "motion": "bow",
+      "line": "おかえりなさい ♡"
+    },
+    {
+      "id": "beckon",
+      "name": "Come closer",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 6,
+      "motion": "sway",
+      "line": "Come sit with me."
+    },
+    {
+      "id": "finger_heart",
+      "name": "Finger heart",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 7,
+      "motion": "bounce",
+      "line": "A tiny heart for you."
+    },
+    {
+      "id": "hug",
+      "name": "Open arms",
+      "category": "Greetings",
+      "atlas": "actions-greetings",
+      "frame": 8,
+      "motion": "breathe",
+      "line": "抱抱！"
+    },
+    {
+      "id": "bubbles",
+      "name": "Bubble wand",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 0,
+      "motion": "float",
+      "line": "ぷくぷく～"
+    },
+    {
+      "id": "paper_plane",
+      "name": "Paper plane",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 1,
+      "motion": "swing",
+      "line": "Special delivery!"
+    },
+    {
+      "id": "yoyo",
+      "name": "Yo-yo",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 2,
+      "motion": "bounce",
+      "line": "Up, down, wheee!"
+    },
+    {
+      "id": "pinwheel",
+      "name": "Pinwheel",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 3,
+      "motion": "sway",
+      "line": "ふーっ ♡"
+    },
+    {
+      "id": "hoop",
+      "name": "Hula hoop",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 4,
+      "motion": "shimmy",
+      "line": "小鱼扭扭～"
+    },
+    {
+      "id": "cat_cradle",
+      "name": "String game",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 5,
+      "motion": "sway",
+      "line": "I made a tiny web!"
+    },
+    {
+      "id": "balloon",
+      "name": "Balloon ride",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 6,
+      "motion": "float",
+      "line": "Take me to the clouds."
+    },
+    {
+      "id": "blanket_peek",
+      "name": "Peekaboo",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 7,
+      "motion": "peek",
+      "line": "ばあ！"
+    },
+    {
+      "id": "plush_ride",
+      "name": "Whale rider",
+      "category": "Playtime",
+      "atlas": "actions-play",
+      "frame": 8,
+      "motion": "hop",
+      "line": "出发！"
+    },
+    {
+      "id": "tea",
+      "name": "Tea sip",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 0,
+      "motion": "nod",
+      "line": "お茶にしよ ♡"
+    },
+    {
+      "id": "mochi",
+      "name": "Mochi cheeks",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 1,
+      "motion": "bounce",
+      "line": "もぐもぐ。"
+    },
+    {
+      "id": "noodles",
+      "name": "Noodle slurp",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 2,
+      "motion": "nod",
+      "line": "Slurp slurp!"
+    },
+    {
+      "id": "popsicle",
+      "name": "Popsicle",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 3,
+      "motion": "sway",
+      "line": "冷たい～"
+    },
+    {
+      "id": "melon",
+      "name": "Melon munch",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 4,
+      "motion": "bounce",
+      "line": "One bite of summer."
+    },
+    {
+      "id": "strawberry",
+      "name": "Berry treasure",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "这颗给你 ♡"
+    },
+    {
+      "id": "whisk",
+      "name": "Mixing batter",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 6,
+      "motion": "shimmy",
+      "line": "Mixing a little joy."
+    },
+    {
+      "id": "dough",
+      "name": "Kneading dough",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 7,
+      "motion": "bow",
+      "line": "もちもち～"
+    },
+    {
+      "id": "cookie",
+      "name": "Cookie for you",
+      "category": "Snack time",
+      "atlas": "actions-snacks",
+      "frame": 8,
+      "motion": "swing",
+      "line": "Saved the best one."
+    },
+    {
+      "id": "yawn",
+      "name": "Sleepy yawn",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 0,
+      "motion": "breathe",
+      "line": "ふぁ～"
+    },
+    {
+      "id": "pillow",
+      "name": "Pillow hug",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 1,
+      "motion": "breathe",
+      "line": "软乎乎 ♡"
+    },
+    {
+      "id": "nightcap",
+      "name": "Nightcap",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 2,
+      "motion": "sway",
+      "line": "Good night, world."
+    },
+    {
+      "id": "lullaby",
+      "name": "Lullaby",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 3,
+      "motion": "swing",
+      "line": "ねんねんころり。"
+    },
+    {
+      "id": "stargaze",
+      "name": "Stargazing",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 4,
+      "motion": "float",
+      "line": "星がきれい。"
+    },
+    {
+      "id": "book_doze",
+      "name": "Book snooze",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 5,
+      "motion": "nod",
+      "line": "Just… one… page…"
+    },
+    {
+      "id": "blanket",
+      "name": "Blanket burrito",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 6,
+      "motion": "breathe",
+      "line": "小鱼卷饼。"
+    },
+    {
+      "id": "eye_mask",
+      "name": "Sleep mask",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 7,
+      "motion": "peek",
+      "line": "See you in dreams."
+    },
+    {
+      "id": "alarm",
+      "name": "Five more minutes",
+      "category": "Sleepy time",
+      "atlas": "actions-sleepy",
+      "frame": 8,
+      "motion": "bow",
+      "line": "あと5分…"
+    },
+    {
+      "id": "side_bend",
+      "name": "Side stretch",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 0,
+      "motion": "sway",
+      "line": "ゆっくり～"
+    },
+    {
+      "id": "toe_touch",
+      "name": "Toe touch",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 1,
+      "motion": "bow",
+      "line": "Touch the floor!"
+    },
+    {
+      "id": "balance",
+      "name": "One-leg balance",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 2,
+      "motion": "swing",
+      "line": "稳住稳住！"
+    },
+    {
+      "id": "squat",
+      "name": "Tiny squat",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 3,
+      "motion": "bounce",
+      "line": "Down, and up!"
+    },
+    {
+      "id": "lunge",
+      "name": "Little lunge",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 4,
+      "motion": "sway",
+      "line": "いち、に！"
+    },
+    {
+      "id": "arm_circle",
+      "name": "Arm circles",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 5,
+      "motion": "shimmy",
+      "line": "Airplane arms!"
+    },
+    {
+      "id": "jump_rope",
+      "name": "Skipping rope",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 6,
+      "motion": "hop",
+      "line": "ぴょんぴょん！"
+    },
+    {
+      "id": "jog",
+      "name": "Little jog",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 7,
+      "motion": "hop",
+      "line": "小碎步～"
+    },
+    {
+      "id": "tiptoe",
+      "name": "Tiptoe reach",
+      "category": "Little stretches",
+      "atlas": "actions-movement",
+      "frame": 8,
+      "motion": "float",
+      "line": "Almost got it!"
+    },
+    {
+      "id": "pout",
+      "name": "Cheeky pout",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 0,
+      "motion": "shimmy",
+      "line": "むぅ。"
+    },
+    {
+      "id": "surprise",
+      "name": "Surprised",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 1,
+      "motion": "hop",
+      "line": "わっ！"
+    },
+    {
+      "id": "laugh",
+      "name": "Giggle fit",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 2,
+      "motion": "bounce",
+      "line": "えへへへ！"
+    },
+    {
+      "id": "teary",
+      "name": "Tiny tears",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 3,
+      "motion": "nod",
+      "line": "抱一下就好。"
+    },
+    {
+      "id": "proud",
+      "name": "Proud little fish",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 4,
+      "motion": "sway",
+      "line": "I did it!"
+    },
+    {
+      "id": "sulk",
+      "name": "Little sulk",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "哼，哄哄我。"
+    },
+    {
+      "id": "think",
+      "name": "Thinking cap",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 6,
+      "motion": "nod",
+      "line": "Hmm… なるほど。"
+    },
+    {
+      "id": "determined",
+      "name": "You got this",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 7,
+      "motion": "bounce",
+      "line": "がんばれ！"
+    },
+    {
+      "id": "confetti",
+      "name": "Happy confetti",
+      "category": "Little feelings",
+      "atlas": "actions-feelings",
+      "frame": 8,
+      "motion": "hop",
+      "line": "やったー！"
+    },
+    {
+      "id": "microphone",
+      "name": "Tiny concert",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 0,
+      "motion": "sway",
+      "line": "La la la～"
+    },
+    {
+      "id": "drum",
+      "name": "Little drummer",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 1,
+      "motion": "bounce",
+      "line": "どんどん♪"
+    },
+    {
+      "id": "tambourine",
+      "name": "Tambourine",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 2,
+      "motion": "shimmy",
+      "line": "Shake a little sunshine."
+    },
+    {
+      "id": "maracas",
+      "name": "Maraca shake",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 3,
+      "motion": "shimmy",
+      "line": "沙沙沙～"
+    },
+    {
+      "id": "ukulele",
+      "name": "Whale ukulele",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 4,
+      "motion": "swing",
+      "line": "A song just for you."
+    },
+    {
+      "id": "conductor",
+      "name": "Maestro",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 5,
+      "motion": "swing",
+      "line": "せーの！"
+    },
+    {
+      "id": "ballet",
+      "name": "Ballet pose",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 6,
+      "motion": "float",
+      "line": "くるりん ♡"
+    },
+    {
+      "id": "disco",
+      "name": "Disco point",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 7,
+      "motion": "shimmy",
+      "line": "Tiny disco time!"
+    },
+    {
+      "id": "fan_dance",
+      "name": "Fan dance",
+      "category": "Music & dance",
+      "atlas": "actions-music",
+      "frame": 8,
+      "motion": "sway",
+      "line": "翩翩小鱼～"
+    },
+    {
+      "id": "typing",
+      "name": "Tiny typist",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 0,
+      "motion": "bounce",
+      "line": "Tap tap tap."
+    },
+    {
+      "id": "mouse",
+      "name": "Mouse buddy",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 1,
+      "motion": "sway",
+      "line": "Your tiny assistant."
+    },
+    {
+      "id": "sketch",
+      "name": "Doodle time",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 2,
+      "motion": "nod",
+      "line": "画个小鲸鱼。"
+    },
+    {
+      "id": "read",
+      "name": "Bookworm",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 3,
+      "motion": "breathe",
+      "line": "One more chapter."
+    },
+    {
+      "id": "magnify",
+      "name": "Detective",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 4,
+      "motion": "peek",
+      "line": "发现可爱！"
+    },
+    {
+      "id": "sticky",
+      "name": "Little note",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 5,
+      "motion": "swing",
+      "line": "A note full of love."
+    },
+    {
+      "id": "sweep",
+      "name": "Tiny cleanup",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 6,
+      "motion": "swing",
+      "line": "さっさっ。"
+    },
+    {
+      "id": "plant",
+      "name": "Plant parent",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 7,
+      "motion": "bow",
+      "line": "Grow, little friend."
+    },
+    {
+      "id": "edge_peek",
+      "name": "Edge peek",
+      "category": "Desk buddy",
+      "atlas": "actions-desk",
+      "frame": 8,
+      "motion": "peek",
+      "line": "Still here ♡"
+    },
+    {
+      "id": "wand",
+      "name": "Magic wand",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 0,
+      "motion": "swing",
+      "line": "ちちんぷいぷい！"
+    },
+    {
+      "id": "broom_fly",
+      "name": "Broom flight",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 1,
+      "motion": "float",
+      "line": "Off to the moon!"
+    },
+    {
+      "id": "orb",
+      "name": "Crystal ball",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 2,
+      "motion": "breathe",
+      "line": "I see… snack time."
+    },
+    {
+      "id": "umbrella",
+      "name": "Rainy stroll",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 3,
+      "motion": "sway",
+      "line": "雨でも一緒。"
+    },
+    {
+      "id": "raincoat",
+      "name": "Puddle splash",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 4,
+      "motion": "hop",
+      "line": "啪嗒啪嗒！"
+    },
+    {
+      "id": "snowflake",
+      "name": "Catch a snowflake",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 5,
+      "motion": "float",
+      "line": "雪だ！"
+    },
+    {
+      "id": "map",
+      "name": "Lost explorer",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 6,
+      "motion": "nod",
+      "line": "This way… maybe?"
+    },
+    {
+      "id": "lantern",
+      "name": "Lantern walk",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 7,
+      "motion": "swing",
+      "line": "I'll light the way."
+    },
+    {
+      "id": "swim",
+      "name": "Bubble swim",
+      "category": "Tiny adventures",
+      "atlas": "actions-adventure",
+      "frame": 8,
+      "motion": "float",
+      "line": "ぷかぷか～"
+    },
+    {
+      "id": "heart_gift",
+      "name": "Heart gift",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 0,
+      "motion": "bow",
+      "line": "For you, always."
+    },
+    {
+      "id": "flower",
+      "name": "Flower for you",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 1,
+      "motion": "sway",
+      "line": "今天也要开心。"
+    },
+    {
+      "id": "bandage",
+      "name": "Little bandage",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 2,
+      "motion": "nod",
+      "line": "痛いの飛んでけ。"
+    },
+    {
+      "id": "water",
+      "name": "Water break",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 3,
+      "motion": "swing",
+      "line": "Sip sip ♡"
+    },
+    {
+      "id": "look_far",
+      "name": "Look far away",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 4,
+      "motion": "peek",
+      "line": "Look at the clouds."
+    },
+    {
+      "id": "breathe",
+      "name": "Quiet breath",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "ゆっくり呼吸。"
+    },
+    {
+      "id": "eye_rest",
+      "name": "Rest your eyes",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 6,
+      "motion": "breathe",
+      "line": "闭眼歇一小会。"
+    },
+    {
+      "id": "sunhat",
+      "name": "Sunny hat",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 7,
+      "motion": "sway",
+      "line": "Let's find some sunshine."
+    },
+    {
+      "id": "warm_towel",
+      "name": "Warm towel",
+      "category": "Care & comfort",
+      "atlas": "actions-kindness",
+      "frame": 8,
+      "motion": "bow",
+      "line": "おつかれさま ♡"
+    },
+    {
+      "id": "party_horn",
+      "name": "Party horn",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 0,
+      "motion": "bounce",
+      "line": "ぱぱーん！"
+    },
+    {
+      "id": "cake",
+      "name": "Birthday cake",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 1,
+      "motion": "sway",
+      "line": "Make a little wish."
+    },
+    {
+      "id": "sparkler",
+      "name": "Sparkler",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 2,
+      "motion": "swing",
+      "line": "きらきら～"
+    },
+    {
+      "id": "pumpkin",
+      "name": "Pumpkin peek",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 3,
+      "motion": "peek",
+      "line": "Boo, but cute!"
+    },
+    {
+      "id": "snowman",
+      "name": "Snow buddy",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 4,
+      "motion": "bow",
+      "line": "雪だるまさん ♡"
+    },
+    {
+      "id": "present",
+      "name": "Surprise gift",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 5,
+      "motion": "hop",
+      "line": "Surprise!"
+    },
+    {
+      "id": "ribbon",
+      "name": "Ribbon twirl",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 6,
+      "motion": "swing",
+      "line": "くるくる～"
+    },
+    {
+      "id": "gold_star",
+      "name": "Gold star",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 7,
+      "motion": "float",
+      "line": "给你一颗星！"
+    },
+    {
+      "id": "trophy",
+      "name": "Tiny victory",
+      "category": "Happy occasions",
+      "atlas": "actions-celebration",
+      "frame": 8,
+      "motion": "hop",
+      "line": "You did so well ♡"
+    },
+    {
+      "id": "extra_pour_over",
+      "name": "Pour-over coffee",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 0,
+      "motion": "nod",
+      "line": "A tiny café just opened."
+    },
+    {
+      "id": "extra_latte_art",
+      "name": "Whale latte",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 1,
+      "motion": "breathe",
+      "line": "Today's special: one whale latte."
+    },
+    {
+      "id": "extra_tray_service",
+      "name": "Café delivery",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 2,
+      "motion": "bow",
+      "line": "Your bill is one head pat."
+    },
+    {
+      "id": "extra_tea_strainer",
+      "name": "Tea leaves",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 3,
+      "motion": "sway",
+      "line": "茶叶在开小小的游泳派对。"
+    },
+    {
+      "id": "extra_tea_pour",
+      "name": "Tea ceremony",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 4,
+      "motion": "nod",
+      "line": "咕嘟咕嘟，香气到站。"
+    },
+    {
+      "id": "extra_tea_offer",
+      "name": "Tea for you",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 5,
+      "motion": "bow",
+      "line": "给你留了最暖的一杯。"
+    },
+    {
+      "id": "extra_juice_press",
+      "name": "Orange squeeze",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 6,
+      "motion": "bounce",
+      "line": "I squeezed the sunshine."
+    },
+    {
+      "id": "extra_juice_sip",
+      "name": "Orange sip",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 7,
+      "motion": "nod",
+      "line": "Oops. Sunshine has pulp."
+    },
+    {
+      "id": "extra_cafe_sign",
+      "name": "Café closed",
+      "category": "Tiny café",
+      "atlas": "actions-extra-cafe",
+      "frame": 8,
+      "motion": "sway",
+      "line": "The café owner needs a nap."
+    },
+    {
+      "id": "extra_seed_pouch",
+      "name": "Seeds of joy",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 0,
+      "motion": "nod",
+      "line": "I planted a tiny good mood."
+    },
+    {
+      "id": "extra_soil_pot",
+      "name": "Little planting",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 1,
+      "motion": "breathe",
+      "line": "Now we wait. Very patiently."
+    },
+    {
+      "id": "extra_sprout_listen",
+      "name": "Listening to sprouts",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 2,
+      "motion": "peek",
+      "line": "Was that a sprout sneeze?"
+    },
+    {
+      "id": "extra_flower_sniff",
+      "name": "Flower sniff",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 3,
+      "motion": "sway",
+      "line": "Found a flower with your name."
+    },
+    {
+      "id": "extra_flower_sneeze",
+      "name": "Pollen sneeze",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 4,
+      "motion": "hop",
+      "line": "Achoo! It found my nose."
+    },
+    {
+      "id": "extra_flower_crown",
+      "name": "Daisy crown",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 5,
+      "motion": "bow",
+      "line": "Royal gardener reporting."
+    },
+    {
+      "id": "extra_leaf_boat",
+      "name": "Leaf boat",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 6,
+      "motion": "sway",
+      "line": "葉っぱの船、出航！"
+    },
+    {
+      "id": "extra_snail_watch",
+      "name": "Snail friend",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 7,
+      "motion": "breathe",
+      "line": "船長、ちょっとゆっくりだね。"
+    },
+    {
+      "id": "extra_garden_rest",
+      "name": "Garden rest",
+      "category": "Pocket garden",
+      "atlas": "actions-extra-garden",
+      "frame": 8,
+      "motion": "breathe",
+      "line": "のんびりも冒険だよ。"
+    },
+    {
+      "id": "extra_yarn_tangle",
+      "name": "Yarn trouble",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 0,
+      "motion": "peek",
+      "line": "I tried knitting a cloud."
+    },
+    {
+      "id": "extra_knit_scarf",
+      "name": "Tiny knitting",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 1,
+      "motion": "nod",
+      "line": "It became a very small scarf."
+    },
+    {
+      "id": "extra_scarf_plush",
+      "name": "Scarf delivery",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 2,
+      "motion": "bow",
+      "line": "Whale winter is officially solved."
+    },
+    {
+      "id": "extra_origami_fold",
+      "name": "Origami folding",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 3,
+      "motion": "breathe",
+      "line": "折一只小小纸鹤。"
+    },
+    {
+      "id": "extra_paper_crane",
+      "name": "Paper crane",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 4,
+      "motion": "float",
+      "line": "它说想替你送个愿望。"
+    },
+    {
+      "id": "extra_paper_flight",
+      "name": "Crane launch",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 5,
+      "motion": "hop",
+      "line": "起飞！带上今天的好运。"
+    },
+    {
+      "id": "extra_bead_thread",
+      "name": "Bead necklace",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 6,
+      "motion": "nod",
+      "line": "I'm making a lucky charm."
+    },
+    {
+      "id": "extra_ribbon_tie",
+      "name": "Perfect ribbon",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 7,
+      "motion": "sway",
+      "line": "The bow took three attempts."
+    },
+    {
+      "id": "extra_charm_offer",
+      "name": "Lucky charm",
+      "category": "Handmade treasures",
+      "atlas": "actions-extra-crafts",
+      "frame": 8,
+      "motion": "bow",
+      "line": "All three were full of love."
+    },
+    {
+      "id": "extra_shell_listen",
+      "name": "Shell whispers",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 0,
+      "motion": "peek",
+      "line": "The shell has breaking news."
+    },
+    {
+      "id": "extra_shell_reply",
+      "name": "Talking to shells",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 1,
+      "motion": "nod",
+      "line": "It says: shhhhhhh."
+    },
+    {
+      "id": "extra_shell_pocket",
+      "name": "Seashell souvenir",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 2,
+      "motion": "breathe",
+      "line": "Excellent reporting. I'll keep it."
+    },
+    {
+      "id": "extra_sand_bucket",
+      "name": "Sand bucket",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 3,
+      "motion": "nod",
+      "line": "Building my seaside palace."
+    },
+    {
+      "id": "extra_sand_castle",
+      "name": "Sandcastle queen",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 4,
+      "motion": "bow",
+      "line": "It has a snack room."
+    },
+    {
+      "id": "extra_crab_guest",
+      "name": "Crab visitor",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 5,
+      "motion": "peek",
+      "line": "The landlord is a crab."
+    },
+    {
+      "id": "extra_float_ring",
+      "name": "Swim ring",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 6,
+      "motion": "bounce",
+      "line": "海へ行く準備、できた！"
+    },
+    {
+      "id": "extra_goggles_adjust",
+      "name": "Swim goggles",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 7,
+      "motion": "nod",
+      "line": "ゴーグル、よし！"
+    },
+    {
+      "id": "extra_fin_paddle",
+      "name": "Fin paddles",
+      "category": "Seaside holiday",
+      "atlas": "actions-extra-seaside",
+      "frame": 8,
+      "motion": "hop",
+      "line": "でも、まずおやつ。"
+    },
+    {
+      "id": "extra_rain_boots",
+      "name": "Big rain boots",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 0,
+      "motion": "peek",
+      "line": "小鱼获得了巨人雨靴！"
+    },
+    {
+      "id": "extra_puddle_step",
+      "name": "Careful puddle",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 1,
+      "motion": "nod",
+      "line": "轻轻踩一下……"
+    },
+    {
+      "id": "extra_puddle_splash",
+      "name": "Big splash",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 2,
+      "motion": "hop",
+      "line": "噗叽！快乐溅到你了吗？"
+    },
+    {
+      "id": "extra_window_draw",
+      "name": "Rain window",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 3,
+      "motion": "sway",
+      "line": "I drew a smile in the rain."
+    },
+    {
+      "id": "extra_raindrop_catch",
+      "name": "Catch a raindrop",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 4,
+      "motion": "float",
+      "line": "Collecting tiny sky marbles."
+    },
+    {
+      "id": "extra_towel_hair",
+      "name": "Fluffy towel",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 5,
+      "motion": "shimmy",
+      "line": "My hair became a sea cloud."
+    },
+    {
+      "id": "extra_raincoat_button",
+      "name": "Raincoat buttons",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 6,
+      "motion": "nod",
+      "line": "Rain patrol is getting dressed."
+    },
+    {
+      "id": "extra_umbrella_turn",
+      "name": "Umbrella twirl",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 7,
+      "motion": "swing",
+      "line": "Umbrella choreography: approved."
+    },
+    {
+      "id": "extra_rainbow_ribbon",
+      "name": "Rainbow ribbon",
+      "category": "Rainy-day club",
+      "atlas": "actions-extra-rainy",
+      "frame": 8,
+      "motion": "bow",
+      "line": "I saved the rainbow for you."
+    },
+    {
+      "id": "extra_telescope",
+      "name": "Tiny telescope",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 0,
+      "motion": "peek",
+      "line": "Searching for a new planet."
+    },
+    {
+      "id": "extra_star_chart",
+      "name": "Star chart",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 1,
+      "motion": "nod",
+      "line": "This one looks like a dumpling."
+    },
+    {
+      "id": "extra_star_cookie",
+      "name": "Planet cookie",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 2,
+      "motion": "bounce",
+      "line": "Research is delicious."
+    },
+    {
+      "id": "extra_moon_ladder",
+      "name": "Moon ladder",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 3,
+      "motion": "hop",
+      "line": "月亮的灯泡好像松了。"
+    },
+    {
+      "id": "extra_moon_polish",
+      "name": "Polishing moon",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 4,
+      "motion": "shimmy",
+      "line": "小鱼维修队出动！"
+    },
+    {
+      "id": "extra_moon_hug",
+      "name": "Moon cuddle",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 5,
+      "motion": "sway",
+      "line": "修好啦，今晚做个软软的梦。"
+    },
+    {
+      "id": "extra_comet_net",
+      "name": "Comet catcher",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 6,
+      "motion": "swing",
+      "line": "Caught a runaway wish."
+    },
+    {
+      "id": "extra_wish_jar",
+      "name": "Wish jar",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 7,
+      "motion": "float",
+      "line": "It wriggles when it's happy."
+    },
+    {
+      "id": "extra_star_release",
+      "name": "Star release",
+      "category": "Starlight errands",
+      "atlas": "actions-extra-stargazing",
+      "frame": 8,
+      "motion": "bow",
+      "line": "Go find your human, little wish."
+    },
+    {
+      "id": "extra_flour_nose",
+      "name": "Flour nose",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 0,
+      "motion": "peek",
+      "line": "The recipe said a pinch."
+    },
+    {
+      "id": "extra_rolling_pin",
+      "name": "Rolling dough",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 1,
+      "motion": "nod",
+      "line": "I may have added a cloud."
+    },
+    {
+      "id": "extra_bread_basket",
+      "name": "Bread delivery",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 2,
+      "motion": "bow",
+      "line": "Freshly baked little victories."
+    },
+    {
+      "id": "extra_egg_crack",
+      "name": "Cracking egg",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 3,
+      "motion": "breathe",
+      "line": "たまご、そーっとね。"
+    },
+    {
+      "id": "extra_pancake_flip",
+      "name": "Pancake flip",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 4,
+      "motion": "hop",
+      "line": "くるん！うまくできた！"
+    },
+    {
+      "id": "extra_pancake_stack",
+      "name": "Pancake tower",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 5,
+      "motion": "bow",
+      "line": "一番上、あなたのぶん。"
+    },
+    {
+      "id": "extra_icing_bag",
+      "name": "Cake icing",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 6,
+      "motion": "nod",
+      "line": "One cupcake. Serious decoration."
+    },
+    {
+      "id": "extra_berry_top",
+      "name": "Berry topper",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 7,
+      "motion": "peek",
+      "line": "The berry is the boss."
+    },
+    {
+      "id": "extra_cake_slice",
+      "name": "Cake offering",
+      "category": "Pocket bakery",
+      "atlas": "actions-extra-bakery",
+      "frame": 8,
+      "motion": "bow",
+      "line": "You get the corner with extra joy."
+    },
+    {
+      "id": "extra_dice_roll",
+      "name": "Rolling dice",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 0,
+      "motion": "hop",
+      "line": "Your turn. I warmed up the dice."
+    },
+    {
+      "id": "extra_game_piece",
+      "name": "Board game",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 1,
+      "motion": "nod",
+      "line": "My strategy is extremely cute."
+    },
+    {
+      "id": "extra_game_win",
+      "name": "Little winner",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 2,
+      "motion": "bounce",
+      "line": "Unfortunately, that is my whole strategy."
+    },
+    {
+      "id": "extra_cards_fan",
+      "name": "Card fan",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 3,
+      "motion": "peek",
+      "line": "I have a very serious poker face."
+    },
+    {
+      "id": "extra_cards_drop",
+      "name": "Oops cards",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 4,
+      "motion": "hop",
+      "line": "The cards disagree."
+    },
+    {
+      "id": "extra_card_castle",
+      "name": "Card castle",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "New plan: tiny architecture."
+    },
+    {
+      "id": "extra_puzzle_piece",
+      "name": "Puzzle piece",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 6,
+      "motion": "peek",
+      "line": "这块拼图像不像小鲸鱼？"
+    },
+    {
+      "id": "extra_puzzle_fit",
+      "name": "Puzzle solved",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 7,
+      "motion": "nod",
+      "line": "咔哒，刚刚好。"
+    },
+    {
+      "id": "extra_puzzle_proud",
+      "name": "Puzzle pride",
+      "category": "Tiny game night",
+      "atlas": "actions-extra-games",
+      "frame": 8,
+      "motion": "bow",
+      "line": "今天的小圆满，送给你。"
+    },
+    {
+      "id": "extra_badminton_ready",
+      "name": "Badminton ready",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 0,
+      "motion": "sway",
+      "line": "Tiny sports day has begun."
+    },
+    {
+      "id": "extra_badminton_hit",
+      "name": "Shuttle swing",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 1,
+      "motion": "swing",
+      "line": "A magnificent swing!"
+    },
+    {
+      "id": "extra_shuttle_head",
+      "name": "Shuttle hat",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 2,
+      "motion": "peek",
+      "line": "A magnificent hat, actually."
+    },
+    {
+      "id": "extra_basketball",
+      "name": "Tiny dribble",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 3,
+      "motion": "bounce",
+      "line": "小鱼篮球队，只有我一条鱼。"
+    },
+    {
+      "id": "extra_basket_shot",
+      "name": "Little jump shot",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 4,
+      "motion": "hop",
+      "line": "投篮——！"
+    },
+    {
+      "id": "extra_sports_towel",
+      "name": "Team towel",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "先喝口水，冠军也要休息。"
+    },
+    {
+      "id": "extra_ribbon_gym",
+      "name": "Ribbon gymnast",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 6,
+      "motion": "swing",
+      "line": "Ribbon practice. Very graceful."
+    },
+    {
+      "id": "extra_ribbon_tangle",
+      "name": "Ribbon tangle",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 7,
+      "motion": "peek",
+      "line": "The ribbon has other plans."
+    },
+    {
+      "id": "extra_gym_finish",
+      "name": "Gymnast finish",
+      "category": "Tiny sports day",
+      "atlas": "actions-extra-sports",
+      "frame": 8,
+      "motion": "bow",
+      "line": "We call that freestyle."
+    },
+    {
+      "id": "extra_pencil_balance",
+      "name": "Pencil balance",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 0,
+      "motion": "breathe",
+      "line": "I'm balancing the workload."
+    },
+    {
+      "id": "extra_eraser_stack",
+      "name": "Eraser tower",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 1,
+      "motion": "nod",
+      "line": "One tiny task at a time."
+    },
+    {
+      "id": "extra_paperclip_chain",
+      "name": "Paperclip chain",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 2,
+      "motion": "sway",
+      "line": "Accidentally made office jewelry."
+    },
+    {
+      "id": "extra_stamp_heart",
+      "name": "Heart stamp",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 3,
+      "motion": "nod",
+      "line": "今日のがんばりに、ぽん！"
+    },
+    {
+      "id": "extra_envelope_seal",
+      "name": "Tiny letter",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 4,
+      "motion": "peek",
+      "line": "お手紙の中身は、ひみつ。"
+    },
+    {
+      "id": "extra_letter_delivery",
+      "name": "Letter delivery",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 5,
+      "motion": "bow",
+      "line": "応援をぎゅっと詰めたよ。"
+    },
+    {
+      "id": "extra_cable_loop",
+      "name": "Cable wrangler",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 6,
+      "motion": "swing",
+      "line": "Taming a wild desk noodle."
+    },
+    {
+      "id": "extra_screen_dust",
+      "name": "Dust patrol",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 7,
+      "motion": "shimmy",
+      "line": "Dust bunnies, please queue politely."
+    },
+    {
+      "id": "extra_desk_flag",
+      "name": "Desk flag",
+      "category": "Office mischief",
+      "atlas": "actions-extra-desk2",
+      "frame": 8,
+      "motion": "bow",
+      "line": "This desk is now a cozy kingdom."
+    },
+    {
+      "id": "extra_sock_mismatch",
+      "name": "Odd socks",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 0,
+      "motion": "peek",
+      "line": "袜子今天不想穿情侣装。"
+    },
+    {
+      "id": "extra_slipper_shuffle",
+      "name": "Slipper shuffle",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 1,
+      "motion": "sway",
+      "line": "啪嗒啪嗒，小鱼巡逻。"
+    },
+    {
+      "id": "extra_hot_water",
+      "name": "Warm bottle",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 2,
+      "motion": "breathe",
+      "line": "暖暖的，分你一半。"
+    },
+    {
+      "id": "extra_cushion_fort",
+      "name": "Cushion fort",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 3,
+      "motion": "peek",
+      "line": "Built a highly secure pillow fort."
+    },
+    {
+      "id": "extra_blanket_roof",
+      "name": "Blanket roof",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 4,
+      "motion": "sway",
+      "line": "Password is: extra fluffy."
+    },
+    {
+      "id": "extra_fort_invite",
+      "name": "Fort invitation",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 5,
+      "motion": "bow",
+      "line": "There's room for your worries."
+    },
+    {
+      "id": "extra_book_tea",
+      "name": "Book and tea",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 6,
+      "motion": "breathe",
+      "line": "Quiet chapter, warm cup."
+    },
+    {
+      "id": "extra_bookmark",
+      "name": "Whale bookmark",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 7,
+      "motion": "nod",
+      "line": "I'll save your place."
+    },
+    {
+      "id": "extra_cozy_wave",
+      "name": "Blanket wave",
+      "category": "Cozy rituals",
+      "atlas": "actions-extra-cozy",
+      "frame": 8,
+      "motion": "sway",
+      "line": "Stay as long as you like."
+    },
+    {
+      "id": "extra_suitcase_pack",
+      "name": "Packing snacks",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 0,
+      "motion": "nod",
+      "line": "Packing for a grand adventure."
+    },
+    {
+      "id": "extra_suitcase_sit",
+      "name": "Suitcase problem",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 1,
+      "motion": "bounce",
+      "line": "Mostly snacks. A strategic decision."
+    },
+    {
+      "id": "extra_suitcase_roll",
+      "name": "Off we go",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 2,
+      "motion": "hop",
+      "line": "Next stop: the other side of your desk."
+    },
+    {
+      "id": "extra_camera_aim",
+      "name": "Photo time",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 3,
+      "motion": "peek",
+      "line": "写真を撮るよ、はい！"
+    },
+    {
+      "id": "extra_photo_peek",
+      "name": "Photo preview",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 4,
+      "motion": "nod",
+      "line": "あっ、しっぽが写ってた。"
+    },
+    {
+      "id": "extra_postcard",
+      "name": "Little postcard",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 5,
+      "motion": "bow",
+      "line": "旅のおすそわけ、どうぞ。"
+    },
+    {
+      "id": "extra_compass",
+      "name": "Compass check",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 6,
+      "motion": "peek",
+      "line": "The compass says north."
+    },
+    {
+      "id": "extra_binoculars",
+      "name": "Lookout",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 7,
+      "motion": "sway",
+      "line": "My nose says bakery."
+    },
+    {
+      "id": "extra_travel_choice",
+      "name": "Important decision",
+      "category": "Suitcase stories",
+      "atlas": "actions-extra-travel",
+      "frame": 8,
+      "motion": "bow",
+      "line": "We follow the nose."
+    },
+    {
+      "id": "extra_party_hat",
+      "name": "Party hat",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 0,
+      "motion": "hop",
+      "line": "A tiny celebration has been declared."
+    },
+    {
+      "id": "extra_confetti_pop",
+      "name": "Confetti pop",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 1,
+      "motion": "bounce",
+      "line": "For what? For making it this far."
+    },
+    {
+      "id": "extra_party_slice",
+      "name": "Party slice",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 2,
+      "motion": "bow",
+      "line": "You get the first slice."
+    },
+    {
+      "id": "extra_lantern_paper",
+      "name": "Paper lantern",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 3,
+      "motion": "sway",
+      "line": "给今天挂一盏小灯笼。"
+    },
+    {
+      "id": "extra_fan_paper",
+      "name": "Festival fan",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 4,
+      "motion": "swing",
+      "line": "把不开心轻轻扇走。"
+    },
+    {
+      "id": "extra_festival_candy",
+      "name": "Candy apple",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 5,
+      "motion": "nod",
+      "line": "甜甜的事情正在排队赶来。"
+    },
+    {
+      "id": "extra_gift_wrap",
+      "name": "Gift wrapping",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 6,
+      "motion": "nod",
+      "line": "Wrapped up a very small surprise."
+    },
+    {
+      "id": "extra_gift_ribbon",
+      "name": "Gift bow",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 7,
+      "motion": "sway",
+      "line": "The ribbon took most of the effort."
+    },
+    {
+      "id": "extra_gift_present",
+      "name": "Gift for you",
+      "category": "Tiny celebrations",
+      "atlas": "actions-extra-festival",
+      "frame": 8,
+      "motion": "bow",
+      "line": "Inside: permission to be proud."
+    },
+    {
+      "id": "extra_goggles_lab",
+      "name": "Lab goggles",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 0,
+      "motion": "nod",
+      "line": "Very important science is happening."
+    },
+    {
+      "id": "extra_test_tube",
+      "name": "Bubble experiment",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 1,
+      "motion": "float",
+      "line": "Hypothesis: bubbles improve everything."
+    },
+    {
+      "id": "extra_lab_bubbles",
+      "name": "Bubbly result",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 2,
+      "motion": "bounce",
+      "line": "Results: yes. Extremely yes."
+    },
+    {
+      "id": "extra_magnet",
+      "name": "Magnet wonder",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 3,
+      "motion": "peek",
+      "line": "磁石で幸せを集めたいな。"
+    },
+    {
+      "id": "extra_magnets_join",
+      "name": "Magnet click",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 4,
+      "motion": "nod",
+      "line": "ぴたっ。なかよしだね。"
+    },
+    {
+      "id": "extra_lab_notes",
+      "name": "Science notebook",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "今日の発見、なかよしの力。"
+    },
+    {
+      "id": "extra_prism",
+      "name": "Rainbow prism",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 6,
+      "motion": "sway",
+      "line": "I found a rainbow in this pebble."
+    },
+    {
+      "id": "extra_color_wheel",
+      "name": "Color wheel",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 7,
+      "motion": "shimmy",
+      "line": "The colors are holding hands."
+    },
+    {
+      "id": "extra_lab_bow",
+      "name": "Little scientist",
+      "category": "Curious little lab",
+      "atlas": "actions-extra-science",
+      "frame": 8,
+      "motion": "bow",
+      "line": "Thank you for peer reviewing my cuteness."
+    },
+    {
+      "id": "extra_kalimba",
+      "name": "Little kalimba",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 0,
+      "motion": "nod",
+      "line": "A song small enough for your pocket."
+    },
+    {
+      "id": "extra_triangle",
+      "name": "Triangle solo",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 1,
+      "motion": "swing",
+      "line": "Ting! That was my solo."
+    },
+    {
+      "id": "extra_music_bow",
+      "name": "Musical bow",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 2,
+      "motion": "bow",
+      "line": "Encore accepted in snacks."
+    },
+    {
+      "id": "extra_violin",
+      "name": "Whale violin",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 3,
+      "motion": "sway",
+      "line": "今天给你拉一首小曲。"
+    },
+    {
+      "id": "extra_accordion",
+      "name": "Tiny accordion",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 4,
+      "motion": "bounce",
+      "line": "呼哧呼哧，琴也在做深呼吸。"
+    },
+    {
+      "id": "extra_cymbals",
+      "name": "Tiny cymbals",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 5,
+      "motion": "hop",
+      "line": "锵！烦恼被我吓跑啦。"
+    },
+    {
+      "id": "extra_headphones",
+      "name": "Headphone groove",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 6,
+      "motion": "sway",
+      "line": "Listening to my secret playlist."
+    },
+    {
+      "id": "extra_air_guitar",
+      "name": "Air guitar",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 7,
+      "motion": "shimmy",
+      "line": "It's mostly whale noises."
+    },
+    {
+      "id": "extra_music_heart",
+      "name": "Heart encore",
+      "category": "Pocket orchestra",
+      "atlas": "actions-extra-music2",
+      "frame": 8,
+      "motion": "sway",
+      "line": "This track reminded me of you."
+    },
+    {
+      "id": "extra_spoon_balance",
+      "name": "Spoon trick",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 0,
+      "motion": "breathe",
+      "line": "I have mastered an ancient art."
+    },
+    {
+      "id": "extra_spoon_drop",
+      "name": "Spoon surprise",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 1,
+      "motion": "hop",
+      "line": "The spoon has resigned."
+    },
+    {
+      "id": "extra_spoon_bow",
+      "name": "Spoon applause",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 2,
+      "motion": "bow",
+      "line": "Please clap for its service."
+    },
+    {
+      "id": "extra_leaf_hat",
+      "name": "Leaf hat",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 3,
+      "motion": "peek",
+      "line": "新しい帽子、どうかな？"
+    },
+    {
+      "id": "extra_mustache",
+      "name": "Ribbon mustache",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 4,
+      "motion": "sway",
+      "line": "わたし、立派な紳士です。"
+    },
+    {
+      "id": "extra_silly_peek",
+      "name": "Peekaboo paws",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 5,
+      "motion": "peek",
+      "line": "ばあ！小魚でした。"
+    },
+    {
+      "id": "extra_crown_cup",
+      "name": "Cup crown",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 6,
+      "motion": "bow",
+      "line": "The kingdom has a new queen."
+    },
+    {
+      "id": "extra_royal_spatula",
+      "name": "Royal spatula",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 7,
+      "motion": "swing",
+      "line": "My scepter can also flip pancakes."
+    },
+    {
+      "id": "extra_royal_nap",
+      "name": "Royal nap",
+      "category": "Lovable nonsense",
+      "atlas": "actions-extra-silly",
+      "frame": 8,
+      "motion": "breathe",
+      "line": "Royal duties are exhausting."
+    },
+    {
+      "id": "halloween_hat_hello",
+      "name": "Little witch",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 0,
+      "motion": "sway",
+      "line": "New hat. Same tiny menace. ♡"
+    },
+    {
+      "id": "halloween_boo",
+      "name": "Pocket-sized boo",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 1,
+      "motion": "hop",
+      "line": "Boo! ...Was that too small?"
+    },
+    {
+      "id": "halloween_shy",
+      "name": "Not scary",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 2,
+      "motion": "peek",
+      "line": "只吓你一下下。♡"
+    },
+    {
+      "id": "halloween_wand",
+      "name": "First spell",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 3,
+      "motion": "swing",
+      "line": "One spell. Very professional."
+    },
+    {
+      "id": "halloween_spell_pop",
+      "name": "Oops, sparkles",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 4,
+      "motion": "bounce",
+      "line": "Oops. I summoned glitter."
+    },
+    {
+      "id": "halloween_giggle",
+      "name": "Witch giggles",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 5,
+      "motion": "shimmy",
+      "line": "魔法、ちょっと失敗♪"
+    },
+    {
+      "id": "halloween_broom",
+      "name": "Broom practice",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 6,
+      "motion": "float",
+      "line": "Flight lesson number one."
+    },
+    {
+      "id": "halloween_wobble",
+      "name": "Wobbly flight",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 7,
+      "motion": "sway",
+      "line": "The broom has other plans."
+    },
+    {
+      "id": "halloween_landing",
+      "name": "Tiny landing",
+      "category": "Halloween tricks",
+      "atlas": "actions-halloween-tricks",
+      "frame": 8,
+      "motion": "bow",
+      "line": "着陆成功！差一点点。"
+    },
+    {
+      "id": "halloween_basket",
+      "name": "Trick or treat",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 0,
+      "motion": "nod",
+      "line": "Trick or treat? Tiny treat?"
+    },
+    {
+      "id": "halloween_candy",
+      "name": "Candy treasure",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 1,
+      "motion": "hop",
+      "line": "A treasure! For my collection."
+    },
+    {
+      "id": "halloween_share",
+      "name": "One for you",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 2,
+      "motion": "sway",
+      "line": "一颗给你，一颗给我。"
+    },
+    {
+      "id": "halloween_cookie",
+      "name": "Bat cookie",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 3,
+      "motion": "breathe",
+      "line": "This bat tastes like cocoa."
+    },
+    {
+      "id": "halloween_crumb",
+      "name": "Caught snacking",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 4,
+      "motion": "peek",
+      "line": "Evidence? What evidence?"
+    },
+    {
+      "id": "halloween_full",
+      "name": "Candy coma",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 5,
+      "motion": "breathe",
+      "line": "おなか、ぽんぽん♡"
+    },
+    {
+      "id": "halloween_pumpkin",
+      "name": "Pumpkin hug",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 6,
+      "motion": "sway",
+      "line": "Meet my very round assistant."
+    },
+    {
+      "id": "halloween_lantern",
+      "name": "Lantern keeper",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 7,
+      "motion": "float",
+      "line": "He handles the night shift."
+    },
+    {
+      "id": "halloween_pumpkin_pat",
+      "name": "Pumpkin pats",
+      "category": "Halloween treats",
+      "atlas": "actions-halloween-treats",
+      "frame": 8,
+      "motion": "bow",
+      "line": "小南瓜也要摸摸头。"
+    },
+    {
+      "id": "halloween_dance_left",
+      "name": "Moonstep left",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 0,
+      "motion": "hop",
+      "line": "Left foot. Little moonstep."
+    },
+    {
+      "id": "halloween_dance_right",
+      "name": "Moonstep right",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 1,
+      "motion": "hop",
+      "line": "Right foot. Cape goes whoosh!"
+    },
+    {
+      "id": "halloween_twirl",
+      "name": "Bat cape twirl",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 2,
+      "motion": "shimmy",
+      "line": "くるりん、ぱっ♪"
+    },
+    {
+      "id": "halloween_ghost",
+      "name": "Ghost friend",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 3,
+      "motion": "float",
+      "line": "I found a pocket ghost."
+    },
+    {
+      "id": "halloween_ghost_boop",
+      "name": "Ghost boop",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 4,
+      "motion": "nod",
+      "line": "He charges one boop for rent."
+    },
+    {
+      "id": "halloween_ghost_cuddle",
+      "name": "Ghost cuddle",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 5,
+      "motion": "sway",
+      "line": "不闹啦，抱抱。♡"
+    },
+    {
+      "id": "halloween_yawn",
+      "name": "Sleepy witch",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 6,
+      "motion": "breathe",
+      "line": "Even witches need a break."
+    },
+    {
+      "id": "halloween_rest",
+      "name": "Moonlit nap",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 7,
+      "motion": "breathe",
+      "line": "Five minutes. No spells."
+    },
+    {
+      "id": "halloween_wake",
+      "name": "Little moon stretch",
+      "category": "Halloween moonlight",
+      "atlas": "actions-halloween-moonlight",
+      "frame": 8,
+      "motion": "bow",
+      "line": "充电完成，满格小魔女！"
+    }
+  ],
+  "countingRule": "108 distinct illustrated poses with procedural motion loops. Dance and bell frame sequences are additional, not counted. Retiming, mirroring and motion profiles are not counted as new actions."
+}

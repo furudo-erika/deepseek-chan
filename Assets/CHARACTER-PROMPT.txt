@@ -1,0 +1,14 @@
+Generated using the built-in image_gen tool (not CLI).
+Design reference: https://www.gamersky.com/news/202608/2190273.shtml
+The external reference image is not redistributed in this repository or packaged in the app.
+Final asset: Assets/deepseek-chan-atlas.png
+
+Use case: stylized-concept.
+Asset type: production transparent 2 by 2 animation sprite atlas for a native Mac desktop eye-rest companion.
+Reference image: use the attached blue-haired DeepSeek-chan whale maid as the character identity/design reference, not its text, laptop, table or scene.
+Create ONE square image containing exactly FOUR equal square cells arranged 2 columns by 2 rows on real transparent background. No borders, labels, writing, captions or watermark. The same full-body human anime whale-maid woman appears once centered in EACH cell, same scale, head position, feet baseline and outfit. Leave 10% transparent padding in each cell so no hair, tail, prop crosses a cell boundary. Each figure occupies ~85% cell height. High-quality adorable chibi anime illustration, clean dark blue linework, polished cel shading, expressive blue eyes, long wavy deep-blue hair with cyan ends, single curved ahoge, small whale-fin ears, white frilly maid headband, navy modest long-sleeve maid dress with white apron, blue ribbon at collar, white stockings, navy shoes, a broad blue whale tail behind her. Fully clothed, human face, human hands and legs, not a whale animal.
+Top-left cell: idle happy welcoming pose, hands gently clasped at apron, open eyes and a small warm smile, relaxed standing.
+Top-right cell: knock wind-up pose: playful determined smile, right hand holding a SMALL wooden mallet raised at shoulder level on viewer's left, left hand at waist. A small blue round desk bell floats at her waist level to viewer's left, at identical position in both knock frames.
+Bottom-left cell: knock impact pose: exact same character position as top-right, right arm and mallet lowered to strike the little blue bell, slightly squinty determined smile. Small yellow impact rays at contact. Keep head/feet/outfit anchored identically so alternating these frames reads as arm swinging.
+Bottom-right cell: rest pose: same scale and standing position, eyes gently closed, hands together against cheek, peaceful smile, no mallet or bell.
+The figure must be recognizable as the referenced DeepSeek-chan blue whale maid. Ensure every cell is independently usable by exact quadrant clipping. True alpha transparency, no white background, no baked checkerboard.

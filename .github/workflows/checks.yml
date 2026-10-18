@@ -1,0 +1,23 @@
+name: macOS checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  macos:
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Behavior checks (no network or API key)
+        run: zsh scripts/check.sh
+      - name: Build the Debug app
+        run: zsh scripts/package-debug.sh
+      - name: Verify the app bundle
+        run: codesign --verify --deep --strict dist/DeepSeek-chan.app

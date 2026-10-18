@@ -1,0 +1,90 @@
+[
+  {
+    "category": "Greetings",
+    "asset": "Assets/actions/actions-greetings.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "greetings",
+    "sha256": "e20e19c0ed826618b394ba5656d8188cf637fa118d416a1f5e3442cf71847be6"
+  },
+  {
+    "category": "Playtime",
+    "asset": "Assets/actions/actions-play.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "play",
+    "sha256": "bcd9ae2974f0c52e6cb9ec9f431f57d2470627102460f100588d9da6907a3b94"
+  },
+  {
+    "category": "Snack time",
+    "asset": "Assets/actions/actions-snacks.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "snacks",
+    "sha256": "8e53a67d0f0ece39d3be90babf66e0ec3a295dac700b1aa6cb27c28f089484f3"
+  },
+  {
+    "category": "Sleepy time",
+    "asset": "Assets/actions/actions-sleepy.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "sleepy",
+    "sha256": "1fbbd8d1cfa9a18e55f7a5fc2981a0b05b96efecee13db5c4aa7380fc478461b"
+  },
+  {
+    "category": "Little stretches",
+    "asset": "Assets/actions/actions-movement.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "movement",
+    "sha256": "1203b32d0d2429419f8f24a1074b31dc3ae27c597d50445a3dae2834726138b9"
+  },
+  {
+    "category": "Little feelings",
+    "asset": "Assets/actions/actions-feelings.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "feelings",
+    "sha256": "1a0246b73d691166d4160806052e0eab5429a6f7e495f762cf76816cdbffdbdf"
+  },
+  {
+    "category": "Music & dance",
+    "asset": "Assets/actions/actions-music.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "music",
+    "sha256": "c3b4e2752832c097b6ee3626f4c1c14b636ba61dfa04c66fdd4fca994c30d233"
+  },
+  {
+    "category": "Desk buddy",
+    "asset": "Assets/actions/actions-desk.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "desk",
+    "sha256": "b61a121d815580c30973bd13b2e09e2cd3471aac8d034058b6c3c50d76f3369d"
+  },
+  {
+    "category": "Tiny adventures",
+    "asset": "Assets/actions/actions-adventure.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "adventure",
+    "sha256": "79d6ead93d3951d67923e1aef9c35725574f5afa2e96da7041e4b64dbbacace5"
+  },
+  {
+    "category": "Care & comfort",
+    "asset": "Assets/actions/actions-kindness.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "kindness",
+    "sha256": "d9e8a96f48c0dbeca01705c7c682bc5d0fed3addcfa1f1d320bd7e43ec793917"
+  },
+  {
+    "category": "Happy occasions",
+    "asset": "Assets/actions/actions-celebration.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "promptId": "celebration",
+    "sha256": "eb7ba36c4d2eeaf4d068cf40acc3892677057eff1e38f5c80fb8d915f9316965"
+  }
+]

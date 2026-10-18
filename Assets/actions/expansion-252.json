@@ -1,0 +1,1122 @@
+[
+  {
+    "id": "cafe",
+    "category": "Tiny café",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. kneeling carefully pouring a gooseneck kettle through a coffee dripper; 2. holding a cup with a blue whale-shaped foam design; 3. balancing a tray of one cup and one biscuit with a proud smile; 4. holding a tiny tea strainer over a round teapot; 5. kneeling pouring tea from a small teapot into a cup; 6. offering a steaming teacup on a saucer with both hands; 7. squeezing half an orange over a little juicer; 8. sipping orange juice through a straw from a glass; 9. hugging a little blank crescent-shaped café sign and yawning.",
+    "actions": [
+      [
+        "pour_over",
+        "Pour-over coffee",
+        "kneeling carefully pouring a gooseneck kettle through a coffee dripper",
+        "A tiny café just opened.",
+        "nod"
+      ],
+      [
+        "latte_art",
+        "Whale latte",
+        "holding a cup with a blue whale-shaped foam design",
+        "Today's special: one whale latte.",
+        "breathe"
+      ],
+      [
+        "tray_service",
+        "Café delivery",
+        "balancing a tray of one cup and one biscuit with a proud smile",
+        "Your bill is one head pat.",
+        "bow"
+      ],
+      [
+        "tea_strainer",
+        "Tea leaves",
+        "holding a tiny tea strainer over a round teapot",
+        "茶叶在开小小的游泳派对。",
+        "sway"
+      ],
+      [
+        "tea_pour",
+        "Tea ceremony",
+        "kneeling pouring tea from a small teapot into a cup",
+        "咕嘟咕嘟，香气到站。",
+        "nod"
+      ],
+      [
+        "tea_offer",
+        "Tea for you",
+        "offering a steaming teacup on a saucer with both hands",
+        "给你留了最暖的一杯。",
+        "bow"
+      ],
+      [
+        "juice_press",
+        "Orange squeeze",
+        "squeezing half an orange over a little juicer",
+        "I squeezed the sunshine.",
+        "bounce"
+      ],
+      [
+        "juice_sip",
+        "Orange sip",
+        "sipping orange juice through a straw from a glass",
+        "Oops. Sunshine has pulp.",
+        "nod"
+      ],
+      [
+        "cafe_sign",
+        "Café closed",
+        "hugging a little blank crescent-shaped café sign and yawning",
+        "The café owner needs a nap.",
+        "sway"
+      ]
+    ]
+  },
+  {
+    "id": "garden",
+    "category": "Pocket garden",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. crouching with seeds in palm and a small seed pouch; 2. patting soil around a seed in a small terracotta pot; 3. kneeling with ear close to a newly sprouted pot; 4. smelling a fresh daisy held close to nose; 5. sneezing into elbow while holding a daisy in other hand; 6. carefully placing a daisy chain crown over her maid headband; 7. setting a tiny folded leaf boat into a small bowl of water; 8. lying on tummy watching a tiny snail on one leaf; 9. sitting cuddling a small potted fern against her cheek.",
+    "actions": [
+      [
+        "seed_pouch",
+        "Seeds of joy",
+        "crouching with seeds in palm and a small seed pouch",
+        "I planted a tiny good mood.",
+        "nod"
+      ],
+      [
+        "soil_pot",
+        "Little planting",
+        "patting soil around a seed in a small terracotta pot",
+        "Now we wait. Very patiently.",
+        "breathe"
+      ],
+      [
+        "sprout_listen",
+        "Listening to sprouts",
+        "kneeling with ear close to a newly sprouted pot",
+        "Was that a sprout sneeze?",
+        "peek"
+      ],
+      [
+        "flower_sniff",
+        "Flower sniff",
+        "smelling a fresh daisy held close to nose",
+        "Found a flower with your name.",
+        "sway"
+      ],
+      [
+        "flower_sneeze",
+        "Pollen sneeze",
+        "sneezing into elbow while holding a daisy in other hand",
+        "Achoo! It found my nose.",
+        "hop"
+      ],
+      [
+        "flower_crown",
+        "Daisy crown",
+        "carefully placing a daisy chain crown over her maid headband",
+        "Royal gardener reporting.",
+        "bow"
+      ],
+      [
+        "leaf_boat",
+        "Leaf boat",
+        "setting a tiny folded leaf boat into a small bowl of water",
+        "葉っぱの船、出航！",
+        "sway"
+      ],
+      [
+        "snail_watch",
+        "Snail friend",
+        "lying on tummy watching a tiny snail on one leaf",
+        "船長、ちょっとゆっくりだね。",
+        "breathe"
+      ],
+      [
+        "garden_rest",
+        "Garden rest",
+        "sitting cuddling a small potted fern against her cheek",
+        "のんびりも冒険だよ。",
+        "breathe"
+      ]
+    ]
+  },
+  {
+    "id": "crafts",
+    "category": "Handmade treasures",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. sitting tangled loosely in blue yarn with a puzzled face; 2. knitting a short blue scarf using two needles; 3. wrapping a newly knitted scarf around a whale plush; 4. folding colored paper on her lap with focused hands; 5. holding a completed origami crane on one palm; 6. lifting the origami crane toward the sky with both hands; 7. threading colorful beads onto a short string; 8. tying a tiny blue ribbon on a handmade bracelet; 9. offering a small handmade bead charm toward viewer.",
+    "actions": [
+      [
+        "yarn_tangle",
+        "Yarn trouble",
+        "sitting tangled loosely in blue yarn with a puzzled face",
+        "I tried knitting a cloud.",
+        "peek"
+      ],
+      [
+        "knit_scarf",
+        "Tiny knitting",
+        "knitting a short blue scarf using two needles",
+        "It became a very small scarf.",
+        "nod"
+      ],
+      [
+        "scarf_plush",
+        "Scarf delivery",
+        "wrapping a newly knitted scarf around a whale plush",
+        "Whale winter is officially solved.",
+        "bow"
+      ],
+      [
+        "origami_fold",
+        "Origami folding",
+        "folding colored paper on her lap with focused hands",
+        "折一只小小纸鹤。",
+        "breathe"
+      ],
+      [
+        "paper_crane",
+        "Paper crane",
+        "holding a completed origami crane on one palm",
+        "它说想替你送个愿望。",
+        "float"
+      ],
+      [
+        "paper_flight",
+        "Crane launch",
+        "lifting the origami crane toward the sky with both hands",
+        "起飞！带上今天的好运。",
+        "hop"
+      ],
+      [
+        "bead_thread",
+        "Bead necklace",
+        "threading colorful beads onto a short string",
+        "I'm making a lucky charm.",
+        "nod"
+      ],
+      [
+        "ribbon_tie",
+        "Perfect ribbon",
+        "tying a tiny blue ribbon on a handmade bracelet",
+        "The bow took three attempts.",
+        "sway"
+      ],
+      [
+        "charm_offer",
+        "Lucky charm",
+        "offering a small handmade bead charm toward viewer",
+        "All three were full of love.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "seaside",
+    "category": "Seaside holiday",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. holding a spiral seashell to ear with wide curious eyes; 2. whispering back into the same spiral shell; 3. carefully tucking a seashell into her apron pocket; 4. kneeling filling a tiny pail with sand using a toy shovel; 5. proudly presenting a tiny sandcastle with a shell roof; 6. crouching greeting a tiny friendly crab beside the castle; 7. wearing a blue whale inflatable swim ring around waist; 8. adjusting blue swimming goggles over her eyes; 9. sitting and kicking feet with little blue flippers.",
+    "actions": [
+      [
+        "shell_listen",
+        "Shell whispers",
+        "holding a spiral seashell to ear with wide curious eyes",
+        "The shell has breaking news.",
+        "peek"
+      ],
+      [
+        "shell_reply",
+        "Talking to shells",
+        "whispering back into the same spiral shell",
+        "It says: shhhhhhh.",
+        "nod"
+      ],
+      [
+        "shell_pocket",
+        "Seashell souvenir",
+        "carefully tucking a seashell into her apron pocket",
+        "Excellent reporting. I'll keep it.",
+        "breathe"
+      ],
+      [
+        "sand_bucket",
+        "Sand bucket",
+        "kneeling filling a tiny pail with sand using a toy shovel",
+        "Building my seaside palace.",
+        "nod"
+      ],
+      [
+        "sand_castle",
+        "Sandcastle queen",
+        "proudly presenting a tiny sandcastle with a shell roof",
+        "It has a snack room.",
+        "bow"
+      ],
+      [
+        "crab_guest",
+        "Crab visitor",
+        "crouching greeting a tiny friendly crab beside the castle",
+        "The landlord is a crab.",
+        "peek"
+      ],
+      [
+        "float_ring",
+        "Swim ring",
+        "wearing a blue whale inflatable swim ring around waist",
+        "海へ行く準備、できた！",
+        "bounce"
+      ],
+      [
+        "goggles_adjust",
+        "Swim goggles",
+        "adjusting blue swimming goggles over her eyes",
+        "ゴーグル、よし！",
+        "nod"
+      ],
+      [
+        "fin_paddle",
+        "Fin paddles",
+        "sitting and kicking feet with little blue flippers",
+        "でも、まずおやつ。",
+        "hop"
+      ]
+    ]
+  },
+  {
+    "id": "rainy",
+    "category": "Rainy-day club",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. standing in oversized blue rain boots examining her feet; 2. carefully stepping one boot into a small isolated puddle; 3. hopping with both boots splashing a small puddle; 4. drawing a smiley face with fingertip on a small freestanding misted pane; 5. holding out an empty teacup catching a few drops; 6. drying hair with a fluffy towel draped over head; 7. fastening a small clear blue raincoat over her maid dress; 8. twirling a closed small blue umbrella like a baton; 9. holding a small rainbow-colored ribbon arcing between both hands.",
+    "actions": [
+      [
+        "rain_boots",
+        "Big rain boots",
+        "standing in oversized blue rain boots examining her feet",
+        "小鱼获得了巨人雨靴！",
+        "peek"
+      ],
+      [
+        "puddle_step",
+        "Careful puddle",
+        "carefully stepping one boot into a small isolated puddle",
+        "轻轻踩一下……",
+        "nod"
+      ],
+      [
+        "puddle_splash",
+        "Big splash",
+        "hopping with both boots splashing a small puddle",
+        "噗叽！快乐溅到你了吗？",
+        "hop"
+      ],
+      [
+        "window_draw",
+        "Rain window",
+        "drawing a smiley face with fingertip on a small freestanding misted pane",
+        "I drew a smile in the rain.",
+        "sway"
+      ],
+      [
+        "raindrop_catch",
+        "Catch a raindrop",
+        "holding out an empty teacup catching a few drops",
+        "Collecting tiny sky marbles.",
+        "float"
+      ],
+      [
+        "towel_hair",
+        "Fluffy towel",
+        "drying hair with a fluffy towel draped over head",
+        "My hair became a sea cloud.",
+        "shimmy"
+      ],
+      [
+        "raincoat_button",
+        "Raincoat buttons",
+        "fastening a small clear blue raincoat over her maid dress",
+        "Rain patrol is getting dressed.",
+        "nod"
+      ],
+      [
+        "umbrella_turn",
+        "Umbrella twirl",
+        "twirling a closed small blue umbrella like a baton",
+        "Umbrella choreography: approved.",
+        "swing"
+      ],
+      [
+        "rainbow_ribbon",
+        "Rainbow ribbon",
+        "holding a small rainbow-colored ribbon arcing between both hands",
+        "I saved the rainbow for you.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "stargazing",
+    "category": "Starlight errands",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. looking through a miniature telescope on a short tripod; 2. holding an unfolded star map without letters and tracing a constellation; 3. holding a star cookie over one eye with a guilty smile; 4. climbing two rungs of a tiny crescent-moon ladder; 5. polishing a small crescent moon prop with a cloth; 6. hugging a glowing crescent moon while seated; 7. sweeping a small butterfly net at a miniature shooting star; 8. placing one tiny glowing star into a glass jar; 9. opening the jar and letting a tiny star float from her palm.",
+    "actions": [
+      [
+        "telescope",
+        "Tiny telescope",
+        "looking through a miniature telescope on a short tripod",
+        "Searching for a new planet.",
+        "peek"
+      ],
+      [
+        "star_chart",
+        "Star chart",
+        "holding an unfolded star map without letters and tracing a constellation",
+        "This one looks like a dumpling.",
+        "nod"
+      ],
+      [
+        "star_cookie",
+        "Planet cookie",
+        "holding a star cookie over one eye with a guilty smile",
+        "Research is delicious.",
+        "bounce"
+      ],
+      [
+        "moon_ladder",
+        "Moon ladder",
+        "climbing two rungs of a tiny crescent-moon ladder",
+        "月亮的灯泡好像松了。",
+        "hop"
+      ],
+      [
+        "moon_polish",
+        "Polishing moon",
+        "polishing a small crescent moon prop with a cloth",
+        "小鱼维修队出动！",
+        "shimmy"
+      ],
+      [
+        "moon_hug",
+        "Moon cuddle",
+        "hugging a glowing crescent moon while seated",
+        "修好啦，今晚做个软软的梦。",
+        "sway"
+      ],
+      [
+        "comet_net",
+        "Comet catcher",
+        "sweeping a small butterfly net at a miniature shooting star",
+        "Caught a runaway wish.",
+        "swing"
+      ],
+      [
+        "wish_jar",
+        "Wish jar",
+        "placing one tiny glowing star into a glass jar",
+        "It wriggles when it's happy.",
+        "float"
+      ],
+      [
+        "star_release",
+        "Star release",
+        "opening the jar and letting a tiny star float from her palm",
+        "Go find your human, little wish.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "bakery",
+    "category": "Pocket bakery",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. holding a flour scoop with a dusting of flour on her nose; 2. kneeling pushing a rolling pin over tiny dough; 3. carrying a wicker basket with three tiny bread rolls; 4. carefully cracking a tiny egg into a bowl; 5. flipping one small pancake from a tiny frying pan; 6. offering a plate with three pancakes and a berry; 7. piping icing onto one small cupcake with a piping bag; 8. balancing a strawberry on top of the cupcake; 9. holding a dainty plate with a tiny cake slice.",
+    "actions": [
+      [
+        "flour_nose",
+        "Flour nose",
+        "holding a flour scoop with a dusting of flour on her nose",
+        "The recipe said a pinch.",
+        "peek"
+      ],
+      [
+        "rolling_pin",
+        "Rolling dough",
+        "kneeling pushing a rolling pin over tiny dough",
+        "I may have added a cloud.",
+        "nod"
+      ],
+      [
+        "bread_basket",
+        "Bread delivery",
+        "carrying a wicker basket with three tiny bread rolls",
+        "Freshly baked little victories.",
+        "bow"
+      ],
+      [
+        "egg_crack",
+        "Cracking egg",
+        "carefully cracking a tiny egg into a bowl",
+        "たまご、そーっとね。",
+        "breathe"
+      ],
+      [
+        "pancake_flip",
+        "Pancake flip",
+        "flipping one small pancake from a tiny frying pan",
+        "くるん！うまくできた！",
+        "hop"
+      ],
+      [
+        "pancake_stack",
+        "Pancake tower",
+        "offering a plate with three pancakes and a berry",
+        "一番上、あなたのぶん。",
+        "bow"
+      ],
+      [
+        "icing_bag",
+        "Cake icing",
+        "piping icing onto one small cupcake with a piping bag",
+        "One cupcake. Serious decoration.",
+        "nod"
+      ],
+      [
+        "berry_top",
+        "Berry topper",
+        "balancing a strawberry on top of the cupcake",
+        "The berry is the boss.",
+        "peek"
+      ],
+      [
+        "cake_slice",
+        "Cake offering",
+        "holding a dainty plate with a tiny cake slice",
+        "You get the corner with extra joy.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "games",
+    "category": "Tiny game night",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. crouching rolling a large foam die with both hands; 2. moving a whale-shaped piece on a tiny board without text; 3. holding a small board-game token above her head triumphantly; 4. holding a fan of playing cards with abstract symbols; 5. looking surprised as three cards fall from her hands; 6. kneeling beside a tiny house of cards with careful palms; 7. holding a large blue jigsaw piece examining its shape; 8. pressing the last piece into a small whale-shaped puzzle; 9. sitting holding up the finished whale puzzle.",
+    "actions": [
+      [
+        "dice_roll",
+        "Rolling dice",
+        "crouching rolling a large foam die with both hands",
+        "Your turn. I warmed up the dice.",
+        "hop"
+      ],
+      [
+        "game_piece",
+        "Board game",
+        "moving a whale-shaped piece on a tiny board without text",
+        "My strategy is extremely cute.",
+        "nod"
+      ],
+      [
+        "game_win",
+        "Little winner",
+        "holding a small board-game token above her head triumphantly",
+        "Unfortunately, that is my whole strategy.",
+        "bounce"
+      ],
+      [
+        "cards_fan",
+        "Card fan",
+        "holding a fan of playing cards with abstract symbols",
+        "I have a very serious poker face.",
+        "peek"
+      ],
+      [
+        "cards_drop",
+        "Oops cards",
+        "looking surprised as three cards fall from her hands",
+        "The cards disagree.",
+        "hop"
+      ],
+      [
+        "card_castle",
+        "Card castle",
+        "kneeling beside a tiny house of cards with careful palms",
+        "New plan: tiny architecture.",
+        "breathe"
+      ],
+      [
+        "puzzle_piece",
+        "Puzzle piece",
+        "holding a large blue jigsaw piece examining its shape",
+        "这块拼图像不像小鲸鱼？",
+        "peek"
+      ],
+      [
+        "puzzle_fit",
+        "Puzzle solved",
+        "pressing the last piece into a small whale-shaped puzzle",
+        "咔哒，刚刚好。",
+        "nod"
+      ],
+      [
+        "puzzle_proud",
+        "Puzzle pride",
+        "sitting holding up the finished whale puzzle",
+        "今天的小圆满，送给你。",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "sports",
+    "category": "Tiny sports day",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. holding a little badminton racket and shuttlecock; 2. swinging a badminton racket at one shuttlecock; 3. standing sheepishly with a shuttlecock landed on her head; 4. bending to bounce a miniature basketball; 5. jumping to toss a small basketball upward; 6. draping a towel over shoulders while holding a water bottle; 7. twirling a short rhythmic gymnastic ribbon in a neat spiral; 8. sitting with ribbon loosely looped around her ankles; 9. standing with one knee raised holding ribbon handles in a finishing pose.",
+    "actions": [
+      [
+        "badminton_ready",
+        "Badminton ready",
+        "holding a little badminton racket and shuttlecock",
+        "Tiny sports day has begun.",
+        "sway"
+      ],
+      [
+        "badminton_hit",
+        "Shuttle swing",
+        "swinging a badminton racket at one shuttlecock",
+        "A magnificent swing!",
+        "swing"
+      ],
+      [
+        "shuttle_head",
+        "Shuttle hat",
+        "standing sheepishly with a shuttlecock landed on her head",
+        "A magnificent hat, actually.",
+        "peek"
+      ],
+      [
+        "basketball",
+        "Tiny dribble",
+        "bending to bounce a miniature basketball",
+        "小鱼篮球队，只有我一条鱼。",
+        "bounce"
+      ],
+      [
+        "basket_shot",
+        "Little jump shot",
+        "jumping to toss a small basketball upward",
+        "投篮——！",
+        "hop"
+      ],
+      [
+        "sports_towel",
+        "Team towel",
+        "draping a towel over shoulders while holding a water bottle",
+        "先喝口水，冠军也要休息。",
+        "breathe"
+      ],
+      [
+        "ribbon_gym",
+        "Ribbon gymnast",
+        "twirling a short rhythmic gymnastic ribbon in a neat spiral",
+        "Ribbon practice. Very graceful.",
+        "swing"
+      ],
+      [
+        "ribbon_tangle",
+        "Ribbon tangle",
+        "sitting with ribbon loosely looped around her ankles",
+        "The ribbon has other plans.",
+        "peek"
+      ],
+      [
+        "gym_finish",
+        "Gymnast finish",
+        "standing with one knee raised holding ribbon handles in a finishing pose",
+        "We call that freestyle.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "desk2",
+    "category": "Office mischief",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. balancing a pencil horizontally on one finger; 2. stacking three little erasers into a tower; 3. holding a long chain of paperclips proudly between hands; 4. pressing a small heart stamp onto a blank paper; 5. sealing a small blue envelope with a heart sticker; 6. offering the sealed envelope with both hands; 7. coiling a loose blue USB cable carefully in both hands; 8. wiping a tiny blank tablet with a feather duster; 9. planting a small plain blue flag on a stack of two books.",
+    "actions": [
+      [
+        "pencil_balance",
+        "Pencil balance",
+        "balancing a pencil horizontally on one finger",
+        "I'm balancing the workload.",
+        "breathe"
+      ],
+      [
+        "eraser_stack",
+        "Eraser tower",
+        "stacking three little erasers into a tower",
+        "One tiny task at a time.",
+        "nod"
+      ],
+      [
+        "paperclip_chain",
+        "Paperclip chain",
+        "holding a long chain of paperclips proudly between hands",
+        "Accidentally made office jewelry.",
+        "sway"
+      ],
+      [
+        "stamp_heart",
+        "Heart stamp",
+        "pressing a small heart stamp onto a blank paper",
+        "今日のがんばりに、ぽん！",
+        "nod"
+      ],
+      [
+        "envelope_seal",
+        "Tiny letter",
+        "sealing a small blue envelope with a heart sticker",
+        "お手紙の中身は、ひみつ。",
+        "peek"
+      ],
+      [
+        "letter_delivery",
+        "Letter delivery",
+        "offering the sealed envelope with both hands",
+        "応援をぎゅっと詰めたよ。",
+        "bow"
+      ],
+      [
+        "cable_loop",
+        "Cable wrangler",
+        "coiling a loose blue USB cable carefully in both hands",
+        "Taming a wild desk noodle.",
+        "swing"
+      ],
+      [
+        "screen_dust",
+        "Dust patrol",
+        "wiping a tiny blank tablet with a feather duster",
+        "Dust bunnies, please queue politely.",
+        "shimmy"
+      ],
+      [
+        "desk_flag",
+        "Desk flag",
+        "planting a small plain blue flag on a stack of two books",
+        "This desk is now a cozy kingdom.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "cozy",
+    "category": "Cozy rituals",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. sitting looking down at one striped sock and one dotted sock; 2. shuffling in fluffy whale slippers with relaxed arms; 3. hugging a whale-shaped hot water bottle to chest; 4. peeking over two small stacked cushions; 5. holding a small blanket like a tent over two cushions; 6. sitting in cushion nook beckoning with one hand; 7. sitting with closed book and warm mug on her lap; 8. tucking a whale-shaped bookmark into an open book; 9. wrapped in a shoulder blanket waving one hand gently.",
+    "actions": [
+      [
+        "sock_mismatch",
+        "Odd socks",
+        "sitting looking down at one striped sock and one dotted sock",
+        "袜子今天不想穿情侣装。",
+        "peek"
+      ],
+      [
+        "slipper_shuffle",
+        "Slipper shuffle",
+        "shuffling in fluffy whale slippers with relaxed arms",
+        "啪嗒啪嗒，小鱼巡逻。",
+        "sway"
+      ],
+      [
+        "hot_water",
+        "Warm bottle",
+        "hugging a whale-shaped hot water bottle to chest",
+        "暖暖的，分你一半。",
+        "breathe"
+      ],
+      [
+        "cushion_fort",
+        "Cushion fort",
+        "peeking over two small stacked cushions",
+        "Built a highly secure pillow fort.",
+        "peek"
+      ],
+      [
+        "blanket_roof",
+        "Blanket roof",
+        "holding a small blanket like a tent over two cushions",
+        "Password is: extra fluffy.",
+        "sway"
+      ],
+      [
+        "fort_invite",
+        "Fort invitation",
+        "sitting in cushion nook beckoning with one hand",
+        "There's room for your worries.",
+        "bow"
+      ],
+      [
+        "book_tea",
+        "Book and tea",
+        "sitting with closed book and warm mug on her lap",
+        "Quiet chapter, warm cup.",
+        "breathe"
+      ],
+      [
+        "bookmark",
+        "Whale bookmark",
+        "tucking a whale-shaped bookmark into an open book",
+        "I'll save your place.",
+        "nod"
+      ],
+      [
+        "cozy_wave",
+        "Blanket wave",
+        "wrapped in a shoulder blanket waving one hand gently",
+        "Stay as long as you like.",
+        "sway"
+      ]
+    ]
+  },
+  {
+    "id": "travel",
+    "category": "Suitcase stories",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. kneeling putting a snack pouch into a tiny open suitcase; 2. sitting atop an overstuffed closed suitcase trying to close it; 3. pulling a tiny wheeled suitcase while stepping forward; 4. holding a small camera to one eye leaning forward; 5. looking at the back of a little camera with surprised eyes; 6. offering a postcard with a simple blue whale drawing and no text; 7. studying a small compass in her palm; 8. peering through small binoculars with elbows raised; 9. pointing decisively with a tiny shoulder bag.",
+    "actions": [
+      [
+        "suitcase_pack",
+        "Packing snacks",
+        "kneeling putting a snack pouch into a tiny open suitcase",
+        "Packing for a grand adventure.",
+        "nod"
+      ],
+      [
+        "suitcase_sit",
+        "Suitcase problem",
+        "sitting atop an overstuffed closed suitcase trying to close it",
+        "Mostly snacks. A strategic decision.",
+        "bounce"
+      ],
+      [
+        "suitcase_roll",
+        "Off we go",
+        "pulling a tiny wheeled suitcase while stepping forward",
+        "Next stop: the other side of your desk.",
+        "hop"
+      ],
+      [
+        "camera_aim",
+        "Photo time",
+        "holding a small camera to one eye leaning forward",
+        "写真を撮るよ、はい！",
+        "peek"
+      ],
+      [
+        "photo_peek",
+        "Photo preview",
+        "looking at the back of a little camera with surprised eyes",
+        "あっ、しっぽが写ってた。",
+        "nod"
+      ],
+      [
+        "postcard",
+        "Little postcard",
+        "offering a postcard with a simple blue whale drawing and no text",
+        "旅のおすそわけ、どうぞ。",
+        "bow"
+      ],
+      [
+        "compass",
+        "Compass check",
+        "studying a small compass in her palm",
+        "The compass says north.",
+        "peek"
+      ],
+      [
+        "binoculars",
+        "Lookout",
+        "peering through small binoculars with elbows raised",
+        "My nose says bakery.",
+        "sway"
+      ],
+      [
+        "travel_choice",
+        "Important decision",
+        "pointing decisively with a tiny shoulder bag",
+        "We follow the nose.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "festival",
+    "category": "Tiny celebrations",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. placing a tiny blue party cone hat over maid headband; 2. pulling a miniature party popper with a small burst of confetti; 3. offering a small slice of celebration cake on plate; 4. holding a small round paper lantern decorated with a blue wave; 5. holding a round uchiwa fan with a whale motif beside face; 6. holding a small glossy candy apple with delighted eyes; 7. kneeling wrapping a small box with blue paper; 8. pulling ribbon ends into a neat bow on the gift box; 9. offering the finished tiny present in both palms.",
+    "actions": [
+      [
+        "party_hat",
+        "Party hat",
+        "placing a tiny blue party cone hat over maid headband",
+        "A tiny celebration has been declared.",
+        "hop"
+      ],
+      [
+        "confetti_pop",
+        "Confetti pop",
+        "pulling a miniature party popper with a small burst of confetti",
+        "For what? For making it this far.",
+        "bounce"
+      ],
+      [
+        "party_slice",
+        "Party slice",
+        "offering a small slice of celebration cake on plate",
+        "You get the first slice.",
+        "bow"
+      ],
+      [
+        "lantern_paper",
+        "Paper lantern",
+        "holding a small round paper lantern decorated with a blue wave",
+        "给今天挂一盏小灯笼。",
+        "sway"
+      ],
+      [
+        "fan_paper",
+        "Festival fan",
+        "holding a round uchiwa fan with a whale motif beside face",
+        "把不开心轻轻扇走。",
+        "swing"
+      ],
+      [
+        "festival_candy",
+        "Candy apple",
+        "holding a small glossy candy apple with delighted eyes",
+        "甜甜的事情正在排队赶来。",
+        "nod"
+      ],
+      [
+        "gift_wrap",
+        "Gift wrapping",
+        "kneeling wrapping a small box with blue paper",
+        "Wrapped up a very small surprise.",
+        "nod"
+      ],
+      [
+        "gift_ribbon",
+        "Gift bow",
+        "pulling ribbon ends into a neat bow on the gift box",
+        "The ribbon took most of the effort.",
+        "sway"
+      ],
+      [
+        "gift_present",
+        "Gift for you",
+        "offering the finished tiny present in both palms",
+        "Inside: permission to be proud.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "science",
+    "category": "Curious little lab",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. putting clear safety goggles on forehead with determined face; 2. holding a sealed tube of sparkling blue water carefully; 3. watching a few soap bubbles escape a small flask with delighted face; 4. holding a horseshoe magnet attracting two tiny paperclips; 5. holding two small magnets as they snap together gently; 6. sitting sketching a little heart in a plain notebook; 7. holding a little glass prism that splits a tiny beam into rainbow; 8. spinning a small colorful paper wheel on a stick; 9. bowing with a small closed notebook tucked under one arm.",
+    "actions": [
+      [
+        "goggles_lab",
+        "Lab goggles",
+        "putting clear safety goggles on forehead with determined face",
+        "Very important science is happening.",
+        "nod"
+      ],
+      [
+        "test_tube",
+        "Bubble experiment",
+        "holding a sealed tube of sparkling blue water carefully",
+        "Hypothesis: bubbles improve everything.",
+        "float"
+      ],
+      [
+        "lab_bubbles",
+        "Bubbly result",
+        "watching a few soap bubbles escape a small flask with delighted face",
+        "Results: yes. Extremely yes.",
+        "bounce"
+      ],
+      [
+        "magnet",
+        "Magnet wonder",
+        "holding a horseshoe magnet attracting two tiny paperclips",
+        "磁石で幸せを集めたいな。",
+        "peek"
+      ],
+      [
+        "magnets_join",
+        "Magnet click",
+        "holding two small magnets as they snap together gently",
+        "ぴたっ。なかよしだね。",
+        "nod"
+      ],
+      [
+        "lab_notes",
+        "Science notebook",
+        "sitting sketching a little heart in a plain notebook",
+        "今日の発見、なかよしの力。",
+        "breathe"
+      ],
+      [
+        "prism",
+        "Rainbow prism",
+        "holding a little glass prism that splits a tiny beam into rainbow",
+        "I found a rainbow in this pebble.",
+        "sway"
+      ],
+      [
+        "color_wheel",
+        "Color wheel",
+        "spinning a small colorful paper wheel on a stick",
+        "The colors are holding hands.",
+        "shimmy"
+      ],
+      [
+        "lab_bow",
+        "Little scientist",
+        "bowing with a small closed notebook tucked under one arm",
+        "Thank you for peer reviewing my cuteness.",
+        "bow"
+      ]
+    ]
+  },
+  {
+    "id": "music2",
+    "category": "Pocket orchestra",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. sitting plucking a tiny wooden kalimba held between hands; 2. holding a musical triangle and striking it with a small beater; 3. bowing deeply with a little triangle instrument at her side; 4. playing a miniature violin with a short bow; 5. holding and opening a small blue accordion; 6. bringing together two miniature cymbals with a proud expression; 7. wearing blue headphones and tapping one foot; 8. leaning back miming an air guitar with expressive hands; 9. both hands forming a heart at chest while wearing headphones.",
+    "actions": [
+      [
+        "kalimba",
+        "Little kalimba",
+        "sitting plucking a tiny wooden kalimba held between hands",
+        "A song small enough for your pocket.",
+        "nod"
+      ],
+      [
+        "triangle",
+        "Triangle solo",
+        "holding a musical triangle and striking it with a small beater",
+        "Ting! That was my solo.",
+        "swing"
+      ],
+      [
+        "music_bow",
+        "Musical bow",
+        "bowing deeply with a little triangle instrument at her side",
+        "Encore accepted in snacks.",
+        "bow"
+      ],
+      [
+        "violin",
+        "Whale violin",
+        "playing a miniature violin with a short bow",
+        "今天给你拉一首小曲。",
+        "sway"
+      ],
+      [
+        "accordion",
+        "Tiny accordion",
+        "holding and opening a small blue accordion",
+        "呼哧呼哧，琴也在做深呼吸。",
+        "bounce"
+      ],
+      [
+        "cymbals",
+        "Tiny cymbals",
+        "bringing together two miniature cymbals with a proud expression",
+        "锵！烦恼被我吓跑啦。",
+        "hop"
+      ],
+      [
+        "headphones",
+        "Headphone groove",
+        "wearing blue headphones and tapping one foot",
+        "Listening to my secret playlist.",
+        "sway"
+      ],
+      [
+        "air_guitar",
+        "Air guitar",
+        "leaning back miming an air guitar with expressive hands",
+        "It's mostly whale noises.",
+        "shimmy"
+      ],
+      [
+        "music_heart",
+        "Heart encore",
+        "both hands forming a heart at chest while wearing headphones",
+        "This track reminded me of you.",
+        "sway"
+      ]
+    ]
+  },
+  {
+    "id": "silly",
+    "category": "Lovable nonsense",
+    "prompt": "Use case: illustration-story. Create a NEW production sprite atlas using the supplied reference ONLY for character identity and exact rendering style. Same adorable chibi DeepSeek-chan human anime whale-maid girl: blue gradient wavy hair, curled ahoge, blue whale tail, navy and white frilly maid dress, fluffy maid headband, huge blue eyes. Same soft polished detailed illustration; fully clothed, cute innocent comedy. TRANSPARENT alpha background. Square canvas, EXACTLY 3 columns x 3 rows of nine different FULL BODY figures. Each centered INSIDE its own equal square cell, at consistent scale, with generous 14% empty transparent margin on ALL four sides of EACH cell. Every hand, hair strand, prop and effect must fit completely inside its cell. Keep clear empty gutters. No touching or overlapping neighboring cells. No text, letters, labels, numbers, borders, ground, background or watermark. Props small, no environment. Read left to right, top to bottom. Nine distinct poses: 1. balancing a tiny spoon on her nose with crossed eyes; 2. looking surprised at a small spoon falling into her cupped palms; 3. bowing theatrically with a spoon held like a trophy; 4. wearing a huge leaf balanced on her maid headband; 5. holding a curled blue ribbon under nose like a mustache; 6. covering eyes with sleeves but peeking through fingers; 7. wearing an empty paper cup upside down as a small crown; 8. holding a tiny spatula upright like a royal scepter; 9. sitting asleep clutching the tiny spatula with paper cup crown tilted.",
+    "actions": [
+      [
+        "spoon_balance",
+        "Spoon trick",
+        "balancing a tiny spoon on her nose with crossed eyes",
+        "I have mastered an ancient art.",
+        "breathe"
+      ],
+      [
+        "spoon_drop",
+        "Spoon surprise",
+        "looking surprised at a small spoon falling into her cupped palms",
+        "The spoon has resigned.",
+        "hop"
+      ],
+      [
+        "spoon_bow",
+        "Spoon applause",
+        "bowing theatrically with a spoon held like a trophy",
+        "Please clap for its service.",
+        "bow"
+      ],
+      [
+        "leaf_hat",
+        "Leaf hat",
+        "wearing a huge leaf balanced on her maid headband",
+        "新しい帽子、どうかな？",
+        "peek"
+      ],
+      [
+        "mustache",
+        "Ribbon mustache",
+        "holding a curled blue ribbon under nose like a mustache",
+        "わたし、立派な紳士です。",
+        "sway"
+      ],
+      [
+        "silly_peek",
+        "Peekaboo paws",
+        "covering eyes with sleeves but peeking through fingers",
+        "ばあ！小魚でした。",
+        "peek"
+      ],
+      [
+        "crown_cup",
+        "Cup crown",
+        "wearing an empty paper cup upside down as a small crown",
+        "The kingdom has a new queen.",
+        "bow"
+      ],
+      [
+        "royal_spatula",
+        "Royal spatula",
+        "holding a tiny spatula upright like a royal scepter",
+        "My scepter can also flip pancakes.",
+        "swing"
+      ],
+      [
+        "royal_nap",
+        "Royal nap",
+        "sitting asleep clutching the tiny spatula with paper cup crown tilted",
+        "Royal duties are exhausting.",
+        "breathe"
+      ]
+    ]
+  }
+]

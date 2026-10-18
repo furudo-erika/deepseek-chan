@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cafe",
+    "asset": "Assets/actions/actions-extra-cafe.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "2f97bb234f165ef9e2fa20eb7b213d63c514feea6b2ad39a6a0748ed785a3674"
+  },
+  {
+    "id": "seaside",
+    "asset": "Assets/actions/actions-extra-seaside.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "e9a585353461a456f97f137a6130d5afbe3b21e051ae6f06c9d82cff6f048dec"
+  },
+  {
+    "id": "garden",
+    "asset": "Assets/actions/actions-extra-garden.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "bf735011296d5eb57ced83407e32056496e20badfd0644fa5de521fc75b28ca7"
+  },
+  {
+    "id": "crafts",
+    "asset": "Assets/actions/actions-extra-crafts.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "4a7b17b28a49308bb04dc135fd32952cf00fedab30f281fabc1b7775a3f5045d"
+  },
+  {
+    "id": "rainy",
+    "asset": "Assets/actions/actions-extra-rainy.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "1ab8c3e6ab7a0cf0c0fee9a0fc24d3b9486ab0d294c7f62f532d05e16916604a"
+  },
+  {
+    "id": "games",
+    "asset": "Assets/actions/actions-extra-games.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "8a2a7d3c2f628254b505f9b173339394d58d6f38aeaaa9c7c4377386de4c1091"
+  },
+  {
+    "id": "stargazing",
+    "asset": "Assets/actions/actions-extra-stargazing.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "5e6a8cb428ded1dff2bb2cb2323f844b7581927a0574f4b4bb14fcc2adc49d48"
+  },
+  {
+    "id": "bakery",
+    "asset": "Assets/actions/actions-extra-bakery.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "9f643685d3fca6233071d1d4232e841092199a38fc9b634edd13c65c4e937e7c"
+  },
+  {
+    "id": "sports",
+    "asset": "Assets/actions/actions-extra-sports.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "590f7f58bd65106a0d708abad88cd7b692bbb93f5ceee91d10288bbe05f4af33"
+  },
+  {
+    "id": "cozy",
+    "asset": "Assets/actions/actions-extra-cozy.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "fe9a73257db1995903708c408f0539e812df8925299f03fbc57d246e94c14bf9"
+  },
+  {
+    "id": "desk2",
+    "asset": "Assets/actions/actions-extra-desk2.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "9f0553b8b087e39a1bed0cae64d2698d3c6bc6f2cd897ea5360cfb61cf603254"
+  },
+  {
+    "id": "travel",
+    "asset": "Assets/actions/actions-extra-travel.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "dd68af1a2b86e8cfbc34371cfaf194665afae54a5df970389466ffec9c58d02d"
+  },
+  {
+    "id": "music2",
+    "asset": "Assets/actions/actions-extra-music2.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "cb83a844996790d16fc52dfbdecda33f44a2a5beb598e297f4ef00491214274c"
+  },
+  {
+    "id": "science",
+    "asset": "Assets/actions/actions-extra-science.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "d00a35226b6eaf29214e46f6c1ee54a379cf9065e2dce2822d2936ed0038e0c7"
+  },
+  {
+    "id": "festival",
+    "asset": "Assets/actions/actions-extra-festival.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "d87080918b9bd6152a0f7276079d3f278c54086bfd2782ef26d873282069d199"
+  },
+  {
+    "id": "silly",
+    "asset": "Assets/actions/actions-extra-silly.png",
+    "generator": "built-in image_gen",
+    "reference": "Assets/deepseek-chan-daily-atlas.png",
+    "sha256": "414db3597c3385c0995c89b01a8d3f5ef7bfcb2a3ef8cdd4abf959181d95f791"
+  }
+]

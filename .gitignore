@@ -1,0 +1,18 @@
+# Local builds, release artifacts, and platform metadata
+.build/
+dist/
+.DS_Store
+*.dmg
+*.dmg.sha256
+*.app/
+
+# Local development records and external reference originals
+/ACCEPTANCE.md
+/Assets/References/
+
+# Credentials and local configuration
+.env
+.env.*
+*.p12
+*.p8
+*.mobileprovision

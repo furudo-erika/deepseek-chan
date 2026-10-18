@@ -1,0 +1,212 @@
+[
+  {
+    "id": "tricks",
+    "category": "Halloween tricks",
+    "actions": [
+      [
+        "hat_hello",
+        "Little witch",
+        "holding the brim of her witch hat and waving shyly",
+        "New hat. Same tiny menace. ♡",
+        "sway"
+      ],
+      [
+        "boo",
+        "Pocket-sized boo",
+        "both hands raised like tiny ghost paws with mischievous smile",
+        "Boo! ...Was that too small?",
+        "hop"
+      ],
+      [
+        "shy",
+        "Not scary",
+        "hiding a blushing smile behind her cape",
+        "只吓你一下下。♡",
+        "peek"
+      ],
+      [
+        "wand",
+        "First spell",
+        "raising a tiny star wand confidently",
+        "One spell. Very professional.",
+        "swing"
+      ],
+      [
+        "spell_pop",
+        "Oops, sparkles",
+        "surprised by a little orange sparkle puff at her wand tip",
+        "Oops. I summoned glitter.",
+        "bounce"
+      ],
+      [
+        "giggle",
+        "Witch giggles",
+        "eyes closed giggling into one sleeve with wand lowered",
+        "魔法、ちょっと失敗♪",
+        "shimmy"
+      ],
+      [
+        "broom",
+        "Broom practice",
+        "sitting sideways on a tiny broom a few inches above ground",
+        "Flight lesson number one.",
+        "float"
+      ],
+      [
+        "wobble",
+        "Wobbly flight",
+        "balancing on a tilted short broom with wide worried eyes",
+        "The broom has other plans.",
+        "sway"
+      ],
+      [
+        "landing",
+        "Tiny landing",
+        "standing after landing, clutching broom, proud bashful bow",
+        "着陆成功！差一点点。",
+        "bow"
+      ]
+    ],
+    "prompt": "Use case: stylized-concept. Asset type: transparent native macOS desktop pet sprite atlas. Create a Halloween costume expansion of exactly the SAME blue-haired chibi girl in reference image 1. Reference is character identity and rendering style only; create new poses. Keep her round face, huge blue eyes, blue-to-cyan curly hair, whale tail, tiny chibi proportions, navy maid dress and white frills. Add a small floppy midnight-purple witch hat with orange bow and tiny pumpkin pin, short purple bat-scalloped cape with orange lining, orange waist bow, navy shoes. The same outfit in ALL nine cells. Sweet and playful, never scary or sexualized. Soft polished anime illustration, crisp clean cutout edges. Composition: square canvas, exactly 3 columns x 3 rows, nine separate full-body figures, row-major reading order. Each figure AND its props fit within the INNER 78 percent of its equal cell. Leave generous fully transparent gutters between figures and around all outer edges. Nothing may cross into adjacent cells. Consistent figure scale and head size. Transparent background with real alpha, no checkerboard drawn, no floor, no panels, no labels, no text, no watermark, no white sticker border. Poses row-major: 1. holding the brim of her witch hat and waving shyly; 2. both hands raised like tiny ghost paws with mischievous smile; 3. hiding a blushing smile behind her cape; 4. raising a tiny star wand confidently; 5. surprised by a little orange sparkle puff at her wand tip; 6. eyes closed giggling into one sleeve with wand lowered; 7. sitting sideways on a tiny broom a few inches above ground; 8. balancing on a tilted short broom with wide worried eyes; 9. standing after landing, clutching broom, proud bashful bow."
+  },
+  {
+    "id": "treats",
+    "category": "Halloween treats",
+    "actions": [
+      [
+        "basket",
+        "Trick or treat",
+        "offering a small jack-o-lantern candy basket with hopeful eyes",
+        "Trick or treat? Tiny treat?",
+        "nod"
+      ],
+      [
+        "candy",
+        "Candy treasure",
+        "holding one wrapped orange candy up triumphantly",
+        "A treasure! For my collection.",
+        "hop"
+      ],
+      [
+        "share",
+        "One for you",
+        "offering a wrapped candy toward viewer warmly",
+        "一颗给你，一颗给我。",
+        "sway"
+      ],
+      [
+        "cookie",
+        "Bat cookie",
+        "taking a tiny bite from a bat shaped cookie happily",
+        "This bat tastes like cocoa.",
+        "breathe"
+      ],
+      [
+        "crumb",
+        "Caught snacking",
+        "caught with cookie crumbs on cheek and innocent wide eyes",
+        "Evidence? What evidence?",
+        "peek"
+      ],
+      [
+        "full",
+        "Candy coma",
+        "sitting hugging pumpkin basket with sleepy content cheeks",
+        "おなか、ぽんぽん♡",
+        "breathe"
+      ],
+      [
+        "pumpkin",
+        "Pumpkin hug",
+        "hugging a small smiling jack-o-lantern to her chest",
+        "Meet my very round assistant.",
+        "sway"
+      ],
+      [
+        "lantern",
+        "Lantern keeper",
+        "holding tiny pumpkin lantern with warm glow looking down at it",
+        "He handles the night shift.",
+        "float"
+      ],
+      [
+        "pumpkin_pat",
+        "Pumpkin pats",
+        "kneeling to gently pat her smiling pumpkin companion",
+        "小南瓜也要摸摸头。",
+        "bow"
+      ]
+    ],
+    "prompt": "Use case: stylized-concept. Asset type: transparent native macOS desktop pet sprite atlas. Create a Halloween costume expansion of exactly the SAME blue-haired chibi girl in reference image 1. Reference is character identity and rendering style only; create new poses. Keep her round face, huge blue eyes, blue-to-cyan curly hair, whale tail, tiny chibi proportions, navy maid dress and white frills. Add a small floppy midnight-purple witch hat with orange bow and tiny pumpkin pin, short purple bat-scalloped cape with orange lining, orange waist bow, navy shoes. The same outfit in ALL nine cells. Sweet and playful, never scary or sexualized. Soft polished anime illustration, crisp clean cutout edges. Composition: square canvas, exactly 3 columns x 3 rows, nine separate full-body figures, row-major reading order. Each figure AND its props fit within the INNER 78 percent of its equal cell. Leave generous fully transparent gutters between figures and around all outer edges. Nothing may cross into adjacent cells. Consistent figure scale and head size. Transparent background with real alpha, no checkerboard drawn, no floor, no panels, no labels, no text, no watermark, no white sticker border. Poses row-major: 1. offering a small jack-o-lantern candy basket with hopeful eyes; 2. holding one wrapped orange candy up triumphantly; 3. offering a wrapped candy toward viewer warmly; 4. taking a tiny bite from a bat shaped cookie happily; 5. caught with cookie crumbs on cheek and innocent wide eyes; 6. sitting hugging pumpkin basket with sleepy content cheeks; 7. hugging a small smiling jack-o-lantern to her chest; 8. holding tiny pumpkin lantern with warm glow looking down at it; 9. kneeling to gently pat her smiling pumpkin companion.\nReference image 2 is the approved Halloween costume: match its purple hat, pumpkin bow, bat cape and white frills exactly. Keep all hair curls inside the canvas with transparent outer margins. Same nine-cell atlas layout with larger empty gutters."
+  },
+  {
+    "id": "moonlight",
+    "category": "Halloween moonlight",
+    "actions": [
+      [
+        "dance_left",
+        "Moonstep left",
+        "one foot raised left, one hand on hat, cape swung left",
+        "Left foot. Little moonstep.",
+        "hop"
+      ],
+      [
+        "dance_right",
+        "Moonstep right",
+        "opposite foot raised right, arms spread, cape swung right",
+        "Right foot. Cape goes whoosh!",
+        "hop"
+      ],
+      [
+        "twirl",
+        "Bat cape twirl",
+        "twirling with bat cape wide and big delighted smile",
+        "くるりん、ぱっ♪",
+        "shimmy"
+      ],
+      [
+        "ghost",
+        "Ghost friend",
+        "gently cupping a tiny smiling white ghost in both hands",
+        "I found a pocket ghost.",
+        "float"
+      ],
+      [
+        "ghost_boop",
+        "Ghost boop",
+        "tiny smiling ghost touching her nose as she closes eyes",
+        "He charges one boop for rent.",
+        "nod"
+      ],
+      [
+        "ghost_cuddle",
+        "Ghost cuddle",
+        "hugging tiny white ghost to cheek with warm sleepy smile",
+        "不闹啦，抱抱。♡",
+        "sway"
+      ],
+      [
+        "yawn",
+        "Sleepy witch",
+        "yawning behind one hand with drooping hat and eyes",
+        "Even witches need a break.",
+        "breathe"
+      ],
+      [
+        "rest",
+        "Moonlit nap",
+        "sitting eyes closed with cheek resting on small pumpkin pillow",
+        "Five minutes. No spells.",
+        "breathe"
+      ],
+      [
+        "wake",
+        "Little moon stretch",
+        "stretching both arms up with witch hat tipped back happily",
+        "充电完成，满格小魔女！",
+        "bow"
+      ]
+    ],
+    "prompt": "Use case: stylized-concept. Asset type: transparent native macOS desktop pet sprite atlas. Create a Halloween costume expansion of exactly the SAME blue-haired chibi girl in reference image 1. Reference is character identity and rendering style only; create new poses. Keep her round face, huge blue eyes, blue-to-cyan curly hair, whale tail, tiny chibi proportions, navy maid dress and white frills. Add a small floppy midnight-purple witch hat with orange bow and tiny pumpkin pin, short purple bat-scalloped cape with orange lining, orange waist bow, navy shoes. The same outfit in ALL nine cells. Sweet and playful, never scary or sexualized. Soft polished anime illustration, crisp clean cutout edges. Composition: square canvas, exactly 3 columns x 3 rows, nine separate full-body figures, row-major reading order. Each figure AND its props fit within the INNER 78 percent of its equal cell. Leave generous fully transparent gutters between figures and around all outer edges. Nothing may cross into adjacent cells. Consistent figure scale and head size. Transparent background with real alpha, no checkerboard drawn, no floor, no panels, no labels, no text, no watermark, no white sticker border. Poses row-major: 1. one foot raised left, one hand on hat, cape swung left; 2. opposite foot raised right, arms spread, cape swung right; 3. twirling with bat cape wide and big delighted smile; 4. gently cupping a tiny smiling white ghost in both hands; 5. tiny smiling ghost touching her nose as she closes eyes; 6. hugging tiny white ghost to cheek with warm sleepy smile; 7. yawning behind one hand with drooping hat and eyes; 8. sitting eyes closed with cheek resting on small pumpkin pillow; 9. stretching both arms up with witch hat tipped back happily.\nReference image 2 is the approved Halloween costume: match its purple hat, pumpkin bow, bat cape and white frills exactly. Keep all hair curls inside the canvas with transparent outer margins. Same nine-cell atlas layout with larger empty gutters."
+  }
+]

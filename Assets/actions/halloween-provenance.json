@@ -1,0 +1,31 @@
+[
+  {
+    "id": "tricks",
+    "asset": "Assets/actions/actions-halloween-tricks.png",
+    "generator": "built-in image_gen",
+    "references": [
+      "Assets/actions/actions-extra-silly.png"
+    ],
+    "sha256": "3f923e5f0223f98f821353fb683d1123b19b5db63119f8640ae365ea24d1d9ab"
+  },
+  {
+    "id": "treats",
+    "asset": "Assets/actions/actions-halloween-treats.png",
+    "generator": "built-in image_gen",
+    "references": [
+      "Assets/actions/actions-extra-silly.png",
+      "Assets/actions/actions-halloween-tricks.png"
+    ],
+    "sha256": "5c7a6d4905b2dca204f5be4757a1cd64ddecd75ec9bbed4d5521dcfb11301a5e"
+  },
+  {
+    "id": "moonlight",
+    "asset": "Assets/actions/actions-halloween-moonlight.png",
+    "generator": "built-in image_gen",
+    "references": [
+      "Assets/actions/actions-extra-silly.png",
+      "Assets/actions/actions-halloween-tricks.png"
+    ],
+    "sha256": "947810e06d4f511e59ca98c11be01e6a627f8dbccf13c0b2a4ee0f51977b8bda"
+  }
+]
