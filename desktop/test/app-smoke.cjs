@@ -21,10 +21,13 @@ const assert = require('node:assert/strict');
   await fs.writeFile(path.join(temp,'inbox/tasks/test.json'),JSON.stringify({version:1,event_id:'fixture',source:'codex',task_id:'smoke',title:'Smoke task',status:'waiting',updated_at:Date.now()/1000}));
   await page.waitForFunction(()=>document.querySelector('#task-list').textContent.includes('Smoke task'));
   assert.equal(await page.getByRole('textbox',{name:'Message',exact:true}).inputValue(),'UNSENT DRAFT');
+  const originalBounds = await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].getBounds());
   await page.evaluate(()=>window.pet.command('test-reminder'));
   await page.getByRole('button',{name:'Rest 5 min ♡'}).waitFor({state:'visible'});
   await page.getByRole('button',{name:'In 5 min',exact:true}).click();
   assert.equal(await page.getByRole('textbox',{name:'Message',exact:true}).inputValue(),'UNSENT DRAFT');
+  await page.waitForTimeout(850); // A cancelled center animation must not move the pet again.
+  assert.deepEqual(await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].getBounds()), originalBounds);
   await page.getByRole('textbox',{name:'Message',exact:true}).fill('');await page.getByRole('button',{name:'Close panel'}).click();
   await page.evaluate(()=>window.pet.command('rest'));await page.waitForFunction(()=>document.querySelector('#timer').textContent.includes('look far away'));
   await page.screenshot({path:path.join(temp,'pet.png'),omitBackground:true});

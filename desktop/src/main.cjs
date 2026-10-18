@@ -51,7 +51,7 @@ function stories() {
   return Array.from({ length: Math.floor(pool.length / 3) }, (_, i) => pool.slice(i * 3, i * 3 + 3));
 }
 function startStory() { const list = stories(); const index = storyDeck.next(list.map((_, i) => String(i))); routine = [...(list[Number(index)] || [])]; nextBeat = 0; }
-function restorePosition() { if (homeBounds && win && !drag) win.setBounds(clamp(homeBounds, screen.getDisplayMatching(homeBounds).workArea)); }
+function restorePosition() { clearInterval(moving); if (homeBounds && win && !drag) win.setBounds(clamp(homeBounds, screen.getDisplayMatching(homeBounds).workArea)); }
 function centerDance() {
   if (!win || hidden) return;
   const before = win.getBounds(); homeBounds = before;
