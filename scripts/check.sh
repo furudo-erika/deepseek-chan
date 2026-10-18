@@ -2,6 +2,7 @@
 set -euo pipefail
 ROOT=${0:A:h:h}
 cd "$ROOT"
+python3 scripts/check-public-files.py
 mkdir -p .build/checks
 swiftc -Onone Sources/TimerEngine.swift Tests/main.swift -o .build/checks/timer
 .build/checks/timer
@@ -19,5 +20,5 @@ done
 
 swiftc -Onone -parse-as-library Sources/ActionLibrary.swift Sources/PetPersonality.swift Sources/TaskBridge.swift Tests/TaskBridgeChecks.swift -o .build/checks/TaskBridge
 .build/checks/TaskBridge
-python3 -m unittest discover -s Tests -p 'test_task_bridge.py'
-node --test Tests/task-extension.test.mjs
+python3 -m unittest discover -s Tests -p 'test_*.py'
+node --test Tests/*.test.mjs

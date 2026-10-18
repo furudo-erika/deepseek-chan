@@ -56,9 +56,9 @@ shasum -a 256 -c DeepSeek-chan-1.8.1-arm64.dmg.sha256
 
 ## Task buddies (development build)
 
-Connect coding agents so she reacts to their tasks: typing while they work, a wave when they need you, and a tiny celebration when a turn finishes. The new **Task buddies** panel includes setup commands for Codex, Claude Code, Cursor, Pi, OMP, Grok, and dsh.
+Connect coding agents so she reacts to their tasks: typing while they work, a wave when they need you, and a tiny celebration when a turn finishes. The new **Task buddies** panel includes setup commands for Codex, Claude Code, Cursor, Pi, OMP, Grok Build, dsh, and T3 Code.
 
-Claude Code/Cursor use hooks; Pi/OMP use extensions; Codex supports MCP and a completion hook. Grok/dsh currently use a process wrapper or explicit task events, rather than native per-turn detection. All feedback stays local and uses no AI API. See the [connection guide](docs/task-buddies.md) for setup and limitations.
+Claude Code/Cursor/Grok use lifecycle hooks; Pi/OMP/dsh use native extensions; Codex supports MCP and a completion hook. T3 Code connects through a read-only MCP watcher. Grok uses confirmed idle rather than celebrating a vetoable stop hook. Pet feedback stays local and uses no AI API. See the [connection guide](docs/task-buddies.md) for setup and limitations.
 
 **Build from source to try this feature; the 1.8.1 release DMG does not include it.**
 

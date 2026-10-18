@@ -3,7 +3,7 @@ import Foundation
 /// Versioned local snapshots. Text is display-only and never sent to the AI client.
 struct CompanionTask: Codable, Equatable, Identifiable, Sendable {
     enum Status: String, Codable, CaseIterable, Sendable {
-        case working, waiting, completed, failed, cancelled
+        case working, waiting, completed, failed, cancelled, idle
         var label: String {
             switch self {
             case .working: "Working"
@@ -11,10 +11,11 @@ struct CompanionTask: Codable, Equatable, Identifiable, Sendable {
             case .completed: "Turn finished"
             case .failed: "Needs a fix"
             case .cancelled: "Stopped"
+            case .idle: "Idle"
             }
         }
         var priority: Int {
-            switch self { case .waiting, .failed: 3; case .completed: 2; case .cancelled: 1; case .working: 0 }
+            switch self { case .waiting, .failed: 3; case .completed: 2; case .cancelled: 1; case .working, .idle: 0 }
         }
     }
     let version: Int
@@ -26,13 +27,13 @@ struct CompanionTask: Codable, Equatable, Identifiable, Sendable {
     let updated_at: Double
     var id: String { source + ":" + task_id }
     var sourceName: String {
-        ["codex": "Codex", "claude": "Claude Code", "cursor": "Cursor", "pi": "Pi", "omp": "OMP", "grok": "Grok", "dsh": "dsh", "other": "Agent"][source] ?? source
+        ["codex": "Codex", "claude": "Claude Code", "cursor": "Cursor", "pi": "Pi", "omp": "OMP", "grok": "Grok", "dsh": "dsh", "t3": "T3 Code", "other": "Agent"][source] ?? source
     }
     func isStale(at now: Date) -> Bool { (status == .working || status == .waiting) && now.timeIntervalSince1970 - updated_at > 300 }
     func valid(at now: Date) -> Bool {
         let age = now.timeIntervalSince1970 - updated_at
         return version == 1 && updated_at.isFinite && age >= -30 && age < 86400
-            && ["codex", "claude", "cursor", "pi", "omp", "grok", "dsh", "other"].contains(source)
+            && ["codex", "claude", "cursor", "pi", "omp", "grok", "dsh", "t3", "other"].contains(source)
             && !task_id.isEmpty && task_id.utf8.count <= 128 && !event_id.isEmpty && event_id.utf8.count <= 128
             && !title.isEmpty && title.count <= 80 && !title.unicodeScalars.contains { CharacterSet.controlCharacters.contains($0) }
     }
@@ -136,6 +137,9 @@ struct TaskPersonality {
         case .failed:
             poses = ["magnify", "heart_gift"]
             lines = ["A little snag. We can untangle it.", "だいじょうぶ。Let's take a look.", "不慌，小鱼陪你找问题。", "Something needs a fix. I'm here. ♡"]
+        case .idle:
+            poses = ["breathe", "wave"]
+            lines = ["Your agent is quiet now. Tiny stretch?", "ひと休み。I'll stay nearby.", "先歇一下，看看任务进展吧。"]
         case .cancelled:
             poses = ["breathe", "wave"]
             lines = ["Tools down. Tiny stretch?", "Stopped for now. ひと休み。", "先歇一下，小鱼还在。"]

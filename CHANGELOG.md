@@ -4,7 +4,9 @@
 
 - Task buddies: local task states, quiet working poses, and outfit-aware task reactions.
 - Codex MCP/completion adapter, Claude Code/Cursor hooks, and Pi/OMP extensions.
-- CLI process wrapper and explicit event interface for Grok, dsh, and other tools.
+- Native Grok Build hooks with turn correlation and neutral idle feedback; native dsh lifecycle plugin.
+- T3 Code read-only MCP watcher with OAuth transport, project selection and silent historical baselines.
+- CLI process wrapper and explicit event interface for other tools.
 - Concurrent task isolation, private bounded snapshots, stale status, and interruption-aware reaction queues.
 - Connection panel with setup commands and an English integration guide.
 

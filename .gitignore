@@ -16,6 +16,16 @@ dist/
 *.p12
 *.p8
 *.mobileprovision
+*.pem
+*.key
+*.keychain*
+*.log
+.deepseek-chan/
+.claude/
+.cursor/
+.grok/
+.codex/
+.mcp-auth/
 
 __pycache__/
 *.pyc

@@ -20,6 +20,10 @@ Include provenance and redistribution information for new art. Keep genuine tran
 
 These ports are planned, not implemented. Start a focused issue describing the proposed platform layer and how it will be tested. Desktop windows, input/idle detection, accessibility, key storage, and installers need native equivalents. Please do not label an untested cross-compiled binary as a supported release.
 
+## Privacy before publishing
+
+Use your GitHub-provided `users.noreply.github.com` email for commit attribution if you want to keep your personal email private. Check both author and committer fields. Keep credentials in Keychain or local ignored configuration, and never upload chat transcripts or task snapshots. `scripts/check.sh` includes a public-file/path check; run a full secret scanner over source and Git history before a release. The focused check is not a guarantee that all secrets will be detected.
+
 ## Pull requests
 
 Explain the user-visible change, the checks you ran, and anything you could not verify. Test changes that cross behavior boundaries; avoid tests that only assert source strings. Use synthetic credentials and a mock transport for dialogue tests.

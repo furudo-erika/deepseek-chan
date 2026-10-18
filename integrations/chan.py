@@ -17,8 +17,8 @@ import time
 import unicodedata
 import uuid
 
-SOURCES = ('codex', 'claude', 'cursor', 'pi', 'omp', 'grok', 'dsh', 'other')
-STATUSES = ('working', 'waiting', 'completed', 'failed', 'cancelled')
+SOURCES = ('codex', 'claude', 'cursor', 'pi', 'omp', 'grok', 'dsh', 't3', 'other')
+STATUSES = ('working', 'waiting', 'completed', 'failed', 'cancelled', 'idle')
 MAX_INPUT = 1024 * 1024
 
 
@@ -35,7 +35,7 @@ def clean(value, limit):
     return value
 
 
-def emit(source, task_id, status, title='Current turn'):
+def emit(source, task_id, status, title='Current turn', *, turn_id=None, begin=False, settle=False):
     if source not in SOURCES or status not in STATUSES:
         raise ValueError('Unknown source or task state')
     task_id, title = clean(task_id, 128), clean(title, 80)
@@ -49,8 +49,26 @@ def emit(source, task_id, status, title='Current turn'):
     fd = os.open(home() / '.writer.lock', os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
     with os.fdopen(fd, 'w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
+        prior = None
+        destination = directory / (key + '.json')
+        if turn_id is not None or settle:
+            try:
+                if destination.stat().st_size <= 8192:
+                    prior = json.loads(destination.read_text())
+            except (OSError, ValueError):
+                pass
+            if not isinstance(prior, dict):
+                prior = None
+            if turn_id is not None and not begin and prior and prior.get('turn_id') not in (None, turn_id):
+                return None  # Delayed end of an older Grok turn cannot settle the new one.
+            if settle and (not prior or prior.get('status') not in ('working', 'waiting')):
+                return None  # Idle is not proof of success; preserve known failure/cancellation.
         event = dict(version=1, event_id=str(uuid.uuid4()), source=source, task_id=task_id,
                      title=title, status=status, updated_at=time.time())
+        if turn_id is not None:
+            event['turn_id'] = turn_id
+        elif prior and prior.get('turn_id'):
+            event['turn_id'] = prior['turn_id']
         temp_fd, name = tempfile.mkstemp(prefix='.pending-', dir=directory)
         try:
             with os.fdopen(temp_fd, 'w') as output:
@@ -76,6 +94,11 @@ def hook(source, payload):
     if not isinstance(payload, dict):
         return
     status = None
+    # Grok scans Claude/Cursor compatibility hooks too. Do not mislabel those events.
+    if source in ('claude', 'cursor') and 'sessionId' in payload and 'hookEventName' in payload:
+        return
+    if source == 'grok':
+        return grok_hook(payload)
     if source == 'codex':
         identity = payload.get('thread-id')
         if payload.get('type') == 'agent-turn-complete':
@@ -103,22 +126,52 @@ def hook(source, payload):
         emit(source, opaque_id, status)
 
 
+def grok_hook(payload):
+    identity = payload.get('sessionId')
+    if not isinstance(identity, str) or not identity or payload.get('subagentType'):
+        return
+    event = payload.get('hookEventName')
+    status = {'user_prompt_submit': 'working', 'pre_tool_use': 'working',
+              'post_tool_use': 'working', 'post_tool_use_failure': 'working',
+              'stop_failure': 'failed', 'stop_cancelled': 'cancelled'}.get(event)
+    settling = False
+    if event == 'notification':
+        kind = payload.get('notificationType')
+        if kind == 'permission_prompt':
+            status = 'waiting'
+        elif kind == 'idle_prompt':
+            status, settling = 'idle', True
+    if event == 'session_end':
+        status, settling = 'idle', True
+    # Stop is a vetoable gate, so never celebrate it as a confirmed completion.
+    if status:
+        prompt = payload.get('promptId')
+        turn = hashlib.sha256(prompt.encode()).hexdigest() if isinstance(prompt, str) and prompt else None
+        emit('grok', hashlib.sha256(identity.encode()).hexdigest(), status,
+             turn_id=turn, begin=event == 'user_prompt_submit', settle=settling)
+
+
 def hook_config(source):
     command = shlex.join([sys.executable, str(Path(__file__).resolve()), 'hook', source])
-    if source == 'claude':
+    if source in ('claude', 'grok'):
         hooks = {event: [{'hooks': [{'type': 'command', 'command': command, 'timeout': 3}]}]
                  for event in ('UserPromptSubmit', 'PreToolUse', 'PostToolUse', 'Stop', 'StopFailure')}
         hooks['Notification'] = [{'matcher': 'permission_prompt|elicitation_dialog',
                                   'hooks': [{'type': 'command', 'command': command, 'timeout': 3}]}]
+        if source == 'grok':
+            hooks.pop('Stop')
+            hooks['StopCancelled'] = [{'hooks': [{'type': 'command', 'command': command, 'timeout': 3}]}]
+            hooks['SessionEnd'] = [{'hooks': [{'type': 'command', 'command': command, 'timeout': 1}]}]
+            hooks['Notification'][0]['matcher'] = 'permission_prompt|idle_prompt'
         return {'hooks': hooks}
     if source == 'cursor':
         return {'version': 1, 'hooks': {event: [{'command': command}]
                 for event in ('beforeSubmitPrompt', 'preToolUse', 'postToolUse', 'stop')}}
-    raise ValueError('Use claude or cursor for lifecycle hooks')
+    raise ValueError('Use claude, cursor or grok for lifecycle hooks')
 
 
 def install_hooks(source):
-    target = Path.home() / ('.claude/settings.json' if source == 'claude' else '.cursor/hooks.json')
+    target = Path.home() / {'claude': '.claude/settings.json', 'cursor': '.cursor/hooks.json', 'grok': '.grok/hooks/deepseek-chan.json'}[source]
     target.parent.mkdir(parents=True, exist_ok=True)
     original = target.read_text() if target.exists() else None
     current = json.loads(original) if original else {}
@@ -255,13 +308,15 @@ def main():
     p.add_argument('--status', choices=STATUSES, required=True)
     p.add_argument('--title', default='Current turn')
     p = sub.add_parser('hook', help='Read one client lifecycle payload (always non-blocking on errors)')
-    p.add_argument('source', choices=('claude', 'cursor', 'codex'))
+    p.add_argument('source', choices=('claude', 'cursor', 'codex', 'grok'))
     p.add_argument('payload', nargs='?')
     p = sub.add_parser('mcp', help='Serve report_task over MCP stdio')
     p.add_argument('--source', choices=SOURCES, required=True)
     for name in ('config', 'install'):
         p = sub.add_parser(name, help='Print / merge lifecycle hook settings')
-        p.add_argument('source', choices=('claude', 'cursor'))
+        p.add_argument('source', choices=('claude', 'cursor', 'grok'))
+    sub.add_parser('dsh-patch', help='Print a native dsh plugin patch')
+    sub.add_parser('connect-t3', help='Connect to T3 Code through its read-only MCP API')
     p = sub.add_parser('run', help='Observe an explicitly launched command, including Grok or dsh')
     p.add_argument('--source', choices=SOURCES, required=True)
     p.add_argument('--title', default='CLI session')
@@ -283,6 +338,17 @@ def main():
         print(json.dumps(hook_config(args.source), indent=2))
     elif args.command == 'install':
         install_hooks(args.source)
+    elif args.command == 'dsh-patch':
+        # JSON is also valid YAML; no shell interpolation or config overwrite.
+        home().mkdir(parents=True, exist_ok=True, mode=0o700)
+        target = home() / 'dsh-pet.patch.json'
+        target.write_text(json.dumps([{'insert': [{'id': 'deepseek-chan-pet', 'name': str(Path(__file__).with_name('dsh.mjs').resolve())}]}], indent=2) + '\n')
+        target.chmod(0o600)
+        print('Patch ready. Launch your existing profile with:')
+        print('dsh --profile YOUR_PROFILE --patch ' + shlex.quote(str(target)))
+    elif args.command == 'connect-t3':
+        from t3_watch import interactive
+        return interactive()
     elif args.command == 'run':
         return run_command(args.source, args.title, args.args)
     return 0
