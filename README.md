@@ -1,15 +1,15 @@
 <p align="center">
   <img src="Assets/companion-icon-macos.png" width="112" alt="DeepSeek-chan app icon">
 </p>
-<h1 align="center">DeepSeek-chan</h1>
+<h1 align="center">Deepseek Chan Desktop</h1>
 <p align="center">A tiny desktop companion with a big personality.<br>She plays, chats, asks for snacks, and reminds you to rest your eyes.</p>
 <p align="center">
-  <a href="https://github.com/furudo-erika/deepseek-chan/releases/latest">Download for macOS</a> ·
+  <a href="https://github.com/furudo-erika/deepseek-chan-desktop/releases/latest">Download for macOS &amp; Windows</a> ·
   <a href="#build-from-source">Build from source</a> ·
   <a href="#roadmap">Roadmap</a>
 </p>
 
-DeepSeek-chan is a fan-made desktop pet built with SwiftUI and AppKit. She lives on your desktop, reacts to head pats and little conversations, and occasionally comes over with a tiny story of her own. No AI account is needed to enjoy her company.
+Deepseek Chan Desktop is a fan-made desktop pet for macOS and Windows. She lives on your desktop, reacts to head pats and little conversations, and occasionally comes over with a tiny story of her own. No AI account is needed to enjoy her company.
 
 **Available now: macOS and Windows x64. Linux is planned.** macOS uses native SwiftUI/AppKit; the first Windows port uses Electron and shares the illustrated pose library.
 
@@ -33,7 +33,7 @@ The artwork count means **279 distinct illustrated poses with procedural motion*
 
 ## Download and install
 
-Get the DMG and its SHA-256 checksum from [Releases](https://github.com/furudo-erika/deepseek-chan/releases/latest).
+Get the DMG and its SHA-256 checksum from [Releases](https://github.com/furudo-erika/deepseek-chan-desktop/releases/latest).
 
 | Platform | Status |
 | --- | --- |
@@ -99,8 +99,8 @@ Use an Apple Silicon Mac running **macOS 26 or newer**, with Apple’s Command L
 
 ```sh
 xcode-select --install  # If Command Line Tools are not installed yet.
-git clone https://github.com/furudo-erika/deepseek-chan.git
-cd deepseek-chan
+git clone https://github.com/furudo-erika/deepseek-chan-desktop.git
+cd deepseek-chan-desktop
 zsh scripts/package-debug.sh
 open dist/DeepSeek-chan.app
 ```

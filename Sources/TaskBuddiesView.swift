@@ -77,7 +77,7 @@ struct TaskBuddiesView: View {
             HStack {
                 Button("Preview reaction ♡") { model.previewTaskBuddy() }
                 Spacer()
-                Link("Connection guide", destination: URL(string: "https://github.com/furudo-erika/deepseek-chan/blob/main/docs/task-buddies.md")!)
+                Link("Connection guide", destination: URL(string: "https://github.com/furudo-erika/deepseek-chan-desktop/blob/main/docs/task-buddies.md")!)
             }
         }.padding(24).frame(width: 570, height: 550)
             .background(Color(red: 0.94, green: 0.97, blue: 1)).preferredColorScheme(.light)

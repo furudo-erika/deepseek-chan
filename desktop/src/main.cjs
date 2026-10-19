@@ -157,7 +157,7 @@ ipcMain.handle('pet:command', async (event, name, value) => {
       if (typeof value !== 'string' || value.length < 20 || value.length > 512 || /\s/.test(value) || !safeStorage.isEncryptionAvailable()) return { ok: false };
       await fsp.mkdir(path.dirname(keyFile), { recursive: true }); await fsp.writeFile(keyFile, safeStorage.encryptString(value)); return { ok: true };
     case 'remove-key': await fsp.rm(keyFile, { force: true }); prefs.ai = false; save(); break;
-    case 'guide': await shell.openExternal('https://github.com/furudo-erika/deepseek-chan/blob/main/docs/windows.md'); break;
+    case 'guide': await shell.openExternal('https://github.com/furudo-erika/deepseek-chan-desktop/blob/main/docs/windows.md'); break;
     case 'copy-connector': clipboard.writeText(JSON.stringify({ mcpServers: { 'deepseek-chan': { command: 'py', args: ['-3', path.join(integrations, 'chan.py'), 'mcp', '--source', 'codex'] } } }, null, 2)); return { ok: true };
     case 'ignore': if (typeof value === 'boolean' && !drag) win.setIgnoreMouseEvents(value, { forward: true }); break;
     case 'drag-start': clearInterval(moving); drag = { cursor: screen.getCursorScreenPoint(), bounds: win.getBounds(), started: Date.now() }; win.setIgnoreMouseEvents(false); break;

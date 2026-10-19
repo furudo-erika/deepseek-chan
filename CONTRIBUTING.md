@@ -1,4 +1,4 @@
-# Contributing to DeepSeek-chan
+# Contributing to Deepseek Chan Desktop
 
 Bug reports, little stories, artwork improvements, accessibility work, and platform ports are welcome.
 

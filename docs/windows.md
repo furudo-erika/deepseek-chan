@@ -4,7 +4,7 @@ The first Windows desktop release is **1.9.0**. It shares the original 279 illus
 
 ## Install
 
-Download **DeepSeek-chan-1.9.0-windows-x64-setup.exe** and its `.sha256` file from [Releases](https://github.com/furudo-erika/deepseek-chan/releases). Run the installer for your own Windows account, then open **DeepSeek-chan** from Start or the desktop shortcut. No administrator access, Python, Node.js or AI account is required to use the pet. Requires Windows 10/11, x64; ARM64 and 32-bit Windows are not published targets.
+Download **DeepSeek-chan-1.9.0-windows-x64-setup.exe** and its `.sha256` file from [Releases](https://github.com/furudo-erika/deepseek-chan-desktop/releases). Run the installer for your own Windows account, then open **DeepSeek-chan** from Start or the desktop shortcut. No administrator access, Python, Node.js or AI account is required to use the pet. Requires Windows 10/11, x64; ARM64 and 32-bit Windows are not published targets.
 
 The installer is **unsigned**. Windows may show an unknown-publisher/SmartScreen prompt. Verify that the download came from this repository and compare its checksum; do not disable Windows protections globally. The macOS DMG remains a separate native application.
 
