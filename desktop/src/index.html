@@ -5,13 +5,22 @@
 <body>
   <section id="bubble" class="interactive bubble" aria-live="polite"><span id="line"></span><div id="break-buttons" hidden><button data-command="rest">Rest 5 min ♡</button><button data-command="snooze">In 5 min</button></div></section>
   <section id="panel" class="interactive panel" hidden>
-    <header><strong id="panel-title">A little chat</strong><button id="close-panel" aria-label="Close panel">×</button></header>
-    <div id="chat-panel" hidden><p id="chat-line" aria-live="polite">Tell me a tiny thing. ♡</p><form id="chat-form"><input id="chat-input" maxlength="300" autocomplete="off" placeholder="A joke, a hug, a tiny dance…" aria-label="Message"><button type="submit">Send ♡</button></form></div>
+    <header><strong id="panel-title">Coding Plan</strong><button id="close-panel" aria-label="Close panel">×</button></header>
+    <div id="usage-panel" hidden>
+      <p class="usage-subtitle">Your quota, a little closer. ♡</p>
+      <div class="row"><span class="small">Remaining · auto-refresh 5 min</span><button id="usage-refresh" data-command="usage-refresh">Refresh</button></div>
+      <div id="usage-list" aria-live="polite"></div>
+      <details><summary>Connect API balance</summary>
+        <label>Provider <select id="usage-provider"><option value="deepseek">DeepSeek</option><option value="openrouter">OpenRouter</option></select></label>
+        <input id="usage-key" type="password" autocomplete="off" placeholder="API key" aria-label="Usage API key">
+        <div class="row"><button id="usage-save">Save key</button><button id="usage-remove">Remove key</button></div><p id="usage-key-status" class="small" role="status"></p>
+      </details>
+      <p class="small">Reads local client sign-ins and provider quota endpoints. No prompts or chat history. Keys stay on this computer; account names and emails stay out of this panel.</p>
+    </div>
     <div id="settings-panel" hidden>
       <label>Eye break every <select id="minutes"><option>15</option><option selected>20</option><option>25</option><option>30</option><option>45</option><option>60</option></select> minutes</label>
       <label>Outfit <select id="outfit"><option value="classic">Classic ♡</option><option value="halloween">Halloween 🎃</option></select></label>
       <div class="checks"><label><input id="chatter" type="checkbox"> Little hellos</label><label><input id="calm" type="checkbox"> Calm motion</label><label><input id="sound" type="checkbox"> Reminder sound</label><label><input id="tasks" type="checkbox"> Task reactions</label></div>
-      <details><summary>Optional AI replies</summary><p>Uses your OpenRouter key. Only messages you send go to OpenRouter; no task details or chat history.</p><input id="api-key" type="password" autocomplete="off" placeholder="Your OpenRouter key" aria-label="OpenRouter API key"><div class="row"><button id="save-key">Save key</button><button id="remove-key">Remove key</button><label><input id="ai" type="checkbox"> Enable AI</label></div><p id="key-status" aria-live="polite"></p></details>
       <p id="settings-note">Drag her to a cozy corner. Right-click her for more.</p><div class="row"><button data-command="pause" id="pause">Pause timer</button><button data-command="hide">Hide to tray</button><button data-command="quit">Quit</button></div>
     </div>
     <div id="actions-panel" hidden><input id="search" placeholder="Find a little action…" aria-label="Search actions"><div id="action-list"></div></div>
@@ -19,7 +28,7 @@
     <p id="error" class="small" role="status"></p>
   </section>
   <canvas id="pet" class="interactive" width="560" height="560" aria-label="DeepSeek-chan — drag or click for a head pat" tabindex="0"></canvas>
-  <nav class="interactive toolbar" aria-label="Pet controls"><button data-panel="chat">Chat ♡</button><button data-command="dance">Dance ♪</button><button data-panel="actions">Poses</button><button data-panel="tasks">Tasks</button><button data-panel="settings" aria-label="Settings">⚙</button></nav>
+  <nav class="interactive toolbar" aria-label="Pet controls"><button data-panel="usage">Usage ♡</button><button data-command="dance">Dance ♪</button><button data-panel="actions">Poses</button><button data-panel="tasks">Tasks</button><button data-panel="settings" aria-label="Settings">⚙</button></nav>
   <div id="timer" class="timer"></div>
   <script src="renderer.js"></script>
 </body></html>

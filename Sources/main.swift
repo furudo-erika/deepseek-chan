@@ -9,6 +9,7 @@ import Combine
     @Published var previewing = false
     @Published var totalBreaks = UserDefaults.standard.integer(forKey: "totalBreaks")
     let dialogue = DialogueService()
+    let usage = UsageService()
     @Published var speech = "Hey, you ♡"
     @Published var ambient = false
     @Published var settingsPresented = false { didSet { if settingsPresented { dismissBubble() } } }
@@ -152,6 +153,7 @@ import Combine
         }
     }
     init() {
+        dialogue.enabled = false
         if halloweenMode { petAction = HalloweenTheme.index("hat_hello"); speech = "Your little witch is here. ♡" }
         let stored = UserDefaults.standard.integer(forKey: "intervalMinutes")
         if [15, 20, 25, 30, 45, 60].contains(stored) { engine.interval = Double(stored * 60) }
@@ -355,11 +357,8 @@ import Combine
     }
     func surpriseAction() { playAction(actionShuffle.next(in: idleActionChoices, avoiding: petAction)) }
     func openChat() {
-        guard !isResting, engine.phase != .reminding else { return }
-        routine.cancel(); previewing = false
-        lastPetInteraction = Date(); chatterSchedule.schedule(now: Date())
-        chatting = true; ambient = true; ambientUntil = nil; petVisible = true
-        say(.chat); onChange?(); onPreview?()
+        dismissBubble()
+        onSettings?()
     }
     func chatDraftChanged(_ text: String) {
         chatHasDraft = !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -507,12 +506,12 @@ final class ReminderPanel: NSPanel {
         stateItem = NSMenuItem(title: "Waiting for your mouse", action: nil, keyEquivalent: ""); menu.addItem(stateItem)
         menu.addItem(.separator())
         menu.addItem(withTitle: "Open DeepSeek-chan", action: #selector(showWindow), keyEquivalent: "")
-        menu.addItem(withTitle: "Chat", action: #selector(chat), keyEquivalent: "")
+        menu.addItem(withTitle: "Coding Plan…", action: #selector(chat), keyEquivalent: "")
         menu.addItem(withTitle: "Action library…", action: #selector(actions), keyEquivalent: "")
         menu.addItem(withTitle: "Task buddies…", action: #selector(taskBuddies), keyEquivalent: "")
         menu.addItem(withTitle: "Show / hide companion", action: #selector(togglePet), keyEquivalent: "")
         menu.addItem(withTitle: "Say hi", action: #selector(hello), keyEquivalent: "")
-        menu.addItem(withTitle: "AI Settings…", action: #selector(settings), keyEquivalent: "")
+        menu.addItem(withTitle: "Usage & connections…", action: #selector(settings), keyEquivalent: "")
         menu.addItem(withTitle: "Preview reminder", action: #selector(preview), keyEquivalent: "")
         menu.addItem(withTitle: "Take a 5-minute break", action: #selector(rest), keyEquivalent: "")
         pauseItem = NSMenuItem(title: "Pause reminders", action: #selector(pause), keyEquivalent: ""); menu.addItem(pauseItem)

@@ -1,13 +1,13 @@
 {
   "name": "deepseek-chan-desktop",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "A playful desktop companion with eye-break reminders",
   "author": "DeepSeek-chan contributors",
   "license": "MIT",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",
-    "test": "node --test test/core.test.cjs",
+    "test": "node --test test/*.test.cjs",
     "test:app": "node test/app-smoke.cjs",
     "dist:win": "electron-builder --win nsis --x64 --publish never"
   },

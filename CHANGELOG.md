@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.10.0
+
+- Replace Chat with a Coding Plan usage panel on macOS and Windows.
+- Add Codex, Claude, Grok and Cursor plan meters, and DeepSeek/OpenRouter API credit balances.
+- Read-only, fixed-provider requests; encrypted API keys; five-minute refresh; account-change isolation; explicit unavailable/stale states.
+- Keep pet stories, poses, Halloween outfit, eye reminders and task feedback.
+
+
 ## 1.9.0 — 2026-10-18
 
 - First Windows x64 installer: shared artwork, Halloween, chat, proactive stories, drag and eye-break reminders.

@@ -23,4 +23,6 @@ swiftc -Onone -parse-as-library Sources/ActionLibrary.swift Sources/PetPersonali
 python3 -m unittest discover -s Tests -p 'test_*.py'
 node --test Tests/*.test.mjs
 
-node --test desktop/test/core.test.cjs
+node --test desktop/test/*.test.cjs
+swiftc -Onone -parse-as-library -framework JavaScriptCore -lsqlite3 Sources/DialogueService.swift Sources/UsageService.swift Tests/UsageChecks.swift -o .build/checks/Usage
+.build/checks/Usage

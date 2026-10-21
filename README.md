@@ -2,14 +2,14 @@
   <img src="Assets/companion-icon-macos.png" width="112" alt="DeepSeek-chan app icon">
 </p>
 <h1 align="center">Deepseek Chan Desktop</h1>
-<p align="center">A tiny desktop companion with a big personality.<br>She plays, chats, asks for snacks, and reminds you to rest your eyes.</p>
+<p align="center">A tiny desktop companion with a big personality.<br>She keeps your coding quota close and reminds you to rest your eyes.</p>
 <p align="center">
   <a href="https://github.com/furudo-erika/deepseek-chan-desktop/releases/latest">Download for macOS &amp; Windows</a> ·
   <a href="#build-from-source">Build from source</a> ·
   <a href="#roadmap">Roadmap</a>
 </p>
 
-Deepseek Chan Desktop is a fan-made desktop pet for macOS and Windows. She lives on your desktop, reacts to head pats and little conversations, and occasionally comes over with a tiny story of her own. No AI account is needed to enjoy her company.
+Deepseek Chan Desktop is a fan-made desktop pet for macOS and Windows. She lives on your desktop, reacts to head pats and tiny shows, and occasionally comes over with a tiny story of her own. No AI account is needed to enjoy her company.
 
 **Available now: macOS and Windows x64. Linux is planned.** macOS uses native SwiftUI/AppKit; the first Windows port uses Electron and shares the illustrated pose library.
 
@@ -21,13 +21,13 @@ Deepseek Chan Desktop is a fan-made desktop pet for macOS and Windows. She lives
 ## Meet your little companion
 
 - **279 illustrated poses across 31 collections.** Snacks, games, music, cozy naps, tiny adventures, and everyday mischief.
-- **Little hellos every 2–3 minutes.** Short connected stories, including while an empty chat stays open. She waits while you type and avoids repeating stories until her shuffled deck is exhausted.
-- **Playful local conversations.** Ask for a joke, a magic trick, a snack, a dance, or a hug. Say “again” for an encore, or “stop” to interrupt a scene.
+- **Little hellos every 2–3 minutes.** Short authored stories and playful everyday poses.
+- **Coding Plan at a glance.** Codex, Claude, Grok and Cursor quota, plus DeepSeek and OpenRouter API balances. Remaining percentages, reset times, last-updated indicators and automatic refresh.
 - **English controls, multilingual personality.** Small English, Chinese, and Japanese bubbles, rather than long paragraphs.
 - **A Halloween wardrobe.** Witch hat, bat cape, pumpkin candy basket, a pocket ghost, 27 seasonal poses, and nine little scenes. Switch outfits whenever you like.
 - **Visible eye-break reminders.** Mouse activity starts your focus timer. When it is time, she moves to the center of the active display and dances. Take a five-minute break or snooze.
 - **Make her comfortable.** Drag to reposition, browse the action library, save favorites, or turn on Calm mode for gentler everyday movement.
-- **Optional AI dialogue.** Connect your own OpenRouter key for short DeepSeek replies. Offline phrases and local stories remain available without it.
+- **Read-only usage queries.** Existing client sign-ins stay local. No model calls are needed to check quota. [Usage setup and privacy](docs/usage.md).
 
 The artwork count means **279 distinct illustrated poses with procedural motion**, not 279 individually drawn animation clips. The app also has separate multi-frame dance/bell sequences and a three-pose Halloween reminder dance.
 
@@ -53,7 +53,7 @@ For Windows, download the EXE installer and follow the [Windows guide](docs/wind
 To verify a download, put the DMG and its `.sha256` file in the same folder and run:
 
 ```sh
-shasum -a 256 -c DeepSeek-chan-1.9.0-arm64.dmg.sha256
+shasum -a 256 -c DeepSeek-chan-1.10.0-arm64.dmg.sha256
 ```
 
 ## Task buddies
@@ -66,11 +66,9 @@ Included in 1.9.0. Windows supports local snapshots and generic MCP; native hook
 
 ## Say hello
 
-Click her for a head pat. Right-click for **Chat**, **Tiny show**, **Dance**, the action library, and other interactions.
+Click her for a head pat. Right-click for **Coding Plan**, **Tiny show**, **Dance**, the action library and other interactions. The old Chat input has been replaced by **Usage** in 1.10.0.
 
-Try `Tell a joke`, `Magic trick`, `Feed`, `Hug`, `Again`, or `Stop`. She also understands a small set of Chinese and Japanese prompts, such as `讲个笑话`, `摸摸头`, and `踊って`.
-
-Choose **Outfit → Halloween 🎃** for her witch wardrobe, then try `Trick or treat`, `Broom`, `Pumpkin`, `Ghost`, or `讨糖`. The outfit survives a restart. Playing an action card switches to that card’s outfit.
+Choose **Outfit → Halloween 🎃** for her witch wardrobe. The outfit survives a restart. Playing an action card switches to that card’s outfit.
 
 - **Little hellos** controls unsolicited stories independently of eye reminders.
 - **Calm mode** reduces everyday movement and increases pauses. macOS Reduce Motion is also respected.
@@ -78,20 +76,17 @@ Choose **Outfit → Halloween 🎃** for her witch wardrobe, then try `Trick or 
 - **Pause** pauses eye reminders while leaving the companion available.
 - **⌘0** opens the main window; **⌘L** opens the action library; **⌘W** closes the current sheet/window.
 
-Local chat recognizes authored topics; it is not a general-purpose language model.
+## Usage and privacy
 
-## Optional AI and privacy
+Open **Usage / Coding Plan** to check connected providers. Codex, Claude Code, Grok Build and Cursor use local client sign-ins. DeepSeek and OpenRouter API balances accept an optional key through **Connect API balance**. API credit balances are distinct from subscription quotas.
 
-Open **AI Settings**, save your own OpenRouter API key, and enable **AI bubbles · DeepSeek**. The configured model is `deepseek/deepseek-v4.1-flash`; availability and charges depend on OpenRouter.
+- Refreshes every five minutes after opening Usage, with a manual refresh button and provider backoff.
+- Missing or unavailable quota is shown as unavailable; it is never inferred as zero or unlimited. Old results are marked **Last known** after a failed refresh. Account changes clear previous-account values.
+- Keys stay in macOS Keychain or Windows account encryption. Tokens never enter the renderer, repository or release assets. The app only sends each credential to its fixed provider endpoint.
+- No conversation transcripts, account emails or personal identifiers are displayed. No provider response bodies are logged, and usage snapshots are held in memory.
+- The pet's ordinary phrases and stories remain local. The previous AI chat controls are retired; no chat completion request is made by the new Usage feature.
 
-- The key is stored in **macOS Keychain**. No key is bundled with the app.
-- Core pet behavior, authored chat scenes, and periodic little stories work locally.
-- With AI enabled, explicit chat sends the message you submit (up to 300 characters), the current pose name, and a short character prompt to OpenRouter. Other AI-enabled greetings/reminders send a generic occasion prompt.
-- The app does not read your screen, documents, clipboard, or the contents of typing in other apps. Eye reminders use mouse activity and system idle time.
-- Chat transcripts are not saved. Short-lived local state supports encore and repeat interactions. Preferences, favorites, and remaining story IDs are saved locally.
-- Requests have timeouts, rate limits, and short-response validation. If AI is unavailable, she uses local phrases.
-
-The API integration has mock-transport tests. A successful live completion is not part of the current release verification. This repository has no analytics or telemetry integration.
+See [all providers, supported login locations and limitations](docs/usage.md). The project has no analytics or telemetry integration.
 
 ## Build from source
 

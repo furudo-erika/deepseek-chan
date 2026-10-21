@@ -10,6 +10,7 @@ const testing = process.env.DEEPSEEK_CHAN_TEST === '1';
 if (testing && process.env.DEEPSEEK_CHAN_TEST_HOME) app.setPath('userData', process.env.DEEPSEEK_CHAN_TEST_HOME);
 const assets = app.isPackaged ? path.join(process.resourcesPath, 'assets') : path.join(__dirname, '../../Assets');
 const integrations = app.isPackaged ? path.join(process.resourcesPath, 'integrations') : path.join(__dirname, '../../integrations');
+const { UsageService } = require('./usage/service.cjs');
 const actions = JSON.parse(fs.readFileSync(path.join(assets, 'action-library.json'))).actions;
 const actionMap = new Map(actions.map(a => [a.id, a]));
 const configFile = path.join(app.getPath('userData'), 'preferences.json');
@@ -24,6 +25,12 @@ let tasks = new TaskQueue(), win, tray, homeBounds, drag, moving, lastPointer, p
 let action = 'wave', line = 'Your little companion is here. ♡', lineUntil = Date.now() + 7000, panel = 'home', draft = false, lastTyped = 0;
 let nextPose = 0, nextChatter = Date.now() + 120000, danceUntil = 0, routine = [], nextBeat = 0, chatBusy = false, lastAI = 0, aiCalls = [];
 let lastFailure = '', saveTimer;
+const usage = new UsageService({home: testing ? process.env.DEEPSEEK_CHAN_TEST_HOME : app.getPath('home'), appData: testing ? process.env.DEEPSEEK_CHAN_TEST_HOME : app.getPath('appData'), readKey: async id => {
+  const file=path.join(app.getPath('userData'),'usage-'+id+'.bin');
+  try { return safeStorage.decryptString(await fsp.readFile(file)); } catch {}
+  if(id==='openrouter' && !testing)try{return safeStorage.decryptString(await fsp.readFile(keyFile));}catch{}
+  return null;
+}, notify: broadcast, ...(testing ? {credentialReader:async()=>process.env.CHAN_USAGE_FIXTURES ? {Authorization:'Bearer fixture'} : null, fetcher:async url=>{const fixtures=JSON.parse(await fsp.readFile(process.env.CHAN_USAGE_FIXTURES,'utf8'));const p=require('./usage/core.js').providers.find(p=>p.url===url);return new Response(JSON.stringify(fixtures[p.id]),{status:200});}} : {})});
 function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { fs.mkdirSync(path.dirname(configFile), { recursive: true }); const tmp = configFile + '.tmp'; fs.writeFileSync(tmp, JSON.stringify(prefs)); fs.renameSync(tmp, configFile); } catch { lastFailure = 'Could not save preferences.'; } }, 200); }
 function themed(id) {
   if (prefs.outfit !== 'halloween' || id.startsWith('halloween_')) return id;
@@ -36,7 +43,7 @@ function state() {
   let visibleAction = action;
   if (timer.phase === 'resting') visibleAction = themed('nap');
   else if (timer.phase === 'reminding' || now < danceUntil) visibleAction = themed(['conductor', 'disco', 'ballet'][Math.floor(now / 420) % 3]);
-  return { action: visibleAction, line: now < lineUntil ? line : '', panel, prefs, phase: timer.phase, remaining: Math.max(0, Math.ceil(((timer.deadline || now + prefs.minutes * 60000) - now) / 1000)), completed: timer.completed,
+  return { usage: usage.snapshot(), action: visibleAction, line: now < lineUntil ? line : '', panel, prefs, phase: timer.phase, remaining: Math.max(0, Math.ceil(((timer.deadline || now + prefs.minutes * 60000) - now) / 1000)), completed: timer.completed,
     dancing: timer.phase === 'reminding' || now < danceUntil, dragging: !!drag, chatBusy, error: lastFailure,
     tasks: [...tasks.tasks.values()].sort((a, b) => b.updated_at - a.updated_at).slice(0, 20).map(t => ({ ...t, stale: ['working','waiting'].includes(t.status) && now / 1000 - t.updated_at > 300 })) };
 }
@@ -92,7 +99,7 @@ function tick() {
   timer.tick(now, !!moved, powerMonitor.getSystemIdleTime());
   if (phase !== 'reminding' && timer.phase === 'reminding') { routine = []; centerDance(); }
   if (phase === 'resting' && timer.phase === 'waiting') { restorePosition(); pose('wave', 'Welcome back, fresh little eyes! ♡'); }
-  const blocked = hidden || drag || draft || now - lastTyped < 30000 || ['reminding', 'resting', 'paused'].includes(timer.phase) || ['settings', 'actions', 'tasks'].includes(panel) || chatBusy;
+  const blocked = hidden || drag || draft || now - lastTyped < 30000 || ['reminding', 'resting', 'paused'].includes(timer.phase) || ['settings', 'actions', 'tasks', 'usage'].includes(panel) || chatBusy;
   if (!blocked) {
     const task = prefs.tasks && tasks.next(now, false);
     if (task) { routine = []; speakTask(task); }
@@ -102,44 +109,27 @@ function tick() {
   }
   broadcast();
 }
-async function aiReply(message) {
-  if (!prefs.ai || !fs.existsSync(keyFile)) return '';
-  const now = Date.now(); aiCalls = aiCalls.filter(t => now - t < 3600000);
-  if (now - lastAI < 12000 || aiCalls.length >= 40) return '';
-  lastAI = now; aiCalls.push(now);
-  try {
-    const key = safeStorage.decryptString(await fsp.readFile(keyFile));
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', { method: 'POST', redirect: 'error', signal: AbortSignal.timeout(10000), headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key }, body: JSON.stringify({ model: 'deepseek/deepseek-v4.1-flash', max_tokens: 120, temperature: .95, messages: [{ role: 'system', content: 'You are DeepSeek-chan, a tiny blue-haired desktop companion. Reply with one cute short sentence under 90 characters. English, occasional Chinese/Japanese. No markdown. Never claim access to files or screens.' }, { role: 'user', content: message }] }) });
-    if (!response.ok) throw Error('Unavailable');
-    const reader = response.body.getReader(); let size = 0, chunks = [];
-    while (true) { const part = await reader.read(); if (part.done) break; size += part.value.length; if (size > 16384) { await reader.cancel(); throw Error('Oversize'); } chunks.push(Buffer.from(part.value)); }
-    return cleanReply(JSON.parse(Buffer.concat(chunks)).choices?.[0]?.message?.content);
-  } catch { lastFailure = 'AI is unavailable. Local little replies still work.'; return ''; }
-}
-async function chat(message) {
-  if (chatBusy || typeof message !== 'string' || !message.trim() || message.length > 300) return;
-  chatBusy = true; routine = []; lastFailure = '';
-  const text = message.trim(), lower = text.toLowerCase();
-  let id = 'wave', words = ['I saved a tiny cloud just for you. ☁', '今日もいっしょ。♡', '摸摸头，烦恼飞走～'][Math.floor(Math.random() * 3)];
-  if (/stop|停|やめ/.test(lower)) { danceUntil = 0; words = 'Okay, quiet little company. ♡'; }
-  else if (/dance|跳舞|踊/.test(lower)) { id = 'disco'; words = 'One, two… tiny whale shuffle! ♪'; danceUntil = Date.now() + 10000; }
-  else if (/food|feed|snack|cookie|吃|喂/.test(lower)) { id = 'cookie'; words = 'Nom nom… saving you the bigger half. ♡'; }
-  else if (/hug|抱|摸/.test(lower)) { id = 'hug'; words = 'ぎゅー！ A pocket-sized hug. ♡'; }
-  else if (/joke|笑话/.test(lower)) { id = 'laugh'; words = 'My code has bugs. I named them all Mochi. 🐛'; }
-  else if (/magic|魔法/.test(lower)) { id = 'wand'; words = 'ぽん！ Your tiredness is now a marshmallow. ✧'; }
-  else if (/again|再来/.test(lower)) { id = action; words = line || words; }
-  else { const reply = await aiReply(text); if (reply) words = reply; }
-  pose(id, words, 10000); chatBusy = false; broadcast();
-}
 function trusted(event) { return win && event.sender === win.webContents && event.senderFrame === win.webContents.mainFrame; }
 ipcMain.handle('pet:load', event => { if (!trusted(event)) throw Error('Unknown sender'); return { actions, layouts: JSON.parse(fs.readFileSync(path.join(assets, 'atlas-layout.json'))), cutouts: JSON.parse(fs.readFileSync(path.join(assets, 'atlas-cutouts.json'))), regions: JSON.parse(fs.readFileSync(path.join(assets, 'atlas-regions.json'))), assetURL: pathToFileURL(assets + path.sep).href, integrationPath: integrations, state: state() }; });
 ipcMain.handle('pet:command', async (event, name, value) => {
   if (!trusted(event)) throw Error('Unknown sender');
   switch (name) {
     case 'test-reminder': if (testing) { timer.phase = 'reminding'; timer.deadline = null; centerDance(); } break;
-    case 'panel': if (['home','chat','settings','actions','tasks'].includes(value)) { panel = value; broadcast(); } break;
+    case 'panel': if (['home','settings','actions','tasks','usage'].includes(value)) { panel = value; if(value==='usage')usage.refresh(); broadcast(); } break;
     case 'draft': draft = value === true; lastTyped = Date.now(); break;
-    case 'chat': await chat(value); break;
+    case 'usage-refresh': await usage.refresh(); break;
+    case 'usage-save-key': {
+      if(!value || !['deepseek','openrouter'].includes(value.id) || typeof value.key!=='string' || value.key.length<10 || value.key.length>512 || /\s/.test(value.key) || !safeStorage.isEncryptionAvailable())return {ok:false};
+      await fsp.mkdir(app.getPath('userData'),{recursive:true});
+      await fsp.writeFile(path.join(app.getPath('userData'),'usage-'+value.id+'.bin'),safeStorage.encryptString(value.key));
+      usage.clear(value.id);usage.refresh();return {ok:true};
+    }
+    case 'usage-remove-key': {
+      if(!['deepseek','openrouter'].includes(value))return {ok:false};
+      await fsp.rm(path.join(app.getPath('userData'),'usage-'+value+'.bin'),{force:true});
+      if(value==='openrouter')await fsp.rm(keyFile,{force:true});
+      usage.clear(value);return {ok:true};
+    }
     case 'pat': pose('hug', 'Head pats recharge my tiny heart. ♡'); break;
     case 'dance': routine = []; danceUntil = Date.now() + 10000; pose('disco', 'Tiny dance delivery! ♪'); break;
     case 'story': startStory(); break;
@@ -151,12 +141,8 @@ ipcMain.handle('pet:command', async (event, name, value) => {
       if (!value || typeof value !== 'object') break;
       if ([15,20,25,30,45,60].includes(value.minutes)) { prefs.minutes = value.minutes; timer.interval(value.minutes, Date.now()); }
       if (['classic','halloween'].includes(value.outfit)) { prefs.outfit = value.outfit; routine = []; action = value.outfit === 'halloween' ? 'halloween_hat_hello' : 'wave'; }
-      for (const k of ['chatter','calm','tasks','sound','ai']) if (typeof value[k] === 'boolean') { prefs[k] = value[k]; if (k === 'tasks') tasks = new TaskQueue(); }
+      for (const k of ['chatter','calm','tasks','sound']) if (typeof value[k] === 'boolean') { prefs[k] = value[k]; if (k === 'tasks') tasks = new TaskQueue(); }
       save(); break;
-    case 'save-key':
-      if (typeof value !== 'string' || value.length < 20 || value.length > 512 || /\s/.test(value) || !safeStorage.isEncryptionAvailable()) return { ok: false };
-      await fsp.mkdir(path.dirname(keyFile), { recursive: true }); await fsp.writeFile(keyFile, safeStorage.encryptString(value)); return { ok: true };
-    case 'remove-key': await fsp.rm(keyFile, { force: true }); prefs.ai = false; save(); break;
     case 'guide': await shell.openExternal('https://github.com/furudo-erika/deepseek-chan-desktop/blob/main/docs/windows.md'); break;
     case 'copy-connector': clipboard.writeText(JSON.stringify({ mcpServers: { 'deepseek-chan': { command: 'py', args: ['-3', path.join(integrations, 'chan.py'), 'mcp', '--source', 'codex'] } } }, null, 2)); return { ok: true };
     case 'ignore': if (typeof value === 'boolean' && !drag) win.setIgnoreMouseEvents(value, { forward: true }); break;
@@ -182,6 +168,7 @@ else {
     win.on('blur', () => { drag = null; });
     win.loadFile(path.join(__dirname, 'index.html')); win.once('ready-to-show', () => win.showInactive()); homeBounds = win.getBounds();
     if (!testing) { tray = new Tray(nativeImage.createFromPath(path.join(assets, 'companion-icon-dark.png')).resize({ width: 32, height: 32 })); tray.setToolTip('DeepSeek-chan'); tray.setContextMenu(Menu.buildFromTemplate([{ label: 'Show DeepSeek-chan', click: () => { hidden = false; win.show(); } }, { label: 'Rest my eyes', click: () => { timer.rest(Date.now()); hidden = false; win.showInactive(); broadcast(); } }, { label: 'Quit', click: () => app.quit() }])); tray.on('double-click', () => { hidden = false; win.show(); }); }
+    setInterval(()=>{if(usage.lastAttempt && !hidden)usage.refresh();},300000);
     setInterval(tick, 250); setInterval(pollTasks, 2000); pollTasks();
     setInterval(() => { if (!drag || win.isDestroyed()) return; if (Date.now() - drag.started > 15000) { drag = null; return; } const point = screen.getCursorScreenPoint(); const b = { ...drag.bounds, x: drag.bounds.x + point.x - drag.cursor.x, y: drag.bounds.y + point.y - drag.cursor.y }; const next = clamp(b, screen.getDisplayNearestPoint(point).workArea), current = win.getBounds(); if (next.x !== current.x || next.y !== current.y) win.setPosition(next.x, next.y); }, 16);
     powerMonitor.on('resume', () => { timer.wake(Date.now()); lastPointer = null; restorePosition(); });

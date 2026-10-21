@@ -1,0 +1,8 @@
+{
+  "codex": {"plan_type":"fixture", "rate_limit":{"primary_window":{"used_percent":24,"limit_window_seconds":18000,"reset_at":1893456000},"secondary_window":{"used_percent":61,"limit_window_seconds":604800,"reset_at":1893888000}}},
+  "claude": {"five_hour":{"utilization":35,"resets_at":"2030-01-01T00:00:00Z"},"seven_day":{"utilization":12,"resets_at":"2030-01-06T00:00:00Z"},"seven_day_fable":{"utilization":5,"resets_at":"2030-01-06T00:00:00Z"}},
+  "grok": {"config":{"creditUsagePercent":18,"currentPeriod":{"type":"USAGE_PERIOD_TYPE_WEEKLY","end":"2030-01-06T00:00:00Z"}}},
+  "cursor": {"billingCycleEnd":"2030-01-20T00:00:00Z","individualUsage":{"plan":{"enabled":true,"autoPercentUsed":42,"apiPercentUsed":7,"totalPercentUsed":28}}},
+  "deepseek": {"is_available":true,"balance_infos":[{"currency":"CNY","total_balance":"28.50"}]},
+  "openrouter": {"data":{"total_credits":20,"total_usage":7.25}}
+}

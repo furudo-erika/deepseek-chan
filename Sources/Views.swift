@@ -57,7 +57,7 @@ struct Dashboard: View {
                 }.frame(width: 185).controlSize(.small)
                     .help("A little witch outfit, seasonal stories and a moonstep dance.")
                 Button { model.settingsPresented = true } label: { Image(systemName: "gearshape").font(.system(size: 18)) }
-                    .buttonStyle(.plain).accessibilityLabel("AI Settings")
+                    .buttonStyle(.plain).accessibilityLabel("Usage & connections")
             }
             HStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 15) {
@@ -66,7 +66,7 @@ struct Dashboard: View {
                         .font(.system(size: 46, weight: .light, design: .rounded)).monospacedDigit().foregroundStyle(Color.ocean)
                     Text(model.stateLabel).font(.system(size: 11)).foregroundStyle(Color.ink.opacity(0.55))
                     HStack(spacing: 8) {
-                        PillButton(title: "Chat", icon: "bubble", primary: true) { model.openChat() }
+                        PillButton(title: "Usage", icon: "chart.bar.fill", primary: true) { model.openChat() }
                             .disabled(model.isResting || model.engine.phase == .reminding)
                         Button("Dance ♡") { model.preview() }.buttonStyle(.plain).font(.system(size: 12)).foregroundStyle(Color.ocean)
                     }
@@ -111,7 +111,7 @@ struct Dashboard: View {
         .foregroundStyle(Color.ink)
         .background(LinearGradient(colors: [Color(red: 0.94, green: 0.97, blue: 1), Color(red: 0.93, green: 0.94, blue: 1)], startPoint: .topLeading, endPoint: .bottomTrailing))
         .preferredColorScheme(.light)
-        .sheet(isPresented: $model.settingsPresented) { AISettingsView(model: model, service: model.dialogue) }
+        .sheet(isPresented: $model.settingsPresented) { UsageView(service: model.usage) { model.settingsPresented = false } }
         .sheet(isPresented: $model.taskBuddiesPresented) { TaskBuddiesView(model: model) }
         .sheet(isPresented: $model.actionsPresented) { ActionLibraryView(model: model) }
     }
@@ -119,7 +119,6 @@ struct Dashboard: View {
 
 struct ReminderView: View {
     @ObservedObject var model: AppModel
-    @State private var input = ""
     @GestureState private var dragging = false
     var body: some View {
         let centerY = model.panelSize.height - PetPlacement.anchor(in: model.panelSize).y
@@ -138,7 +137,7 @@ struct ReminderView: View {
                     .onEnded { _ in model.onPetDrag?(true) })
                 .onChange(of: dragging) { _, active in if !active { model.onPetDrag?(true) } }
                 .contextMenu {
-                    Button("Chat ♡") { model.openChat() }
+                    Button("Coding Plan ♡") { model.openChat() }
                         .disabled(model.isResting || model.engine.phase == .reminding)
                     Button("Head pats") { model.interact(action: 8, context: .pat) }
                     Button(model.halloweenMode ? "Give a treat" : "Feed rice") { model.interact(action: 4, context: .feed) }
@@ -182,75 +181,8 @@ struct ReminderView: View {
                 }
                 .position(x: model.panelSize.width / 2, y: model.panelSize.height - 37)
             }
-            if model.chatting {
-                HStack(spacing: 8) {
-                    Menu {
-                        if model.halloweenMode { Button("Trick or treat 🎃") { model.sendChat("Trick or treat") } }
-                        Button("Tell a joke") { model.sendChat("Tell a joke") }
-                        Button("Magic trick") { model.sendChat("Magic trick") }
-                        Button("Snack time") { model.sendChat("Snack time") }
-                        Button("Tiny dance") { model.sendChat("Dance") }
-                        Button("One more!") { model.sendChat("Again") }
-                    } label: {
-                        Image(systemName: "sparkles").font(.system(size: 13))
-                            .foregroundStyle(Color.ocean.opacity(0.6)).frame(width: 20, height: 26)
-                    }.menuStyle(.borderlessButton).menuIndicator(.hidden).fixedSize()
-                        .accessibilityLabel("Little things to try").help("Jokes, snacks and tiny shows")
-                    TextField("Talk to me…", text: $input).textFieldStyle(.plain)
-                        .font(.system(size: 13, design: .rounded))
-                        .onSubmit(send)
-                        .onChange(of: input) { _, value in
-                            if value.count > 300 { input = String(value.prefix(300)) }
-                            model.chatDraftChanged(input)
-                        }
-                        .onDisappear { input = ""; model.chatDraftChanged("") }
-                    Button(action: send) {
-                        Image(systemName: "arrow.up").font(.system(size: 12, weight: .semibold))
-                            .foregroundStyle(.white).frame(width: 27, height: 27)
-                            .background(Color.ocean.opacity(input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.25 : 0.85), in: Circle())
-                    }.buttonStyle(.plain).accessibilityLabel("Send message")
-                        .disabled(input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
-                .padding(.leading, 12).padding(.trailing, 6).padding(.vertical, 6)
-                .frame(width: 270).foregroundStyle(Color.ink)
-                .background(.ultraThinMaterial, in: Capsule())
-                .overlay(Capsule().strokeBorder(.white.opacity(0.8), lineWidth: 1))
-                .shadow(color: .ocean.opacity(0.06), radius: 7, y: 3)
-                .position(x: model.panelSize.width / 2, y: model.panelSize.height - 36)
-            }
         }.frame(width: model.panelSize.width, height: model.panelSize.height)
             .preferredColorScheme(.light)
     }
     private var isDancing: Bool { !model.isResting && (model.previewing || model.engine.phase == .reminding) }
-    private func send() { model.sendChat(input); input = "" }
-}
-
-struct AISettingsView: View {
-    @ObservedObject var model: AppModel
-    @ObservedObject var service: DialogueService
-    @State private var key = ""
-    var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            HStack {
-                Text("Her little voice").font(.system(size: 21, weight: .bold, design: .rounded))
-                Spacer()
-                Button("Done") { model.settingsPresented = false }
-            }
-            Toggle("AI bubbles · DeepSeek", isOn: $service.enabled)
-                .onChange(of: service.enabled) { _, value in if !value { model.say(.hello) } }
-            Text("English, 中文, 日本語 — a little of each.").font(.system(size: 12)).foregroundStyle(.secondary)
-            SecureField(service.hasKey ? "Replace OpenRouter API key" : "OpenRouter API key", text: $key)
-                .textFieldStyle(.roundedBorder)
-            HStack {
-                Button("Save key") { if service.saveKey(key) { key = "" } }.disabled(key.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                Button("Try a line") { model.showHello() }.disabled(!service.enabled || !service.hasKey)
-                Spacer()
-                if service.hasKey { Button("Remove key") { service.removeKey(); model.say(.hello) } }
-            }
-            Text(service.status).font(.system(size: 12)).foregroundStyle(Color.ocean)
-            Text("Key stays in macOS Keychain. AI sends short prompts and messages you type to OpenRouter. Offline? She uses local phrases.")
-                .font(.system(size: 11)).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-            Text("DeepSeek V4.1 Flash · 12 automatic + 60 chat requests/hour max").font(.system(size: 10)).foregroundStyle(.secondary)
-        }.padding(28).frame(width: 460).preferredColorScheme(.light)
-    }
 }
