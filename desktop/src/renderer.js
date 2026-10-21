@@ -28,6 +28,7 @@ function render(s) {
   // A reminder temporarily covers panels without clearing the user's unsent draft.
   const visiblePanel = s.phase === 'reminding' ? 'home' : s.panel;
   document.body.dataset.panel = visiblePanel;
+  $('quota-bubble').hidden = visiblePanel !== 'home' || ['resting','reminding'].includes(s.phase) || s.dancing;
   const action = data.actions.find(a => a.id === s.action) || data.actions[0];
   if (drawn !== action.id) { drawn = action.id; sprite(action).catch(() => { $('error').textContent = 'Artwork could not load.'; }); }
   $('pet').className = 'interactive ' + action.motion + (s.dancing ? ' dancing' : '') + (s.prefs.calm ? ' calm' : '') + (s.dragging ? ' dragging' : '');
@@ -38,6 +39,7 @@ function render(s) {
   for (const name of ['usage','settings','actions','tasks']) $(name+'-panel').hidden = visiblePanel !== name;
   $('panel-title').textContent = { usage:'Coding Plan', settings:'Make her comfy', actions:'279 little poses', tasks:'Task buddies' }[s.panel] || '';
   renderUsage(s.usage);
+  renderQuotaBubble(s.usage);
   $('error').textContent = s.error;
   for (const name of ['minutes','outfit']) if (document.activeElement !== $(name)) $(name).value = s.prefs[name];
   for (const name of ['chatter','calm','sound','tasks']) $(name).checked = s.prefs[name];
@@ -65,10 +67,10 @@ $('usage-remove').onclick=async()=>{const result=await command('usage-remove-key
 $('usage-provider').onchange=()=>{$('usage-key').value='';$('usage-key-status').textContent='';};
 $('pet').onpointerdown=event=>{if(event.button!==0)return;down={x:event.screenX,y:event.screenY};dragging=false;$('pet').setPointerCapture(event.pointerId);command('drag-start');};
 $('pet').onpointermove=event=>{if(down&&Math.hypot(event.screenX-down.x,event.screenY-down.y)>4)dragging=true;};
-$('pet').onpointerup=()=>{command('drag-end');if(down&&!dragging)command('pat');down=null;dragging=false;};
+$('pet').onpointerup=()=>{command('drag-end');if(down&&!dragging)command('chatter-bubble');down=null;dragging=false;};
 $('pet').onpointercancel=()=>{down=null;dragging=false;command('drag-end');};
 $('pet').oncontextmenu=event=>{event.preventDefault();command('panel','settings');};
-$('pet').onkeydown=event=>{if(event.key==='Enter'||event.key===' ')command('pat');};
+$('pet').onkeydown=event=>{if(event.key==='Enter'||event.key===' ')command('chatter-bubble');};
 document.addEventListener('mousemove',event=>{const next=!event.target.closest('.interactive');if(next!==ignore){ignore=next;command('ignore',next);}});
 document.addEventListener('keydown',event=>{if(event.key==='Escape')command('panel','home');});
 let lastUsageJSON='';
@@ -90,3 +92,24 @@ function renderUsage(usage) {
   }
 }
 api.load().then(value=>{data=value;actionList();render(data.state);api.onState(render);document.body.dataset.ready='true';}).catch(()=>{$('error').textContent='Could not start the companion.';});
+
+let lastQuotaJSON='';
+function renderQuotaBubble(usage){
+ if(!usage)return;
+ const json=JSON.stringify(usage);if(json===lastQuotaJSON)return;lastQuotaJSON=json;
+ $('quota-grid').replaceChildren();
+ for(const row of usage.rows){
+  const cell=document.createElement('div');cell.className='quota-cell';cell.dataset.quotaProvider=row.id;
+  const meter=[...row.meters].sort((a,b)=>a.remaining-b.remaining)[0], old=row.status!=='ok'||row.stale;
+  const heading=document.createElement('div');heading.className='quota-heading';const name=document.createElement('strong');name.textContent=row.name;heading.append(name);cell.append(heading);
+  const caption=document.createElement('small');
+  if(meter){
+   const value=document.createElement('span');value.textContent=Math.round(meter.remaining)+'%';heading.append(value);
+   const bar=document.createElement('progress');bar.max=100;bar.value=meter.remaining;bar.className=old?'stale':meter.remaining<=10?'low':'';bar.setAttribute('aria-label',row.name+' '+meter.label+' remaining'+(old?', last known':''));cell.append(bar);
+   caption.textContent=meter.label+(old?' · old':'');
+  }else if(row.balances.length){
+   const value=document.createElement('span');value.className='quota-money';value.textContent=row.balances.map(b=>b.currency+' '+b.amount.toFixed(2)).join(' · ');cell.append(value);caption.textContent='API credits'+(old?' · old':'');
+  }else caption.textContent=usage.busy?'Checking…':row.status==='disconnected'?'Not connected':'Unavailable';
+  cell.append(caption);$('quota-grid').append(cell);
+ }
+}

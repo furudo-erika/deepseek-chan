@@ -63,4 +63,9 @@ function clamp(bounds, work) {
   return { x: Math.round(Math.max(work.x, Math.min(bounds.x, work.x + Math.max(0, work.width - bounds.width)))), y: Math.round(Math.max(work.y, Math.min(bounds.y, work.y + Math.max(0, work.height - bounds.height)))), width: bounds.width, height: bounds.height };
 }
 function cleanReply(text) { return typeof text === 'string' && text.trim().length <= 110 && !/[<>`\n\r]/.test(text) ? text.trim() : ''; }
-module.exports = { FocusTimer, Deck, TaskQueue, validTask, clamp, cleanReply };
+function fitCompanion(work, position) {
+  const zoom = Math.min(1, Math.max(1, work.width - 16) / 420, Math.max(1, work.height - 16) / 620);
+  const width = Math.floor(420 * zoom), height = Math.floor(620 * zoom);
+  return { zoom, bounds: clamp({width,height,x:position?.x ?? work.x+work.width-width-16,y:position?.y ?? work.y+work.height-height-16},work) };
+}
+module.exports = { FocusTimer, Deck, TaskQueue, validTask, clamp, cleanReply, fitCompanion };

@@ -15,7 +15,7 @@ import CoreGraphics
         let leftDisplay = ScreenDrag(pointerStart: CGPoint(x: -800, y: 200), windowStart: CGPoint(x: -900, y: 100))
         precondition(leftDisplay.position(pointer: CGPoint(x: -750, y: 150)) == CGPoint(x: -850, y: 50), "Negative screen coordinates must work")
         let anchor = CGPoint(x: -700, y: 430)
-        for size in [CGSize(width: 240, height: 250), CGSize(width: 320, height: 350), CGSize(width: 320, height: 440), CGSize(width: 360, height: 490)] {
+        for size in [CGSize(width: 240, height: 250), CGSize(width: 320, height: 350), CGSize(width: 320, height: 440), CGSize(width: 360, height: 490), CGSize(width: 360, height: 500), CGSize(width: 360, height: 520), CGSize(width: 360, height: 560)] {
             let origin = PetPlacement.origin(anchor: anchor, size: size)
             let local = PetPlacement.anchor(in: size)
             precondition(CGPoint(x: origin.x + local.x, y: origin.y + local.y) == anchor, "Idle, bubble and chat must keep the same character center")

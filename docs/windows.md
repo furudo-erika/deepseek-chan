@@ -1,18 +1,18 @@
 # DeepSeek-chan for Windows
 
-The first Windows desktop release is **1.10.0**. It shares the original 279 illustrated poses with the native Mac app and runs in a small, transparent Electron window.
+The current Windows desktop release is **1.10.1**. It shares the original 279 illustrated poses with the native Mac app and runs in a small, transparent Electron window.
 
 ## Install
 
-Download **DeepSeek-chan-1.10.0-windows-x64-setup.exe** and its `.sha256` file from [Releases](https://github.com/furudo-erika/deepseek-chan-desktop/releases). Run the installer for your own Windows account, then open **DeepSeek-chan** from Start or the desktop shortcut. No administrator access, Python, Node.js or AI account is required to use the pet. Requires Windows 10/11, x64; ARM64 and 32-bit Windows are not published targets.
+Download **DeepSeek-chan-1.10.1-windows-x64-setup.exe** and its `.sha256` file from [Releases](https://github.com/furudo-erika/deepseek-chan-desktop/releases). Run the installer for your own Windows account, then open **DeepSeek-chan** from Start or the desktop shortcut. No administrator access, Python, Node.js or AI account is required to use the pet. Requires Windows 10/11, x64; ARM64 and 32-bit Windows are not published targets.
 
 The installer is **unsigned**. Windows may show an unknown-publisher/SmartScreen prompt. Verify that the download came from this repository and compare its checksum; do not disable Windows protections globally. The macOS DMG remains a separate native application.
 
 In PowerShell, compare the hash to the downloaded checksum file:
 
 ```powershell
-Get-FileHash .\DeepSeek-chan-1.10.0-windows-x64-setup.exe -Algorithm SHA256
-Get-Content .\DeepSeek-chan-1.10.0-windows-x64-setup.exe.sha256
+Get-FileHash .\DeepSeek-chan-1.10.1-windows-x64-setup.exe -Algorithm SHA256
+Get-Content .\DeepSeek-chan-1.10.1-windows-x64-setup.exe.sha256
 ```
 
 ## What she can do

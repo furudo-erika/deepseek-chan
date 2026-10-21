@@ -7,3 +7,15 @@ test('mouse starts timer; rest, snooze, idle and wake preserve correct semantics
 test('shuffle visits every pose before repeating, handles a changed outfit',()=>{const d=new Deck();for(let i=0;i<4;i++)assert.equal(new Set(Array.from({length:8},()=>d.next(['a','b','c','d','e','f','g','h']))).size,8);assert.equal(d.next(['witch']),'witch');});
 test('task baseline, coalescing, cooldown, stale expiry and metadata validation',()=>{const q=new TaskQueue(100000);const row=(status,at=101)=>({version:1,source:'codex',task_id:'t',event_id:String(at),title:'A task',updated_at:at,status});q.ingest([row('completed',99)],100000);assert.equal(q.next(100000,false),undefined);q.ingest([row('working')],102000);q.ingest([row('completed',103)],104000);assert.equal(q.next(104000,true),undefined);assert.equal(q.next(104000,false).status,'completed');q.ingest([row('completed',105)],105000);assert.equal(q.next(120000,false),undefined);q.ingest([row('waiting',130)],131000);assert.equal(q.next(300000,false),undefined);assert.equal(validTask({...row('working'),title:'bad\nlabel'},101000),false);assert.equal(validTask(row('working',150),101000),false);});
 test('negative monitor origins clamp and unsafe AI replies stay out of bubbles',()=>{assert.deepEqual(clamp({x:-3000,y:-10,width:420,height:470},{x:-1920,y:0,width:1920,height:1080}),{x:-1920,y:0,width:420,height:470});assert.equal(cleanReply('<script>no</script>'),'');assert.equal(cleanReply('hi\nthere'),'');assert.equal(cleanReply('こんにちは ♡'),'こんにちは ♡');});
+test('Two-bubble window fits small work areas, negative monitors and existing positions',()=>{
+ const {fitCompanion}=require('../src/core.cjs');
+ for(const work of [{x:0,y:0,width:1920,height:1040},{x:-800,y:40,width:800,height:520},{x:0,y:0,width:360,height:480}]){
+  for(const position of [undefined,{x:10000,y:-5000}]){
+   const {zoom,bounds:b}=fitCompanion(work,position);
+   assert.ok(zoom>0&&zoom<=1);assert.ok(b.x>=work.x&&b.y>=work.y);
+   assert.ok(b.x+b.width<=work.x+work.width&&b.y+b.height<=work.y+work.height);
+   assert.ok(Math.abs(b.width/zoom-420)<2&&Math.abs(b.height/zoom-620)<2);
+  }
+ }
+ assert.equal(fitCompanion({x:0,y:0,width:1920,height:1040}).zoom,1);
+});

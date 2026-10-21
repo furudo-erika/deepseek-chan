@@ -4,6 +4,7 @@
 <title>DeepSeek-chan</title><link rel="stylesheet" href="style.css"></head>
 <body>
   <section id="bubble" class="interactive bubble" aria-live="polite"><span id="line"></span><div id="break-buttons" hidden><button data-command="rest">Rest 5 min ♡</button><button data-command="snooze">In 5 min</button></div></section>
+  <section id="quota-bubble" class="interactive quota-bubble" aria-label="Remaining quota"><header><strong>Remaining ♡</strong><button data-panel="usage">Details ›</button></header><div id="quota-grid"></div></section>
   <section id="panel" class="interactive panel" hidden>
     <header><strong id="panel-title">Coding Plan</strong><button id="close-panel" aria-label="Close panel">×</button></header>
     <div id="usage-panel" hidden>
@@ -28,7 +29,7 @@
     <p id="error" class="small" role="status"></p>
   </section>
   <canvas id="pet" class="interactive" width="560" height="560" aria-label="DeepSeek-chan — drag or click for a head pat" tabindex="0"></canvas>
-  <nav class="interactive toolbar" aria-label="Pet controls"><button data-panel="usage">Usage ♡</button><button data-command="dance">Dance ♪</button><button data-panel="actions">Poses</button><button data-panel="tasks">Tasks</button><button data-panel="settings" aria-label="Settings">⚙</button></nav>
+  <nav class="interactive toolbar" aria-label="Pet controls"><button data-command="usage-bubble">Usage ♡</button><button data-command="dance">Dance ♪</button><button data-panel="actions">Poses</button><button data-panel="tasks">Tasks</button><button data-panel="settings" aria-label="Settings">⚙</button></nav>
   <div id="timer" class="timer"></div>
   <script src="renderer.js"></script>
 </body></html>

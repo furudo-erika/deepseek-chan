@@ -53,7 +53,7 @@ For Windows, download the EXE installer and follow the [Windows guide](docs/wind
 To verify a download, put the DMG and its `.sha256` file in the same folder and run:
 
 ```sh
-shasum -a 256 -c DeepSeek-chan-1.10.0-arm64.dmg.sha256
+shasum -a 256 -c DeepSeek-chan-1.10.1-arm64.dmg.sha256
 ```
 
 ## Task buddies
@@ -66,7 +66,7 @@ Included in 1.9.0. Windows supports local snapshots and generic MCP; native hook
 
 ## Say hello
 
-Click her for a head pat. Right-click for **Coding Plan**, **Tiny show**, **Dance**, the action library and other interactions. The old Chat input has been replaced by **Usage** in 1.10.0.
+Click her for a head pat. Right-click for **Coding Plan**, **Tiny show**, **Dance**, the action library and other interactions. Cute speech stays above her; a separate bubble below her shows remaining quota as progress bars. Click **Details** to see every quota window and connection option.
 
 Choose **Outfit → Halloween 🎃** for her witch wardrobe. The outfit survives a restart. Playing an action card switches to that card’s outfit.
 

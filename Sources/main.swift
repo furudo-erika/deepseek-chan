@@ -10,6 +10,7 @@ import Combine
     @Published var totalBreaks = UserDefaults.standard.integer(forKey: "totalBreaks")
     let dialogue = DialogueService()
     let usage = UsageService()
+    var canShowQuota: Bool { !isResting && !previewing && engine.phase != .reminding }
     @Published var speech = "Hey, you ♡"
     @Published var ambient = false
     @Published var settingsPresented = false { didSet { if settingsPresented { dismissBubble() } } }
@@ -92,6 +93,7 @@ import Combine
     var panelSize: NSSize {
         if isDragging, let dragSizeSnapshot { return dragSizeSnapshot }
         let hasControls = previewing || engine.phase == .reminding || isResting
+        if !hasControls { return NSSize(width: 360, height: 560) }
         return bubbleVisible ? NSSize(width: 320, height: chatting || hasControls ? 440 : 350) : NSSize(width: 240, height: 250)
     }
     func beginDragging() {
@@ -234,7 +236,9 @@ import Combine
             routine.cancel()
             ambient = false; chatting = false; say(.reminder)
         }
-        if !isDragging && ambient && !chatting, let until = ambientUntil, now >= until { dismissBubble(reschedule: false) }
+        if !isDragging && ambient && !chatting, let until = ambientUntil, now >= until {
+            dismissBubble(reschedule: false)
+        }
         let taskBlocked = !taskFeedbackEnabled || !petVisible || isDragging || actionsPresented || settingsPresented || taskBuddiesPresented || previewing || isResting || engine.phase == .reminding || routine.active || ambient && !chatting || chatHasDraft || now.timeIntervalSince(chatterSchedule.lastInput) < 30 || idle >= 600
         if let event = taskFeedback.next(now: now, blocked: taskBlocked) {
             startRoutine(taskPersonality.routine(for: event), speaks: true)
@@ -357,8 +361,17 @@ import Combine
     }
     func surpriseAction() { playAction(actionShuffle.next(in: idleActionChoices, avoiding: petAction)) }
     func openChat() {
+        showUsage()
+    }
+    func showUsage(refresh: Bool = true) {
+        petVisible = true
+        if refresh { usage.start() }
+        onChange?()
+    }
+    func showCuteBubble() {
+        guard !isDragging, canShowQuota else { return }
         dismissBubble()
-        onSettings?()
+        interact(action: 8, context: .pat)
     }
     func chatDraftChanged(_ text: String) {
         chatHasDraft = !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -440,7 +453,7 @@ struct PillButton: View {
         Button(action: action) {
             HStack(spacing: 7) {
                 if let icon { Image(systemName: icon) }
-                Text(title)
+                Text(title).lineLimit(1).fixedSize()
             }
             .font(.system(size: 13, weight: .semibold))
             .padding(.horizontal, 19).frame(height: 42)
@@ -484,7 +497,7 @@ final class ReminderPanel: NSPanel {
             edit.addItem(withTitle: title, action: NSSelectorFromString(selector), keyEquivalent: key)
         }
         let editItem = NSMenuItem(title: "Edit", action: nil, keyEquivalent: ""); editItem.submenu = edit; mainMenu.addItem(editItem)
-        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 640, height: 560), styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView], backing: .buffered, defer: false)
+        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 640, height: 650), styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView], backing: .buffered, defer: false)
         window.title = "DeepSeek-chan"
         window.titlebarAppearsTransparent = true; window.titleVisibility = .hidden
         window.isReleasedWhenClosed = false
@@ -548,7 +561,7 @@ final class ReminderPanel: NSPanel {
                 model.endDragging()
             }
         }
-        refresh(); showWindow()
+        refresh(); showWindow(); model.showUsage(); model.showHello()
         if CommandLine.arguments.contains("--preview") { model.preview() }
         #if DEBUG
         if CommandLine.arguments.contains("--acceptance-countdown") {
@@ -633,7 +646,7 @@ final class ReminderPanel: NSPanel {
         NSApp.orderFrontStandardAboutPanel(options: [.applicationName: "DeepSeek-chan", .applicationVersion: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Development", .credits: NSAttributedString(string: "Your DeepSeek-chan desktop companion.\n\(ActionLibrary.all.count) illustrated actions, little bubbles and gentle eye breaks.\nFan-made; not affiliated with DeepSeek.")])
     }
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { showWindow(); return true }
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { model.settingsPresented = false; model.actionsPresented = false; model.taskBuddiesPresented = false; showWindow(); model.showUsage(); return true }
 }
 
 MainActor.assumeIsolated {

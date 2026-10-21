@@ -83,7 +83,7 @@ jobs:
       - name: Build release and DMG
         run: |
           zsh scripts/package-release.sh
-          zsh scripts/export-dmg.sh "$PWD/dist/DeepSeek-chan-1.10.0-arm64.dmg"
+          zsh scripts/export-dmg.sh "$PWD/dist/DeepSeek-chan-1.10.1-arm64.dmg"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: macos-release

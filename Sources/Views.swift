@@ -78,12 +78,13 @@ struct Dashboard: View {
                     }.buttonStyle(.plain).font(.system(size: 12, weight: .semibold)).foregroundStyle(Color.ocean)
                 }.frame(width: 210, alignment: .leading)
                 VStack(spacing: 12) {
-                    SpeechBubble(text: model.speech).frame(width: 265)
-                    CompanionView(sleeping: model.isResting, still: !model.dashboardVisible || model.actionsPresented || model.settingsPresented || model.taskBuddiesPresented || model.systemSuspended, action: model.petAction, replay: model.replay, calm: model.calmMode, halloween: model.halloweenMode).frame(width: 220, height: 220)
-                        .onTapGesture { model.interact(action: 8, context: .pat) }.accessibilityAddTraits(.isButton)
+                    SpeechBubble(text: model.speech).frame(width: 285)
+                    CompanionView(sleeping: model.isResting, still: !model.dashboardVisible || model.actionsPresented || model.settingsPresented || model.taskBuddiesPresented || model.systemSuspended, action: model.petAction, replay: model.replay, calm: model.calmMode, halloween: model.halloweenMode).frame(width: 110, height: 110)
+                        .onTapGesture { model.showCuteBubble() }.accessibilityAddTraits(.isButton)
                         .accessibilityHint("Give her a head pat")
+                    QuotaBubble(service: model.usage) { model.onSettings?() }.frame(width: 285, height: 170)
                 }
-            }.frame(height: 315)
+            }.frame(height: 400)
             HStack {
                 Text("Eye rest").font(.system(size: 12)).foregroundStyle(Color.ink.opacity(0.6))
                 ForEach([15, 20, 25, 30, 45, 60], id: \.self) { value in
@@ -107,7 +108,7 @@ struct Dashboard: View {
                 Button(model.engine.phase == .paused ? "Resume" : "Pause") { model.togglePause() }.buttonStyle(.plain).foregroundStyle(Color.ocean)
             }.font(.system(size: 11))
         }
-        .padding(30).frame(width: 640, height: 560)
+        .padding(30).frame(width: 640, height: 650)
         .foregroundStyle(Color.ink)
         .background(LinearGradient(colors: [Color(red: 0.94, green: 0.97, blue: 1), Color(red: 0.93, green: 0.94, blue: 1)], startPoint: .topLeading, endPoint: .bottomTrailing))
         .preferredColorScheme(.light)
@@ -130,7 +131,11 @@ struct ReminderView: View {
             }
             CompanionView(knocking: isDancing, sleeping: model.isResting, still: model.isDragging || !model.shouldShowReminder || model.systemSuspended, dancing: isDancing, action: model.petAction, replay: model.replay, calm: model.calmMode, halloween: model.halloweenMode)
                 .frame(width: 210, height: 210)
-                .onTapGesture { model.interact(action: 8, context: .pat) }
+                .contentShape(Rectangle())
+                .onTapGesture { model.showCuteBubble() }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityAction { model.showCuteBubble() }
+                .accessibilityHint("Give her a head pat")
                 .gesture(DragGesture(minimumDistance: 5)
                     .updating($dragging) { _, state, _ in state = true }
                     .onChanged { _ in model.onPetDrag?(false) }
@@ -164,6 +169,11 @@ struct ReminderView: View {
                     Button("Settings") { model.onSettings?() }
                 }
                 .position(x: model.panelSize.width / 2, y: centerY)
+            if model.canShowQuota {
+                QuotaBubble(service: model.usage) { model.onSettings?() }
+                    .frame(width: 328, height: 170)
+                    .position(x: model.panelSize.width / 2, y: centerY + 198)
+            }
             if model.isResting {
                 HStack(spacing: 14) {
                     Text(model.clock).font(.system(size: 26, weight: .semibold, design: .rounded)).monospacedDigit()

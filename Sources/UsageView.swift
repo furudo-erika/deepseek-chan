@@ -1,5 +1,51 @@
 import SwiftUI
 
+struct QuotaBubble: View {
+    @ObservedObject var service: UsageService
+    let details: () -> Void
+    var body: some View {
+        VStack(spacing: 9) {
+            HStack {
+                Text("Remaining ♡").font(.system(size: 11, weight: .semibold))
+                Spacer()
+                Button("Details ›", action: details).buttonStyle(.plain).font(.system(size: 10))
+            }.foregroundStyle(Color.ocean)
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 9) {
+                ForEach(service.rows) { row in
+                    let meter = row.values.meters.min { $0.remaining < $1.remaining }
+                    let old = row.status != "ok" || row.updatedAt.map { Date().timeIntervalSince($0) > 600 } != false
+                    VStack(alignment: .leading, spacing: 3) {
+                        HStack(spacing: 3) {
+                            Text(row.provider.name).fontWeight(.semibold)
+                            Spacer(minLength: 1)
+                            if let meter { Text("\(Int(meter.remaining.rounded()))%").monospacedDigit() }
+                        }.font(.system(size: 10))
+                        if let meter {
+                            GeometryReader { box in
+                                Capsule().fill(Color.ocean.opacity(0.1))
+                                Capsule().fill(old ? Color.gray : meter.remaining <= 10 ? Color.orange : Color.ocean)
+                                    .frame(width: box.size.width * max(0, min(100, meter.remaining)) / 100)
+                            }.frame(height: 5)
+                                .accessibilityLabel("\(row.provider.name) \(meter.label): \(Int(meter.remaining.rounded()))% remaining\(old ? ", last known" : "")")
+                            Text("\(meter.label)\(old ? " · old" : "")").font(.system(size: 8)).foregroundStyle(.secondary).lineLimit(1)
+                        } else if let balance = row.values.balances.first {
+                            Text("\(balance.currency) \(balance.amount, specifier: "%.2f")\(old ? " · old" : "")").font(.system(size: 11, weight: .medium)).foregroundStyle(Color.ocean).lineLimit(1)
+                            Text("API credits").font(.system(size: 8)).foregroundStyle(.secondary)
+                        } else {
+                            Text(service.busy ? "Checking…" : row.status == "disconnected" ? "Not connected" : "Unavailable")
+                                .font(.system(size: 9)).foregroundStyle(.secondary)
+                            Color.clear.frame(height: 5)
+                        }
+                    }.frame(height: 35, alignment: .top)
+                }
+            }
+        }.padding(13).background(Color(red: 0.95, green: 0.98, blue: 1).opacity(0.95), in: RoundedRectangle(cornerRadius: 18))
+            .overlay(RoundedRectangle(cornerRadius: 18).stroke(Color.ocean.opacity(0.15), lineWidth: 1))
+            .overlay(alignment: .top) { BubbleTail().fill(Color(red: 0.95, green: 0.98, blue: 1)).frame(width: 12, height: 8).rotationEffect(.degrees(180)).offset(y: -7) }
+            .foregroundStyle(Color.ink)
+    }
+}
+
 struct UsageView: View {
     @ObservedObject var service: UsageService
     let done: () -> Void

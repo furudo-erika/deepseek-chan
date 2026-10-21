@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.10.1
+
+- Keep cute speech above the pet and show remaining quota in a separate lower bubble.
+- Add compact provider progress bars with named windows, stale-data indicators and API credit amounts.
+- Preserve head-pat replies, little stories and eye-break controls while quota refreshes independently.
+- Start quota loading automatically; keep full details and connections one click away.
+
 ## 1.10.0
 
 - Replace Chat with a Coding Plan usage panel on macOS and Windows.

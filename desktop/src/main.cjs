@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const fsp = require('node:fs/promises');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
-const { FocusTimer, Deck, TaskQueue, validTask, clamp, cleanReply } = require('./core.cjs');
+const { FocusTimer, Deck, TaskQueue, validTask, clamp, cleanReply, fitCompanion } = require('./core.cjs');
 app.setName('DeepSeek-chan');
 const testing = process.env.DEEPSEEK_CHAN_TEST === '1';
 if (testing && process.env.DEEPSEEK_CHAN_TEST_HOME) app.setPath('userData', process.env.DEEPSEEK_CHAN_TEST_HOME);
@@ -38,6 +38,18 @@ function themed(id) {
   return 'halloween_' + (map[id] || 'hat_hello');
 }
 function pose(id, words, duration = 6500) { action = themed(actionMap.has(id) ? id : 'wave'); if (words) { line = words; lineUntil = Date.now() + duration; } nextPose = Date.now() + duration; }
+function showQuota(refresh = true) {
+  if(drag || ['resting','reminding'].includes(timer.phase))return;
+  panel='home';if(refresh)usage.refresh();broadcast();
+}
+function showChatter() {
+  if(drag || ['resting','reminding'].includes(timer.phase))return;
+  const phrases=['Head pats recharge my tiny heart. ♡','Your tiny cheerleader is here! ✧','なでなで？うれしい ♡','偷偷给你加一点好运～','One tiny hug, coming right up! ♡','I saved you the coziest cloud. ☁'];
+  const options=phrases.filter(p=>p!==line);
+  routine=[];panel='home';danceUntil=0;
+  pose('hug',options[Math.floor(Math.random()*options.length)],9000);
+  nextChatter=Date.now()+120000;broadcast();
+}
 function state() {
   const now = Date.now();
   let visibleAction = action;
@@ -59,6 +71,10 @@ function stories() {
 }
 function startStory() { const list = stories(); const index = storyDeck.next(list.map((_, i) => String(i))); routine = [...(list[Number(index)] || [])]; nextBeat = 0; }
 function restorePosition() { clearInterval(moving); if (homeBounds && win && !drag) win.setBounds(clamp(homeBounds, screen.getDisplayMatching(homeBounds).workArea)); }
+function fitDisplay(work = screen.getDisplayMatching(win.getBounds()).workArea) {
+  const fitted=fitCompanion(work,win.getBounds());
+  win.webContents.setZoomFactor(fitted.zoom);win.setBounds(fitted.bounds);homeBounds=win.getBounds();
+}
 function centerDance() {
   if (!win || hidden) return;
   const before = win.getBounds(); homeBounds = before;
@@ -118,6 +134,8 @@ ipcMain.handle('pet:command', async (event, name, value) => {
     case 'panel': if (['home','settings','actions','tasks','usage'].includes(value)) { panel = value; if(value==='usage')usage.refresh(); broadcast(); } break;
     case 'draft': draft = value === true; lastTyped = Date.now(); break;
     case 'usage-refresh': await usage.refresh(); break;
+    case 'usage-bubble': showQuota(); break;
+    case 'chatter-bubble': showChatter(); break;
     case 'usage-save-key': {
       if(!value || !['deepseek','openrouter'].includes(value.id) || typeof value.key!=='string' || value.key.length<10 || value.key.length>512 || /\s/.test(value.key) || !safeStorage.isEncryptionAvailable())return {ok:false};
       await fsp.mkdir(app.getPath('userData'),{recursive:true});
@@ -130,7 +148,7 @@ ipcMain.handle('pet:command', async (event, name, value) => {
       if(value==='openrouter')await fsp.rm(keyFile,{force:true});
       usage.clear(value);return {ok:true};
     }
-    case 'pat': pose('hug', 'Head pats recharge my tiny heart. ♡'); break;
+    case 'pat': showChatter(); break;
     case 'dance': routine = []; danceUntil = Date.now() + 10000; pose('disco', 'Tiny dance delivery! ♪'); break;
     case 'story': startStory(); break;
     case 'action': if (actionMap.has(value)) { routine = []; pose(value, actionMap.get(value).line); } break;
@@ -147,7 +165,7 @@ ipcMain.handle('pet:command', async (event, name, value) => {
     case 'copy-connector': clipboard.writeText(JSON.stringify({ mcpServers: { 'deepseek-chan': { command: 'py', args: ['-3', path.join(integrations, 'chan.py'), 'mcp', '--source', 'codex'] } } }, null, 2)); return { ok: true };
     case 'ignore': if (typeof value === 'boolean' && !drag) win.setIgnoreMouseEvents(value, { forward: true }); break;
     case 'drag-start': clearInterval(moving); drag = { cursor: screen.getCursorScreenPoint(), bounds: win.getBounds(), started: Date.now() }; win.setIgnoreMouseEvents(false); break;
-    case 'drag-end': drag = null; homeBounds = win.getBounds(); break;
+    case 'drag-end': drag = null; fitDisplay(); break;
     case 'hide': hidden = true; win.hide(); break;
     case 'quit': app.quit(); break;
     default: throw Error('Unsupported command');
@@ -156,24 +174,26 @@ ipcMain.handle('pet:command', async (event, name, value) => {
 });
 if (!app.requestSingleInstanceLock()) app.quit();
 else {
-  app.on('second-instance', () => { hidden = false; win?.show(); });
+  app.on('second-instance', () => { hidden = false; win?.show(); showQuota(); });
   app.whenReady().then(() => {
     app.setAppUserModelId('io.github.furudo-erika.deepseek-chan');
     session.defaultSession.setPermissionRequestHandler((_, __, callback) => callback(false));
     session.defaultSession.setPermissionCheckHandler(() => false);
     const work = screen.getPrimaryDisplay().workArea;
-    win = new BrowserWindow({ width: 420, height: 470, x: work.x + work.width - 440, y: work.y + work.height - 490, transparent: true, frame: false, resizable: false, alwaysOnTop: true, skipTaskbar: true, hasShadow: false, show: false, icon: path.join(assets, 'companion-icon-dark.png'), webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: true, nodeIntegration: false, backgroundThrottling: false, devTools: testing } });
+    const fitted=fitCompanion(work);
+    win = new BrowserWindow({ ...fitted.bounds, transparent: true, frame: false, resizable: false, alwaysOnTop: true, skipTaskbar: true, hasShadow: false, show: false, icon: path.join(assets, 'companion-icon-dark.png'), webPreferences: { zoomFactor:fitted.zoom, preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, sandbox: true, nodeIntegration: false, backgroundThrottling: false, devTools: testing } });
     win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
     win.webContents.on('will-navigate', event => event.preventDefault());
     win.on('blur', () => { drag = null; });
-    win.loadFile(path.join(__dirname, 'index.html')); win.once('ready-to-show', () => win.showInactive()); homeBounds = win.getBounds();
+    win.loadFile(path.join(__dirname, 'index.html')); win.once('ready-to-show', () => {win.showInactive();showQuota();}); homeBounds = win.getBounds();
     if (!testing) { tray = new Tray(nativeImage.createFromPath(path.join(assets, 'companion-icon-dark.png')).resize({ width: 32, height: 32 })); tray.setToolTip('DeepSeek-chan'); tray.setContextMenu(Menu.buildFromTemplate([{ label: 'Show DeepSeek-chan', click: () => { hidden = false; win.show(); } }, { label: 'Rest my eyes', click: () => { timer.rest(Date.now()); hidden = false; win.showInactive(); broadcast(); } }, { label: 'Quit', click: () => app.quit() }])); tray.on('double-click', () => { hidden = false; win.show(); }); }
     setInterval(()=>{if(usage.lastAttempt && !hidden)usage.refresh();},300000);
     setInterval(tick, 250); setInterval(pollTasks, 2000); pollTasks();
     setInterval(() => { if (!drag || win.isDestroyed()) return; if (Date.now() - drag.started > 15000) { drag = null; return; } const point = screen.getCursorScreenPoint(); const b = { ...drag.bounds, x: drag.bounds.x + point.x - drag.cursor.x, y: drag.bounds.y + point.y - drag.cursor.y }; const next = clamp(b, screen.getDisplayNearestPoint(point).workArea), current = win.getBounds(); if (next.x !== current.x || next.y !== current.y) win.setPosition(next.x, next.y); }, 16);
     powerMonitor.on('resume', () => { timer.wake(Date.now()); lastPointer = null; restorePosition(); });
     powerMonitor.on('unlock-screen', () => { timer.wake(Date.now()); lastPointer = null; });
-    screen.on('display-removed', () => { drag = null; win.setBounds(clamp(win.getBounds(), screen.getPrimaryDisplay().workArea)); homeBounds = win.getBounds(); });
+    screen.on('display-removed', () => { drag = null; fitDisplay(screen.getPrimaryDisplay().workArea); });
+    screen.on('display-metrics-changed', () => { if(!drag)fitDisplay(); });
   });
   app.on('window-all-closed', () => app.quit());
 }

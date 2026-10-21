@@ -1,6 +1,6 @@
 # Coding Plan usage
 
-Version 1.10.0 replaces the Chat input with **Usage** (Windows) / **Coding Plan** (Mac). Open it from the pet controls or the Mac menu bar. The panel shows **remaining** quota, reset dates and last refresh time. It takes inspiration from Orca's provider meters; it does not require Orca to be installed.
+The pet keeps her cute chatter in the speech bubble above her. A separate bubble **below** her shows remaining quota as progress bars, so both are visible together. Clicking the pet still gives her a head pat and a cute reply. **Details ›** opens all quota windows, reset dates and API-key connections. The compact bar uses the most constrained returned window for each provider, named below the bar. API credit balances show currency amounts because the provider does not supply a percentage budget. Missing accounts show a connection state, never a zero bar.
 
 | Provider | What is displayed | Connection |
 | --- | --- | --- |
@@ -17,9 +17,11 @@ On Windows, Claude's file is normally `%USERPROFILE%\.claude\.credentials.json`,
 
 For the four coding clients, sign in using the provider's own app/CLI, then press **Refresh**. This release reads the default local account; it does not import Orca's private multi-account profiles. On Mac, a client Keychain item can be inaccessible to another app. The panel will show the connection instruction if no usable credential is available. Sign-in renewal belongs to the original client; the pet never refreshes or rewrites its OAuth credentials.
 
+The lower quota bubble updates independently of her normal stories and touch reactions. Eye-break controls temporarily take priority. Grey bars and `old` labels identify last-known data after a refresh failure.
+
 ## Freshness and errors
 
-Opening Usage starts a read-only refresh, followed by a refresh every five minutes. Manual refresh is throttled to once per 30 seconds. Provider 429 responses back off, and sign-in changes invalidate the previous account's values. A failed refresh may retain clearly marked **Last known** values for the same credential. Missing credentials clear the values. A zero remainder is only shown if the provider actually reports it.
+Launching the pet starts a read-only refresh, followed by a refresh every five minutes. Manual refresh is throttled to once per 30 seconds. Provider 429 responses back off, and sign-in changes invalidate the previous account's values. A failed refresh may retain clearly marked **Last known** values for the same credential. Missing credentials clear the values. A zero remainder is only shown if the provider actually reports it.
 
 These account-usage endpoints can change independently of the app. Authentication errors, denied access, unsupported payloads, network errors and missing windows remain visible states; a blank or unavailable window is not proof of an unlimited plan.
 

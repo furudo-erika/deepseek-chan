@@ -15,7 +15,7 @@ struct ScreenDrag {
 /// Growing a speech/chat panel preserves the character's screen-space anchor.
 enum PetPlacement {
     static func anchor(in size: CGSize) -> CGPoint {
-        CGPoint(x: size.width / 2, y: size.height >= 440 ? 180 : 125)
+        CGPoint(x: size.width / 2, y: size.height >= 560 ? 300 : size.height >= 440 ? 180 : 125)
     }
     static func origin(anchor: CGPoint, size: CGSize) -> CGPoint {
         let local = self.anchor(in: size)
