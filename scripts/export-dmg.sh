@@ -21,8 +21,9 @@ Halloween wardrobe: select Outfit > Halloween in the main window.
 This personal release is ad-hoc signed, not Apple-notarized. macOS may
 require explicit approval before first launch on another computer.
 
-AI dialogue is optional. Configure your own OpenRouter key in AI Settings.
-The package contains no API keys or personal preferences.
+Open Coding Plan to view Codex, Claude, Grok and Cursor quotas.
+Connect your own DeepSeek or OpenRouter key for API credit balances.
+The package contains no API keys, account details or personal preferences.
 Fan-made; not affiliated with DeepSeek.
 TXT
 codesign --verify --deep --strict "$STAGE/DeepSeek-chan.app"
