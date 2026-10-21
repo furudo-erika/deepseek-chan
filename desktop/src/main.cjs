@@ -70,7 +70,13 @@ function stories() {
   return Array.from({ length: Math.floor(pool.length / 3) }, (_, i) => pool.slice(i * 3, i * 3 + 3));
 }
 function startStory() { const list = stories(); const index = storyDeck.next(list.map((_, i) => String(i))); routine = [...(list[Number(index)] || [])]; nextBeat = 0; }
-function restorePosition() { clearInterval(moving); if (homeBounds && win && !drag) win.setBounds(clamp(homeBounds, screen.getDisplayMatching(homeBounds).workArea)); }
+function restorePosition() {
+  clearInterval(moving);
+  if (homeBounds && win && !drag) {
+    const fitted=fitCompanion(screen.getDisplayMatching(homeBounds).workArea,homeBounds);
+    win.webContents.setZoomFactor(fitted.zoom);win.setBounds(fitted.bounds);
+  }
+}
 function fitDisplay(work = screen.getDisplayMatching(win.getBounds()).workArea) {
   const fitted=fitCompanion(work,win.getBounds());
   win.webContents.setZoomFactor(fitted.zoom);win.setBounds(fitted.bounds);homeBounds=win.getBounds();
@@ -79,9 +85,10 @@ function centerDance() {
   if (!win || hidden) return;
   const before = win.getBounds(); homeBounds = before;
   const work = screen.getDisplayNearestPoint(screen.getCursorScreenPoint()).workArea;
-  const to = clamp({ ...before, x: work.x + (work.width - before.width) / 2, y: work.y + (work.height - before.height) / 2 }, work);
-  const started = Date.now(); clearInterval(moving); win.showInactive();
-  moving = setInterval(() => { const t = Math.min(1, (Date.now() - started) / 700), ease = 1 - Math.pow(1 - t, 3); if (drag || win.isDestroyed()) { clearInterval(moving); return; } win.setPosition(Math.round(before.x + (to.x - before.x) * ease), Math.round(before.y + (to.y - before.y) * ease)); if (t === 1) clearInterval(moving); }, 16);
+  const fitted=fitCompanion(work), to=clamp({...fitted.bounds,x:work.x+(work.width-fitted.bounds.width)/2,y:work.y+(work.height-fitted.bounds.height)/2},work);
+  const start=clamp({...before,width:to.width,height:to.height},screen.getDisplayMatching(before).workArea);
+  const started = Date.now(); clearInterval(moving);win.webContents.setZoomFactor(fitted.zoom);win.setBounds(start);win.showInactive();
+  moving = setInterval(() => { const t = Math.min(1, (Date.now() - started) / 700), ease = 1 - Math.pow(1 - t, 3); if (drag || win.isDestroyed()) { clearInterval(moving); return; } win.setPosition(Math.round(start.x + (to.x - start.x) * ease), Math.round(start.y + (to.y - start.y) * ease)); if (t === 1) clearInterval(moving); }, 16);
   pose('disco', 'Eyes need a little holiday. Five minutes? ♡', 30000);
   if (prefs.sound) shell.beep();
 }

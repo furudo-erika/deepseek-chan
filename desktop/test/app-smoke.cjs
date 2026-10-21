@@ -40,13 +40,22 @@ const assert = require('node:assert/strict');
   await page.waitForFunction(()=>document.querySelector('#task-list').textContent.includes('Smoke task'));
   await page.locator('#usage-panel').waitFor({state:'visible'});
   const originalBounds = await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].getBounds());
+  const originalZoom = await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].webContents.getZoomFactor());
+  await client.evaluate(({screen})=>{
+    globalThis.originalNearestDisplay=screen.getDisplayNearestPoint;
+    screen.getDisplayNearestPoint=point=>({...globalThis.originalNearestDisplay(point),workArea:{x:0,y:0,width:800,height:520}});
+  });
   await page.evaluate(()=>window.pet.command('test-reminder'));
   await page.getByRole('button',{name:'Rest 5 min ♡'}).waitFor({state:'visible'});
+  const smallBounds = await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].getBounds());
+  assert.ok(smallBounds.height<=520 && smallBounds.width<=800);
   assert.equal(await page.locator('#quota-bubble').isVisible(),false);
   await page.getByRole('button',{name:'In 5 min',exact:true}).click();
   await page.locator('#usage-panel').waitFor({state:'visible'});
   await page.waitForTimeout(850); // A cancelled center animation must not move the pet again.
   assert.deepEqual(await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].getBounds()), originalBounds);
+  assert.equal(await client.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].webContents.getZoomFactor()),originalZoom);
+  await client.evaluate(({screen})=>{screen.getDisplayNearestPoint=globalThis.originalNearestDisplay;delete globalThis.originalNearestDisplay;});
   await page.getByRole('button',{name:'Close panel'}).click();
   await page.evaluate(()=>window.pet.command('rest'));await page.waitForFunction(()=>document.querySelector('#timer').textContent.includes('look far away'));
   await page.screenshot({path:path.join(temp,'pet.png'),omitBackground:true});
