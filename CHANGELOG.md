@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.11.0 — 2026-10-24
+
+- Add OpenCode Go subscription quota: five-hour, weekly and monthly windows, local v1/v2 sign-in detection and optional Go key.
+- Remove DeepSeek and OpenRouter API balance cards and connection controls.
+- Add Fly a kite and Heart-step dance: six new illustrations, two animated mini-scenes, short multilingual stories and direct controls.
+- Preserve cute speech above the pet and independent quota bars below, including during the new mini-scenes.
+
 ## 1.10.1
 
 - Keep cute speech above the pet and show remaining quota in a separate lower bubble.

@@ -411,6 +411,16 @@ import Combine
         }
         nextAction = Date().addingTimeInterval(25)
     }
+    func playBreezeScene(dance: Bool = false) {
+        guard !isDragging, !isResting, engine.phase != .reminding else { return }
+        previewing = false; chatting = false; petVisible = true; halloweenMode = false
+        let ids = dance ? ["heart_dance", "heart_dance_hop", "heart_dance_finish"] : ["kite_flying", "kite_tug", "kite_hop"]
+        let beats = ids.compactMap { id -> PetBeat? in
+            guard let action = ActionLibrary.all.first(where: { $0.id == id }) else { return nil }
+            return PetBeat(action: id, line: action.line, duration: 4.2)
+        }
+        startRoutine(PetRoutine(name: dance ? "Heart-step dance" : "Fly a kite", beats: beats), speaks: true); onChange?()
+    }
     func tinyShow(rememberReply: Bool = true) {
         guard !isDragging, !isResting, engine.phase != .reminding else { return }
         previewing = false; petVisible = true

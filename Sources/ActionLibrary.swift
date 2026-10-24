@@ -13,6 +13,14 @@ struct PetAction: Codable, Identifiable {
         let searchable = name + " " + category + " " + id.replacingOccurrences(of: "_", with: " ") + " " + line
         return words.allSatisfy { searchable.localizedCaseInsensitiveContains(String($0)) }
     }
+    /// These two mini-scenes have three drawn keyframes in addition to their motion loops.
+    func animationFrame(at time: Double) -> Int {
+        guard atlas == "actions-breeze-dance" else { return frame }
+        let step = Int(max(0, time) / (motion == .kite ? 0.7 : 0.38))
+        let order = [0, 1, 2, 1]
+        let base = frame < 3 ? 0 : 3
+        return base + order[(step + frame % 3) % order.count]
+    }
     /// Short bursts and pauses give expressive poses their own rhythm.
     func sample(at time: Double) -> MotionSample {
         let t = max(0, time)
@@ -132,9 +140,11 @@ struct MotionSample {
 }
 
 enum PetMotion: String, Codable, CaseIterable {
-    case breathe, bow, nod, float, hop, sway, bounce, swing, shimmy, peek
+    case breathe, bow, nod, float, hop, sway, bounce, swing, shimmy, peek, kite, heartDance
     func sample(at t: Double) -> MotionSample {
         switch self {
+        case .kite: return .init(x: 4 * sin(t * 1.3), y: -3 * abs(sin(t * 1.8)), angle: 2.5 * sin(t * 1.3))
+        case .heartDance: return .init(x: 6 * sin(t * 4.1), y: -8 * abs(sin(t * 4.1)), angle: 5 * sin(t * 4.1), scaleY: 1 - 0.02 * cos(t * 8.2))
         case .breathe: return .init(y: -1.5 * sin(t * 1.7), scaleY: 1 + 0.012 * sin(t * 1.7))
         case .bow: return .init(y: 3 * (1 - cos(t * 2)), angle: 3 * sin(t * 2), scaleY: 0.97 + 0.03 * cos(t * 2))
         case .nod: return .init(y: 2 * sin(t * 3), angle: 2 * sin(t * 3), scaleY: 1 + 0.015 * sin(t * 3))

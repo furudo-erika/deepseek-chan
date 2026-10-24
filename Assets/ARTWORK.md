@@ -2,7 +2,7 @@
 
 The mascot illustrations were generated with the built-in `image_gen` tool. Runtime assets are stored here and copied into the app. External reference images are not redistributed. See [NOTICE](../NOTICE) for the distinction between the project license and third-party names and character designs.
 
-The current library has 279 illustrated poses across 31 collections. Procedural movement brings each pose to life; this is not a claim of 279 independently drawn multi-frame animations. Provenance manifests record project-relative asset paths and SHA-256 checksums, without machine-local generator paths.
+The current library has 285 illustrated poses across 32 collections. Procedural movement brings each pose to life; this is not a claim of 285 independently drawn multi-frame animations. Provenance manifests record project-relative asset paths and SHA-256 checksums, without machine-local generator paths.
 
 - `deepseek-chan-soft-atlas.png`: softer four-pose character.
 - `deepseek-chan-dance-atlas.png`: four dance poses.
@@ -66,3 +66,7 @@ Exact final prompts and pose/line plans: [halloween-prompts.json](actions/hallow
 ## v1.8.1 · Native macOS icon packaging
 
 Original mascot portrait `companion-icon-dark.png` is unchanged. The release uses `CompanionNative.icon/icon.json` and its `Assets/mascot.png` (1024px format conversion), exported with [Apple Icon Composer](https://developer.apple.com/icon-composer/) 1.2, macOS / Default, 1024×1024 at scale 1. Export is `companion-icon-macos.png`. `scripts/PackageIcon.swift` places that native contour in a 100/1024 transparent inset at each ICNS resolution. The installed system icon was read through NSWorkspace and visually compared against the old icon: the thick gray enclosing tile is gone. No new AI artwork was generated for this packaging fix.
+
+## Breeze & beats · 1.11.0
+
+Six new illustrations in `actions/actions-breeze-dance.png` form two looping three-keyframe scenes: Fly a kite and Heart-step dance. Generated with built-in image_gen using the original daily atlas as the character reference; copied unchanged with alpha preserved. Exact generation/edit prompts and SHA-256: [provenance](actions/breeze-dance-provenance.json). The landscape atlas uses runtime crop metadata and aspect-aware sprite rendering on both platforms. All six production crops were visually reviewed. The catalog now contains 285 distinct illustrated poses in 32 collections; the two scenes also join the proactive story deck.

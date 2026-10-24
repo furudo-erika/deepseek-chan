@@ -73,12 +73,14 @@ struct CompanionSprite: View {
     var body: some View {
         let name = artwork ?? (daily ? "deepseek-chan-daily-atlas" : dance ? "deepseek-chan-dance-atlas" : "deepseek-chan-soft-atlas")
         let rect = CompanionArtwork.layouts[name]?[frame] ?? [CGFloat(frame % 2) / 2, CGFloat(frame / 2) / 2, 0.5, 0.5]
-        let scale = side / max(rect[2], rect[3])
-        Image(nsImage: CompanionArtwork.load(name))
+        let image = CompanionArtwork.load(name)
+        let scale = side / max(rect[2] * image.size.width, rect[3] * image.size.height)
+        let width = image.size.width * scale, height = image.size.height * scale
+        Image(nsImage: image)
             .resizable().interpolation(.high)
-            .frame(width: scale, height: scale)
-            .offset(x: -rect[0] * scale, y: -rect[1] * scale)
-            .frame(width: rect[2] * scale, height: rect[3] * scale, alignment: .topLeading)
+            .frame(width: width, height: height)
+            .offset(x: -rect[0] * width, y: -rect[1] * height)
+            .frame(width: rect[2] * width, height: rect[3] * height, alignment: .topLeading)
             .clipped()
             .clipShape(SpriteRegion(cutouts: CompanionArtwork.cutouts["\(name):\(frame)"] ?? []), style: FillStyle(eoFill: true))
             .clipShape(SpriteOutline(points: CompanionArtwork.regions["\(name):\(frame)"] ?? []))
@@ -107,7 +109,7 @@ struct CompanionView: View {
             let strength = calm ? 0.3 : 1.0
             let useDance = dancing && Int(t / 4) % 3 != 2
             let useDaily = halloween || sleeping || (!knocking && !dancing)
-            let frame = useDaily ? selected.frame : useDance ? Int(t / 0.32) % 4 : (Int(t / 0.38) % 2 == 0 ? 1 : 2)
+            let frame = useDaily ? selected.animationFrame(at: calm ? t * 0.65 : t) : useDance ? Int(t / 0.32) % 4 : (Int(t / 0.38) % 2 == 0 ? 1 : 2)
             GeometryReader { geometry in
                 let side = min(geometry.size.width, geometry.size.height)
                 ZStack {

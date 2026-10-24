@@ -1,27 +1,27 @@
 # DeepSeek-chan for Windows
 
-The current Windows desktop release is **1.10.1**. It shares the original 279 illustrated poses with the native Mac app and runs in a small, transparent Electron window.
+The current Windows desktop release is **1.11.0**. It shares the 285 illustrated poses and 32 collections with the native Mac app and runs in a small, transparent Electron window.
 
 ## Install
 
-Download **DeepSeek-chan-1.10.1-windows-x64-setup.exe** and its `.sha256` file from [Releases](https://github.com/furudo-erika/deepseek-chan-desktop/releases). Run the installer for your own Windows account, then open **DeepSeek-chan** from Start or the desktop shortcut. No administrator access, Python, Node.js or AI account is required to use the pet. Requires Windows 10/11, x64; ARM64 and 32-bit Windows are not published targets.
+Download **DeepSeek-chan-1.11.0-windows-x64-setup.exe** and its `.sha256` file from [Releases](https://github.com/furudo-erika/deepseek-chan-desktop/releases). Run the installer for your own Windows account, then open **DeepSeek-chan** from Start or the desktop shortcut. No administrator access, Python, Node.js or AI account is required to use the pet. Requires Windows 10/11, x64; ARM64 and 32-bit Windows are not published targets.
 
 The installer is **unsigned**. Windows may show an unknown-publisher/SmartScreen prompt. Verify that the download came from this repository and compare its checksum; do not disable Windows protections globally. The macOS DMG remains a separate native application.
 
 In PowerShell, compare the hash to the downloaded checksum file:
 
 ```powershell
-Get-FileHash .\DeepSeek-chan-1.10.1-windows-x64-setup.exe -Algorithm SHA256
-Get-Content .\DeepSeek-chan-1.10.1-windows-x64-setup.exe.sha256
+Get-FileHash .\DeepSeek-chan-1.11.0-windows-x64-setup.exe -Algorithm SHA256
+Get-Content .\DeepSeek-chan-1.11.0-windows-x64-setup.exe.sha256
 ```
 
 ## What she can do
 
 - Drag her to a corner; click her for a head pat. Right-click for settings.
 - Mouse movement starts a focus cycle. At the deadline she moves to the active display's center and dances, with **Rest 5 min** and **In 5 min** buttons. An open panel cannot hide these buttons, and the Usage panel returns after snoozing.
-- Browse all 279 poses, switch between Classic and Halloween, dance, and receive short multilingual stories every 2–3 minutes; Calm motion and the system's reduced-motion preference soften movement.
+- Browse all 285 poses, switch between Classic and Halloween, play the new Fly a kite and Heart-step dance mini-scenes, and receive short multilingual stories every 2–3 minutes; Calm motion and the system's reduced-motion preference soften movement.
 - Close a panel to return to the pet. **Hide to tray** hides her without quitting; use her system-tray icon to restore or quit.
-- **Usage** replaces Chat: see Codex, Claude, Grok and Cursor remaining quota, plus DeepSeek and OpenRouter API balances. See the [usage guide](usage.md) for local login discovery and privacy. Keys are encrypted with the Windows account; other apps running as that account are outside this protection boundary. No chat completion calls are made.
+- **Usage** replaces Chat: see Codex, Claude, Grok, Cursor and OpenCode Go subscription quota. DeepSeek and OpenRouter API balance cards are no longer shown. See the [usage guide](usage.md) for local login discovery and privacy. An optional Go key is encrypted with the Windows account; other apps running as that account are outside this protection boundary. No chat completion calls are made.
 
 
 This first port has its own compact controls. It does not yet include Mac favorites or every contextual conversation routine. Linux is still planned.
@@ -48,7 +48,7 @@ $env:CHAN_EXE = (Resolve-Path 'dist/windows/win-unpacked/DeepSeek-chan.exe').Pat
 npm --prefix desktop run test:app
 ```
 
-The **Release packages** GitHub workflow builds on `windows-2025`, checks the packaged app, installs the actual EXE silently, runs the installed app checks, and uninstalls it. It checks startup, all 279 poses in the catalog, renderer isolation, six provider quota cards with synthetic responses, Halloween, local task feedback, Usage panel restoration through reminders and the five-minute rest state. It saves a screenshot for visual inspection. This is automated Windows runner coverage, not a claim of hands-on testing on every Windows PC, display/DPI arrangement or security product. Live provider calls are not part of the Windows runner tests.
+The **Release packages** GitHub workflow builds on `windows-2025`, checks the packaged app, installs the actual EXE silently, runs the installed app checks, and uninstalls it. It checks startup, all 285 poses in the catalog, renderer isolation, five subscription quota cards with synthetic responses, the Fly a kite and Heart-step dance frame changes, Halloween, local task feedback, Usage panel restoration through reminders and the five-minute rest state. It saves a screenshot for visual inspection. This is automated Windows runner coverage, not a claim of hands-on testing on every Windows PC, display/DPI arrangement or security product. Live provider calls are not part of the Windows runner tests.
 
 Only source and explicitly selected assets/connectors enter the app archive. Development files, credentials, private preferences, PDBs and source maps are excluded. The packaging check inspects our unpacked resources before artifacts are uploaded. Electron's required third-party notices and licenses remain included.
 

@@ -1,5 +1,6 @@
 'use strict';
 const $ = id => document.getElementById(id), api = window.pet;
+let poseStarted = performance.now(), lastPose = '';
 let data, current, drawn = '', drawVersion = 0, lastTaskJSON = '', dragging = false, down, ignore = false;
 const images = new Map();
 const command = async (name, value) => { try { return await api.command(name, value); } catch { $('error').textContent = 'That little action could not finish. Try again.'; } };
@@ -14,14 +15,14 @@ async function sprite(action) {
   if (version !== drawVersion) return;
   const canvas = $('pet'), ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, 560, 560);
   const r = data.layouts[action.atlas]?.[action.frame] || [action.frame % 3 / 3, Math.floor(action.frame / 3) / 3, 1/3, 1/3];
-  const scale = 520 / Math.max(r[2], r[3]), w = r[2] * scale, h = r[3] * scale, x = (560-w)/2, y = 550-h;
+  const scale = 520 / Math.max(r[2]*image.width, r[3]*image.height), w = r[2]*image.width*scale, h = r[3]*image.height*scale, x = (560-w)/2, y = 550-h;
   ctx.save(); ctx.translate(x,y); ctx.beginPath(); ctx.rect(0,0,w,h);
   for (const cut of data.cutouts[action.atlas+':'+action.frame] || []) ctx.rect(cut[0]*w,cut[1]*h,cut[2]*w,cut[3]*h);
   ctx.clip('evenodd');
   const points = data.regions[action.atlas+':'+action.frame];
   if (points?.length) { ctx.beginPath(); points.forEach((p,i) => i ? ctx.lineTo(p[0]*w,p[1]*h) : ctx.moveTo(p[0]*w,p[1]*h)); ctx.closePath(); ctx.clip(); }
   ctx.drawImage(image,r[0]*image.width,r[1]*image.height,r[2]*image.width,r[3]*image.height,0,0,w,h); ctx.restore();
-  canvas.dataset.action = action.id;
+  canvas.dataset.action = action.id; canvas.dataset.frame = action.frame;
 }
 function render(s) {
   current = s;
@@ -30,14 +31,15 @@ function render(s) {
   document.body.dataset.panel = visiblePanel;
   $('quota-bubble').hidden = visiblePanel !== 'home' || ['resting','reminding'].includes(s.phase) || s.dancing;
   const action = data.actions.find(a => a.id === s.action) || data.actions[0];
-  if (drawn !== action.id) { drawn = action.id; sprite(action).catch(() => { $('error').textContent = 'Artwork could not load.'; }); }
+  if (lastPose !== action.id) { lastPose = action.id; poseStarted = performance.now(); }
+  drawPose(action);
   $('pet').className = 'interactive ' + action.motion + (s.dancing ? ' dancing' : '') + (s.prefs.calm ? ' calm' : '') + (s.dragging ? ' dragging' : '');
   $('bubble').hidden = visiblePanel !== 'home' || (!s.line && !['reminding','resting'].includes(s.phase));
   $('line').textContent = s.phase === 'reminding' ? 'Eyes need a holiday. Five minutes? ♡' : s.phase === 'resting' ? 'Look far away. I’ll keep watch. ♡' : s.line;
   $('break-buttons').hidden = s.phase !== 'reminding';
   $('panel').hidden = visiblePanel === 'home';
   for (const name of ['usage','settings','actions','tasks']) $(name+'-panel').hidden = visiblePanel !== name;
-  $('panel-title').textContent = { usage:'Coding Plan', settings:'Make her comfy', actions:'279 little poses', tasks:'Task buddies' }[s.panel] || '';
+  $('panel-title').textContent = { usage:'Coding Plan', settings:'Make her comfy', actions:data.actions.length+' little poses', tasks:'Task buddies' }[s.panel] || '';
   renderUsage(s.usage);
   renderQuotaBubble(s.usage);
   $('error').textContent = s.error;
@@ -62,9 +64,8 @@ document.querySelectorAll('[data-panel]').forEach(button => button.onclick=()=>c
 $('close-panel').onclick=()=>command('panel','home');
 $('search').oninput=actionList;
 for (const name of ['minutes','outfit','chatter','calm','sound','tasks']) $(name).onchange=()=>command('settings',{[name]: name==='minutes'?Number($(name).value):name==='outfit'?$(name).value:$(name).checked});
-$('usage-save').onclick=async()=>{const value={id:$('usage-provider').value,key:$('usage-key').value};$('usage-key').value='';const result=await command('usage-save-key',value);$('usage-key-status').textContent=result?.ok?'Saved with Windows account encryption.':'Could not save this key.';};
-$('usage-remove').onclick=async()=>{const result=await command('usage-remove-key',$('usage-provider').value);$('usage-key').value='';$('usage-key-status').textContent=result?.ok?'Key removed.':'Could not remove this key.';};
-$('usage-provider').onchange=()=>{$('usage-key').value='';$('usage-key-status').textContent='';};
+$('usage-save').onclick=async()=>{const value={id:'opencode',key:$('usage-key').value};$('usage-key').value='';const result=await command('usage-save-key',value);$('usage-key-status').textContent=result?.ok?'Saved with Windows account encryption.':'Could not save this key.';};
+$('usage-remove').onclick=async()=>{const result=await command('usage-remove-key','opencode');$('usage-key').value='';$('usage-key-status').textContent=result?.ok?'Key removed.':'Could not remove this key.';};
 $('pet').onpointerdown=event=>{if(event.button!==0)return;down={x:event.screenX,y:event.screenY};dragging=false;$('pet').setPointerCapture(event.pointerId);command('drag-start');};
 $('pet').onpointermove=event=>{if(down&&Math.hypot(event.screenX-down.x,event.screenY-down.y)>4)dragging=true;};
 $('pet').onpointerup=()=>{command('drag-end');if(down&&!dragging)command('chatter-bubble');down=null;dragging=false;};
@@ -113,3 +114,20 @@ function renderQuotaBubble(usage){
   cell.append(caption);$('quota-grid').append(cell);
  }
 }
+
+function drawPose(action) {
+ let frame=action.frame;
+ if(action.atlas==='actions-breeze-dance' && !current?.dragging && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const elapsed=(performance.now()-poseStarted)/1000*(current?.prefs.calm?0.65:1);
+  const step=Math.floor(elapsed/(action.motion==='kite'?0.7:0.38));
+  frame=(action.frame<3?0:3)+[0,1,2,1][(step+action.frame%3)%4];
+ }
+ const key=action.id+':'+frame;
+ if(drawn===key)return; drawn=key;
+ sprite({...action,frame}).catch(()=>{$('error').textContent='Artwork could not load.';});
+}
+setInterval(()=>{
+ if(!data || !current || document.hidden || document.body.dataset.panel!=='home')return;
+ const action=data.actions.find(a=>a.id===current.action);
+ if(action?.atlas==='actions-breeze-dance')drawPose(action);
+},100);

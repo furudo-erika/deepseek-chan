@@ -28,7 +28,6 @@ let lastFailure = '', saveTimer;
 const usage = new UsageService({home: testing ? process.env.DEEPSEEK_CHAN_TEST_HOME : app.getPath('home'), appData: testing ? process.env.DEEPSEEK_CHAN_TEST_HOME : app.getPath('appData'), readKey: async id => {
   const file=path.join(app.getPath('userData'),'usage-'+id+'.bin');
   try { return safeStorage.decryptString(await fsp.readFile(file)); } catch {}
-  if(id==='openrouter' && !testing)try{return safeStorage.decryptString(await fsp.readFile(keyFile));}catch{}
   return null;
 }, notify: broadcast, ...(testing ? {credentialReader:async()=>process.env.CHAN_USAGE_FIXTURES ? {Authorization:'Bearer fixture'} : null, fetcher:async url=>{const fixtures=JSON.parse(await fsp.readFile(process.env.CHAN_USAGE_FIXTURES,'utf8'));const p=require('./usage/core.js').providers.find(p=>p.url===url);return new Response(JSON.stringify(fixtures[p.id]),{status:200});}} : {})});
 function save() { clearTimeout(saveTimer); saveTimer = setTimeout(() => { try { fs.mkdirSync(path.dirname(configFile), { recursive: true }); const tmp = configFile + '.tmp'; fs.writeFileSync(tmp, JSON.stringify(prefs)); fs.renameSync(tmp, configFile); } catch { lastFailure = 'Could not save preferences.'; } }, 200); }
@@ -66,7 +65,7 @@ function speakTask(t) {
   const options = phrases[t.status]; pose(poses[t.status], options[Math.floor(Math.random() * options.length)]);
 }
 function stories() {
-  const pool = actions.filter(a => prefs.outfit === 'halloween' ? a.id.startsWith('halloween_') : a.atlas.startsWith('actions-extra-'));
+  const pool = actions.filter(a => prefs.outfit === 'halloween' ? a.id.startsWith('halloween_') : (a.atlas.startsWith('actions-extra-') || a.atlas==='actions-breeze-dance'));
   return Array.from({ length: Math.floor(pool.length / 3) }, (_, i) => pool.slice(i * 3, i * 3 + 3));
 }
 function startStory() { const list = stories(); const index = storyDeck.next(list.map((_, i) => String(i))); routine = [...(list[Number(index)] || [])]; nextBeat = 0; }
@@ -144,21 +143,26 @@ ipcMain.handle('pet:command', async (event, name, value) => {
     case 'usage-bubble': showQuota(); break;
     case 'chatter-bubble': showChatter(); break;
     case 'usage-save-key': {
-      if(!value || !['deepseek','openrouter'].includes(value.id) || typeof value.key!=='string' || value.key.length<10 || value.key.length>512 || /\s/.test(value.key) || !safeStorage.isEncryptionAvailable())return {ok:false};
+      if(!value || !['opencode'].includes(value.id) || typeof value.key!=='string' || value.key.length<10 || value.key.length>512 || /\s/.test(value.key) || !safeStorage.isEncryptionAvailable())return {ok:false};
       await fsp.mkdir(app.getPath('userData'),{recursive:true});
       await fsp.writeFile(path.join(app.getPath('userData'),'usage-'+value.id+'.bin'),safeStorage.encryptString(value.key));
       usage.clear(value.id);usage.refresh();return {ok:true};
     }
     case 'usage-remove-key': {
-      if(!['deepseek','openrouter'].includes(value))return {ok:false};
+      if(!['opencode'].includes(value))return {ok:false};
       await fsp.rm(path.join(app.getPath('userData'),'usage-'+value+'.bin'),{force:true});
-      if(value==='openrouter')await fsp.rm(keyFile,{force:true});
       usage.clear(value);return {ok:true};
     }
     case 'pat': showChatter(); break;
-    case 'dance': routine = []; danceUntil = Date.now() + 10000; pose('disco', 'Tiny dance delivery! ♪'); break;
+    case 'kite':
+    case 'dance': {
+      if(drag || ['resting','reminding'].includes(timer.phase))break;
+      prefs.outfit='classic';save();danceUntil=0;panel='home';
+      const ids=name==='kite'?['kite_flying','kite_tug','kite_hop']:['heart_dance','heart_dance_hop','heart_dance_finish'];
+      routine=ids.map(id=>actionMap.get(id));const first=routine.shift();pose(first.id,first.line,4500);nextBeat=Date.now()+4500;nextChatter=Date.now()+150000;break;
+    }
     case 'story': startStory(); break;
-    case 'action': if (actionMap.has(value)) { routine = []; pose(value, actionMap.get(value).line); } break;
+    case 'action': if (actionMap.has(value)) { routine = []; prefs.outfit=value.startsWith('halloween_')?'halloween':'classic';save();danceUntil=0;pose(value, actionMap.get(value).line); } break;
     case 'rest': timer.rest(Date.now()); routine = []; restorePosition(); pose('nap', 'Look far away. I’ll keep watch. ♡', 300000); break;
     case 'snooze': timer.snooze(Date.now()); restorePosition(); break;
     case 'pause': timer.pause(); routine = []; restorePosition(); break;

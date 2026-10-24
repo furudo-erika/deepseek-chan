@@ -3,9 +3,9 @@ import Foundation
 @main struct ProactiveChecks {
     static func main() {
         let stories = ProactiveLibrary.routines
-        precondition(stories.count == 48)
-        precondition(Set(stories.map(\.name)).count == 48)
-        precondition(Set(stories.flatMap { $0.beats.map(\.line) }).count == 144)
+        precondition(stories.count == 50)
+        precondition(Set(stories.map(\.name)).count == 50)
+        precondition(Set(stories.flatMap { $0.beats.map(\.line) }).count == 150)
         let actions = Set(ActionLibrary.all.map(\.id))
         for story in stories {
             precondition(story.beats.count == 3)
@@ -17,13 +17,13 @@ import Foundation
         var previous = ""
         for _ in 0..<3 {
             var seen: Set<String> = []
-            for index in 0..<48 {
+            for index in 0..<50 {
                 if index == 19 { deck = ProactiveDeck(remaining: deck.remaining, last: deck.last) }
                 let story = deck.next(in: stories)!
                 precondition(story.name != previous && seen.insert(story.name).inserted)
                 previous = story.name
             }
-            precondition(seen.count == 48)
+            precondition(seen.count == 50)
         }
         var stale = ProactiveDeck(remaining: ["deleted", stories[0].name, stories[0].name])
         precondition(stale.next(in: stories)?.name == stories[0].name)
@@ -47,6 +47,6 @@ import Foundation
             let random = ProactiveSchedule(now: start)
             precondition((120...180).contains(random.due.timeIntervalSince(start)))
         }
-        print("PASS: 48 stories / 144 unique lines, three no-repeat cycles, restart continuity, stale IDs, 2–3-minute cadence, quiet open chat, draft/typing guards, activity and interruption gates")
+        print("PASS: 50 stories / 150 unique lines, three no-repeat cycles, restart continuity, stale IDs, 2–3-minute cadence, quiet open chat, draft/typing guards, activity and interruption gates")
     }
 }

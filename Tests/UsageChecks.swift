@@ -16,6 +16,10 @@ import JavaScriptCore
         }
         precondition(UsageSecrets.cursorCookie("bad token") == nil)
         precondition(!UsageSecrets.validToken("credential\nwith-newline"))
-        print("PASS: native JavaScriptCore bridge decodes all six provider schemas; credential input validation passes")
+        let headers = UsageSecrets.openCodeHeaders(["type": "oauth", "access": "fixture-session", "metadata": ["server": "https://opencode.ai/console", "orgID": "org_fixture", "email": "PRIVATE"]])!
+        precondition(headers["x-org-id"] == "org_fixture" && headers["Authorization"] == "Bearer fixture-session")
+        precondition(!headers.values.contains("PRIVATE"))
+        precondition(UsageSecrets.openCodeHeaders(["type": "oauth", "access": "fixture-session", "metadata": ["server": "https://untrusted.invalid"]]) == nil)
+        print("PASS: native JavaScriptCore bridge decodes all five provider schemas; credential input validation passes")
     }
 }

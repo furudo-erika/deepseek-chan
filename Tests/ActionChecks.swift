@@ -3,10 +3,10 @@ import Foundation
 @main struct ActionChecks {
     static func main() throws {
         let all = ActionLibrary.all
-        precondition(all.count == 279)
+        precondition(all.count == 285)
         precondition(Set(all.map(\.id)).count == all.count)
         precondition(Set(all.map { "\($0.atlas):\($0.frame)" }).count == all.count, "No duplicated artwork counts")
-        precondition(ActionLibrary.categories.count == 31)
+        precondition(ActionLibrary.categories.count == 32)
         let trophy = all.first { $0.id == "trophy" }!
         precondition(trophy.matches("  TINY   victory  "))
         precondition(trophy.matches("trophy") && trophy.matches("happy victory"))
@@ -28,6 +28,12 @@ import Foundation
                 precondition(outline.count >= 4)
                 precondition(outline.allSatisfy { $0.count == 2 && $0.allSatisfy { $0.isFinite && (0...1).contains($0) } })
             }
+        }
+        for id in ["kite_flying", "heart_dance"] {
+            let action = all.first { $0.id == id }!
+            let frames = Set((0..<30).map { action.animationFrame(at: Double($0) * 0.2) })
+            precondition(frames.count == 3, "Each scene cycles its three drawn keyframes")
+            precondition(action.animationFrame(at: -1) == action.frame)
         }
         var shuffle = ActionShuffle()
         var current = 0
@@ -53,6 +59,6 @@ import Foundation
                 precondition((0.9...1.1).contains(m.scaleX) && (0.9...1.1).contains(m.scaleY))
             }
         }
-        print("PASS: 279 unique actions/artwork cells, 31 categories, assets/crops, five full shuffle cycles, pool changes, empty/single favorites, bounded motion")
+        print("PASS: 285 unique actions/artwork cells, 32 categories, assets/crops, five full shuffle cycles, pool changes, empty/single favorites, bounded motion")
     }
 }

@@ -13,10 +13,10 @@ const assert = require('node:assert/strict');
   const page=await client.firstWindow();const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.waitForSelector('body[data-ready="true"]');await page.waitForFunction(()=>document.querySelector('#pet').dataset.action);
   assert.equal(await page.evaluate(()=>typeof require),'undefined');
-  assert.equal(await page.locator('#action-list button').count(),279);
+  assert.equal(await page.locator('#action-list button').count(),285);
   await page.locator('[data-quota-provider="codex"]').filter({hasText:'39%'}).waitFor();
-  assert.equal(await page.locator('#quota-grid .quota-cell').count(),6);
-  assert.equal(await page.locator('#quota-grid progress').count(),4);
+  assert.equal(await page.locator('#quota-grid .quota-cell').count(),5);
+  assert.equal(await page.locator('#quota-grid progress').count(),5);
   assert.equal(await page.locator('#panel').isVisible(),false);
   assert.ok(!(await page.locator('#line').textContent()).includes('Codex:'));
   await page.emulateMedia({reducedMotion:'reduce'});
@@ -28,10 +28,21 @@ const assert = require('node:assert/strict');
   if(process.env.CHAN_SCREENSHOT)await page.screenshot({path:process.env.CHAN_SCREENSHOT,omitBackground:true});
   await page.getByRole('button',{name:'Details ›',exact:true}).click();
   await page.locator('[data-provider="codex"]').filter({hasText:'76% left'}).waitFor();
-  assert.equal(await page.locator('.usage-card').count(),6);
-  assert.ok((await page.locator('[data-provider="deepseek"]').textContent()).includes('CNY 28.50'));
-  assert.ok((await page.locator('[data-provider="openrouter"]').textContent()).includes('USD 12.75'));
+  assert.equal(await page.locator('.usage-card').count(),5);
+  assert.ok((await page.locator('[data-provider="opencode"]').textContent()).includes('77% left'));
+  assert.equal(await page.locator('[data-provider="deepseek"], [data-provider="openrouter"]').count(),0);
   assert.equal(await page.getByRole('textbox',{name:'Message',exact:true}).count(),0);
+  await page.getByRole('button',{name:'Close panel'}).click();
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  for(const [button,id] of [['Kite ♡','kite_flying'],['Dance ♪','heart_dance']]) {
+    await page.getByRole('button',{name:button,exact:true}).click();
+    await page.waitForFunction(id=>document.querySelector('#pet').dataset.action===id,id);
+    const frame=await page.locator('#pet').getAttribute('data-frame');
+    await page.waitForFunction(frame=>document.querySelector('#pet').dataset.frame!==frame,frame);
+    assert.equal(await page.locator('#quota-bubble').isVisible(),true);
+  }
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.getByRole('button',{name:'Details ›',exact:true}).click();
   await page.getByRole('button',{name:'Close panel'}).click();await page.getByRole('button',{name:'Settings',exact:true}).click();await page.locator('#outfit').selectOption('halloween');await page.waitForFunction(()=>document.querySelector('#pet').dataset.action.startsWith('halloween_'));
   await page.getByRole('button',{name:'Close panel'}).click();await page.getByRole('button',{name:'Usage ♡',exact:true}).click();
   await page.getByRole('button',{name:'Details ›',exact:true}).click();
@@ -60,6 +71,6 @@ const assert = require('node:assert/strict');
   await page.evaluate(()=>window.pet.command('rest'));await page.waitForFunction(()=>document.querySelector('#timer').textContent.includes('look far away'));
   await page.screenshot({path:path.join(temp,'pet.png'),omitBackground:true});
 
-  assert.deepEqual(errors,[]);console.log('PASS: desktop app starts, 279 poses, isolated renderer, six provider quotas, Halloween, local tasks, usage panel preserved through reminders, five-minute rest, screenshot');
+  assert.deepEqual(errors,[]);console.log('PASS: desktop app starts, 285 poses, isolated renderer, five subscription quotas, Halloween, local tasks, usage panel preserved through reminders, five-minute rest, screenshot');
  }finally{await client.close();await fs.rm(temp,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exitCode=1;});

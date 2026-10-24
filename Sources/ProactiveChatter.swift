@@ -4,7 +4,7 @@ import Foundation
 enum ProactiveLibrary {
     static var halloweenRoutines: [PetRoutine] { HalloweenPlay.stories }
     static var routines: [PetRoutine] {
-        let actions = ActionLibrary.all.filter { $0.atlas.hasPrefix("actions-extra-") }
+        let actions = ActionLibrary.all.filter { $0.atlas.hasPrefix("actions-extra-") || $0.atlas == "actions-breeze-dance" }
         return stride(from: 0, to: actions.count, by: 3).compactMap { start in
             guard start + 2 < actions.count else { return nil }
             let row = Array(actions[start...start + 2])

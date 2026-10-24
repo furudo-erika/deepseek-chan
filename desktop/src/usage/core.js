@@ -7,8 +7,7 @@
     { id: 'claude', name: 'Claude', kind: 'Plan usage', url: 'https://api.anthropic.com/api/oauth/usage', guide: 'Sign in with Claude Code on this computer.' },
     { id: 'grok', name: 'Grok', kind: 'Plan usage', url: 'https://cli-chat-proxy.grok.com/v1/billing?format=credits', guide: 'Sign in with Grok Build on this computer.' },
     { id: 'cursor', name: 'Cursor', kind: 'Plan usage', url: 'https://cursor.com/api/usage-summary', guide: 'Sign in with Cursor or cursor-agent on this computer.' },
-    { id: 'deepseek', name: 'DeepSeek', kind: 'API balance', url: 'https://api.deepseek.com/user/balance', guide: 'Add a DeepSeek API key below.' },
-    { id: 'openrouter', name: 'OpenRouter', kind: 'API balance', url: 'https://openrouter.ai/api/v1/credits', guide: 'Add an OpenRouter key with credits access below.' }
+    { id: 'opencode', name: 'OpenCode', kind: 'Go plan', url: 'https://opencode.ai/inference/go/v1/usage', guide: 'Sign in to OpenCode Console locally, or connect a Go key below.' }
   ];
   function number(value) {
     if (typeof value !== 'number' && !(typeof value === 'string' && value.trim())) return null;
@@ -24,7 +23,6 @@
     if (!providers.some(p => p.id === id) || !data || typeof data !== 'object' || Array.isArray(data)) throw Error('Unsupported response');
     const meters = [], balances = [];
     const add = (label, used, reset) => { const n = number(used); if (n === null || n < 0) return; const percent = Math.min(100, n); meters.push({ label, used: percent, remaining: 100 - percent, resetsAt: time(reset) }); };
-    const money = (currency, value) => { const n = number(value); if (['USD','CNY'].includes(currency) && n !== null) balances.push({ currency, amount: n }); };
     if (id === 'codex') {
       for (const [key, fallback] of [['primary_window','Session'],['secondary_window','Weekly']]) {
         const w = data.rate_limit && data.rate_limit[key];
@@ -48,11 +46,11 @@
       }
       const p2=data.individualUsage && data.individualUsage.onDemand;
       if (p2 && p2.enabled === true) { const used=number(p2.used), limit=number(p2.limit); if (used!==null && limit>0) add('On-demand cap',used/limit*100,data.billingCycleEnd); }
-    } else if (id === 'deepseek') {
-      if (Array.isArray(data.balance_infos)) for (const b of data.balance_infos) money(b.currency,b.total_balance);
-    } else if (id === 'openrouter') {
-      const d=data.data || {}, credits=number(d.total_credits), used=number(d.total_usage);
-      if (credits!==null && used!==null) money('USD',credits-used);
+    } else if (id === 'opencode') {
+      for (const [key,label] of [['rolling','5 hours'],['weekly','Weekly'],['monthly','Monthly']]) {
+        const w=data.usage && data.usage[key];
+        if (w && ['ok','rate-limited'].includes(w.status)) add(label,w.percent,w.resetsAt);
+      }
     }
     if (!meters.length && !balances.length) throw Error('No supported quota fields');
     return { meters, balances };

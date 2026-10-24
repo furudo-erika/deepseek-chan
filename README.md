@@ -20,16 +20,16 @@ Deepseek Chan Desktop is a fan-made desktop pet for macOS and Windows. She lives
 
 ## Meet your little companion
 
-- **279 illustrated poses across 31 collections.** Snacks, games, music, cozy naps, tiny adventures, and everyday mischief.
+- **285 illustrated poses across 32 collections.** Snacks, games, music, cozy naps, tiny adventures, and everyday mischief.
 - **Little hellos every 2–3 minutes.** Short authored stories and playful everyday poses.
-- **Coding Plan at a glance.** Codex, Claude, Grok and Cursor quota, plus DeepSeek and OpenRouter API balances. Remaining percentages, reset times, last-updated indicators and automatic refresh.
+- **Coding Plan at a glance.** Codex, Claude, Grok, Cursor and OpenCode Go subscription quota. Remaining percentages, reset times, last-updated indicators and automatic refresh.
 - **English controls, multilingual personality.** Small English, Chinese, and Japanese bubbles, rather than long paragraphs.
 - **A Halloween wardrobe.** Witch hat, bat cape, pumpkin candy basket, a pocket ghost, 27 seasonal poses, and nine little scenes. Switch outfits whenever you like.
 - **Visible eye-break reminders.** Mouse activity starts your focus timer. When it is time, she moves to the center of the active display and dances. Take a five-minute break or snooze.
 - **Make her comfortable.** Drag to reposition, browse the action library, save favorites, or turn on Calm mode for gentler everyday movement.
 - **Read-only usage queries.** Existing client sign-ins stay local. No model calls are needed to check quota. [Usage setup and privacy](docs/usage.md).
 
-The artwork count means **279 distinct illustrated poses with procedural motion**, not 279 individually drawn animation clips. The app also has separate multi-frame dance/bell sequences and a three-pose Halloween reminder dance.
+The artwork count means **285 distinct illustrated poses with procedural motion**, not 285 individually drawn animation clips. The app also has separate multi-frame dance/bell sequences and a three-pose Halloween reminder dance.
 
 ## Download and install
 
@@ -39,7 +39,7 @@ Get the DMG and its SHA-256 checksum from [Releases](https://github.com/furudo-e
 | --- | --- |
 | macOS 26+, Apple Silicon | Available as an ARM64 DMG |
 | macOS, Intel | No tested or published binary |
-| Windows 10/11, x64 | EXE installer; first Windows release |
+| Windows 10/11, x64 | EXE installer; unsigned |
 | Linux | Planned; no package available |
 
 For Windows, download the EXE installer and follow the [Windows guide](docs/windows.md). For macOS:
@@ -53,7 +53,7 @@ For Windows, download the EXE installer and follow the [Windows guide](docs/wind
 To verify a download, put the DMG and its `.sha256` file in the same folder and run:
 
 ```sh
-shasum -a 256 -c DeepSeek-chan-1.10.1-arm64.dmg.sha256
+shasum -a 256 -c DeepSeek-chan-1.11.0-arm64.dmg.sha256
 ```
 
 ## Task buddies
@@ -66,7 +66,7 @@ Included in 1.9.0. Windows supports local snapshots and generic MCP; native hook
 
 ## Say hello
 
-Click her for a head pat. Right-click for **Coding Plan**, **Tiny show**, **Dance**, the action library and other interactions. Cute speech stays above her; a separate bubble below her shows remaining quota as progress bars. Click **Details** to see every quota window and connection option.
+Click her for a head pat. Right-click for **Coding Plan**, **Tiny show**, **Dance**, the action library and other interactions. Cute speech stays above her; a separate bubble below her shows remaining quota as progress bars. Click **Details** to see every quota window and connection option. **Fly a kite** and **Dance** play new three-keyframe mini-scenes with short English, Chinese and Japanese bubbles.
 
 Choose **Outfit → Halloween 🎃** for her witch wardrobe. The outfit survives a restart. Playing an action card switches to that card’s outfit.
 
@@ -78,7 +78,7 @@ Choose **Outfit → Halloween 🎃** for her witch wardrobe. The outfit survives
 
 ## Usage and privacy
 
-Open **Usage / Coding Plan** to check connected providers. Codex, Claude Code, Grok Build and Cursor use local client sign-ins. DeepSeek and OpenRouter API balances accept an optional key through **Connect API balance**. API credit balances are distinct from subscription quotas.
+Open **Usage / Coding Plan** to check connected providers. Codex, Claude Code, Grok Build, Cursor and OpenCode use local client sign-ins. OpenCode supports its v2 credential database and legacy Go credentials, plus an optional Go key under **Connect OpenCode Go**. API credit-balance cards are no longer shown.
 
 - Refreshes every five minutes after opening Usage, with a manual refresh button and provider backoff.
 - Missing or unavailable quota is shown as unavailable; it is never inferred as zero or unlimited. Old results are marked **Last known** after a failed refresh. Account changes clear previous-account values.
@@ -142,7 +142,7 @@ The historical bundle identifier and internal executable name are retained for c
 | `Sources/PetPersonality.swift` | Authored conversations and short scene playback |
 | `Sources/ProactiveChatter.swift` | Non-repeating story decks and proactive scheduling |
 | `Sources/TimerEngine.swift` | Focus and eye-break state machine |
-| `Sources/DialogueService.swift` | Optional OpenRouter client and Keychain storage |
+| `Sources/DialogueService.swift` | Legacy local dialogue and Keychain helpers |
 | `Assets/` | Bundled illustrations, manifests, crop metadata, and generation prompts |
 | `integrations/` | Local task CLI, MCP server, hooks, and Pi/OMP extensions |
 | `Sources/TaskBridge.swift` | Local task snapshots, reaction queue, and task dialogue |

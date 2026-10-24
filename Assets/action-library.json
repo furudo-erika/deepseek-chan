@@ -2511,7 +2511,61 @@
       "frame": 8,
       "motion": "bow",
       "line": "充电完成，满格小魔女！"
+    },
+    {
+      "id": "kite_flying",
+      "name": "Fly a kite",
+      "category": "Breeze & beats",
+      "atlas": "actions-breeze-dance",
+      "frame": 0,
+      "motion": "kite",
+      "line": "A tiny kite, a very big adventure. ♡"
+    },
+    {
+      "id": "kite_tug",
+      "name": "Catch the breeze",
+      "category": "Breeze & beats",
+      "atlas": "actions-breeze-dance",
+      "frame": 1,
+      "motion": "kite",
+      "line": "风来啦，抓紧小鱼！"
+    },
+    {
+      "id": "kite_hop",
+      "name": "Kite hop",
+      "category": "Breeze & beats",
+      "atlas": "actions-breeze-dance",
+      "frame": 2,
+      "motion": "kite",
+      "line": "ふわふわ～ up we go!"
+    },
+    {
+      "id": "heart_dance",
+      "name": "Heart-step dance",
+      "category": "Breeze & beats",
+      "atlas": "actions-breeze-dance",
+      "frame": 3,
+      "motion": "heartDance",
+      "line": "Left, right… a tiny dance for you! ♪"
+    },
+    {
+      "id": "heart_dance_hop",
+      "name": "Heart hop",
+      "category": "Breeze & beats",
+      "atlas": "actions-breeze-dance",
+      "frame": 4,
+      "motion": "heartDance",
+      "line": "One hop, two hearts. Both yours. ♡"
+    },
+    {
+      "id": "heart_dance_finish",
+      "name": "Dance flourish",
+      "category": "Breeze & beats",
+      "atlas": "actions-breeze-dance",
+      "frame": 5,
+      "motion": "heartDance",
+      "line": "最后一个转身，送你小爱心～"
     }
   ],
-  "countingRule": "108 distinct illustrated poses with procedural motion loops. Dance and bell frame sequences are additional, not counted. Retiming, mirroring and motion profiles are not counted as new actions."
+  "countingRule": "285 distinct illustrated poses with procedural motion loops. Dance, bell and mini-scene frame sequences are additional, not counted. Retiming, mirroring and motion profiles are not counted as new actions."
 }

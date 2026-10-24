@@ -51,7 +51,7 @@ struct UsageView: View {
     let done: () -> Void
     var refreshOnAppear = true
     @State private var key = ""
-    @State private var provider = "deepseek"
+    private let provider = "opencode"
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
@@ -87,10 +87,10 @@ struct UsageView: View {
                     }
                 }
             }.frame(maxHeight: 330)
-            DisclosureGroup("Connect API balance") {
+            DisclosureGroup("Connect OpenCode Go") {
                 VStack(alignment: .leading, spacing: 8) {
-                    Picker("Provider", selection: $provider) { Text("DeepSeek").tag("deepseek"); Text("OpenRouter").tag("openrouter") }.onChange(of: provider) { _, _ in key = "" }
-                    SecureField("API key", text: $key).textFieldStyle(.roundedBorder)
+                    Text("Local sign-in is detected automatically. A Go key is optional.").font(.system(size: 11)).foregroundStyle(.secondary)
+                    SecureField("OpenCode Go key", text: $key).textFieldStyle(.roundedBorder)
                     HStack {
                         Button("Save key") { service.save(id: provider, key: key); key = "" }.disabled(key.isEmpty)
                         Button("Remove key") { key = ""; service.remove(id: provider) }

@@ -16,13 +16,13 @@ Drag DeepSeek-chan.app to Applications, then open it from Applications.
 Requires Apple Silicon and macOS 26 or later.
 
 Halloween wardrobe: select Outfit > Halloween in the main window.
-279 illustrated poses, little stories, and five-minute eye breaks.
+285 illustrated poses, little stories, and five-minute eye breaks.
 
 This personal release is ad-hoc signed, not Apple-notarized. macOS may
 require explicit approval before first launch on another computer.
 
-Open Coding Plan to view Codex, Claude, Grok and Cursor quotas.
-Connect your own DeepSeek or OpenRouter key for API credit balances.
+Open Coding Plan to view Codex, Claude, Grok, Cursor and OpenCode quotas.
+OpenCode Go uses your local sign-in or an optional Go key for subscription quota.
 The package contains no API keys, account details or personal preferences.
 Fan-made; not affiliated with DeepSeek.
 TXT

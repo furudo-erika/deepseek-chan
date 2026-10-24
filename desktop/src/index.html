@@ -11,9 +11,9 @@
       <p class="usage-subtitle">Your quota, a little closer. ♡</p>
       <div class="row"><span class="small">Remaining · auto-refresh 5 min</span><button id="usage-refresh" data-command="usage-refresh">Refresh</button></div>
       <div id="usage-list" aria-live="polite"></div>
-      <details><summary>Connect API balance</summary>
-        <label>Provider <select id="usage-provider"><option value="deepseek">DeepSeek</option><option value="openrouter">OpenRouter</option></select></label>
-        <input id="usage-key" type="password" autocomplete="off" placeholder="API key" aria-label="Usage API key">
+      <details><summary>Connect OpenCode Go</summary>
+        <p class="small">Local sign-in is detected automatically. A Go key is optional.</p>
+        <input id="usage-key" type="password" autocomplete="off" placeholder="OpenCode Go key" aria-label="OpenCode Go key">
         <div class="row"><button id="usage-save">Save key</button><button id="usage-remove">Remove key</button></div><p id="usage-key-status" class="small" role="status"></p>
       </details>
       <p class="small">Reads local client sign-ins and provider quota endpoints. No prompts or chat history. Keys stay on this computer; account names and emails stay out of this panel.</p>
@@ -29,7 +29,7 @@
     <p id="error" class="small" role="status"></p>
   </section>
   <canvas id="pet" class="interactive" width="560" height="560" aria-label="DeepSeek-chan — drag or click for a head pat" tabindex="0"></canvas>
-  <nav class="interactive toolbar" aria-label="Pet controls"><button data-command="usage-bubble">Usage ♡</button><button data-command="dance">Dance ♪</button><button data-panel="actions">Poses</button><button data-panel="tasks">Tasks</button><button data-panel="settings" aria-label="Settings">⚙</button></nav>
+  <nav class="interactive toolbar" aria-label="Pet controls"><button data-command="usage-bubble">Usage ♡</button><button data-command="dance">Dance ♪</button><button data-command="kite">Kite ♡</button><button data-panel="actions">Poses</button><button data-panel="tasks">Tasks</button><button data-panel="settings" aria-label="Settings">⚙</button></nav>
   <div id="timer" class="timer"></div>
   <script src="renderer.js"></script>
 </body></html>

@@ -68,10 +68,11 @@ struct Dashboard: View {
                     HStack(spacing: 8) {
                         PillButton(title: "Usage", icon: "chart.bar.fill", primary: true) { model.openChat() }
                             .disabled(model.isResting || model.engine.phase == .reminding)
-                        Button("Dance ♡") { model.preview() }.buttonStyle(.plain).font(.system(size: 12)).foregroundStyle(Color.ocean)
+                        Button("Dance ♡") { model.playBreezeScene(dance: true) }.buttonStyle(.plain).font(.system(size: 12)).foregroundStyle(Color.ocean)
                     }
                     Button(model.isResting ? "End break" : "Rest now") { if model.isResting { model.endRest() } else { model.rest() } }
                         .buttonStyle(.plain).font(.system(size: 12)).foregroundStyle(Color.ocean)
+                    Button("Fly a kite ♡") { model.playBreezeScene() }.buttonStyle(.plain).font(.system(size: 12)).foregroundStyle(Color.ocean)
                     Button("Tiny show ✧") { model.tinyShow() }.buttonStyle(.plain).font(.system(size: 12)).foregroundStyle(Color.ocean)
                     Button { model.actionsPresented = true } label: {
                         Label("Actions · \(ActionLibrary.all.count)", systemImage: "sparkles")
@@ -148,7 +149,8 @@ struct ReminderView: View {
                     Button(model.halloweenMode ? "Give a treat" : "Feed rice") { model.interact(action: 4, context: .feed) }
                     Button("Wave") { model.interact(action: 1, context: .hello) }
                     Button("Nap") { model.interact(action: 5, context: .resting) }
-                    Button("Dance") { model.preview() }
+                    Button("Dance") { model.playBreezeScene(dance: true) }
+                    Button("Fly a kite") { model.playBreezeScene() }
                     Button("Surprise me") { model.surpriseAction() }
                     Button("Tiny show ✧") { model.tinyShow() }
                     Toggle("Halloween outfit 🎃", isOn: $model.halloweenMode)

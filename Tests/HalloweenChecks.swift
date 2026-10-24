@@ -5,7 +5,7 @@ import Foundation
         let library = ActionLibrary.all
         let witch = Set(HalloweenTheme.indices)
         let classic = Set(HalloweenTheme.classicIndices)
-        precondition(witch.count == 27 && classic.count == 252 && witch.isDisjoint(with: classic))
+        precondition(witch.count == 27 && classic.count == 258 && witch.isDisjoint(with: classic))
         precondition(witch.union(classic) == Set(library.indices))
         for i in library.indices {
             precondition(witch.contains(HalloweenTheme.wearingCostume(i)))
@@ -56,7 +56,7 @@ import Foundation
             precondition(show.name != previous)
             previous = show.name
         }
-        precondition(ProactiveLibrary.routines.count == 48, "Classic stories remain separate")
+        precondition(ProactiveLibrary.routines.count == 50, "Classic stories remain separate")
         print("PASS: 27 costume poses, classic/favorite pool isolation, all sleep/dance/chat mappings, 9 seasonal stories, saved no-repeat cycles, multilingual cues, encore/stop, varied shows")
     }
 }

@@ -16,8 +16,7 @@ struct UsageProvider: Identifiable {
         .init(id: "claude", name: "Claude", kind: "Plan usage", endpoint: "https://api.anthropic.com/api/oauth/usage", guide: "Sign in with Claude Code on this computer."),
         .init(id: "grok", name: "Grok", kind: "Plan usage", endpoint: "https://cli-chat-proxy.grok.com/v1/billing?format=credits", guide: "Sign in with Grok Build on this computer."),
         .init(id: "cursor", name: "Cursor", kind: "Plan usage", endpoint: "https://cursor.com/api/usage-summary", guide: "Sign in with Cursor or cursor-agent on this computer."),
-        .init(id: "deepseek", name: "DeepSeek", kind: "API balance", endpoint: "https://api.deepseek.com/user/balance", guide: "Add a DeepSeek API key below."),
-        .init(id: "openrouter", name: "OpenRouter", kind: "API balance", endpoint: "https://openrouter.ai/api/v1/credits", guide: "Add an OpenRouter key with credits access below.")
+        .init(id: "opencode", name: "OpenCode", kind: "Go plan", endpoint: "https://opencode.ai/inference/go/v1/usage", guide: "Sign in to OpenCode Console locally, or connect a Go key below.")
     ]
 }
 struct UsageRow: Identifiable {
@@ -62,10 +61,10 @@ enum UsageSecrets {
         return String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     static func read(_ id: String) -> String? {
-        read(service: service, account: id) ?? (id == "openrouter" ? read(service: "local.bill.eyewhale.openrouter", account: "api-key") : nil)
+        id == "opencode" ? read(service: service, account: id) : nil
     }
     static func save(_ id: String, key: String) -> Bool {
-        guard ["deepseek", "openrouter"].contains(id), validToken(key) else { return false }
+        guard id == "opencode", validToken(key) else { return false }
         let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service, kSecAttrAccount as String: id]
         let data = Data(key.utf8)
         let result = SecItemUpdate(query as CFDictionary, [kSecValueData as String: data] as CFDictionary)
@@ -75,10 +74,9 @@ enum UsageSecrets {
         return SecItemAdd(add as CFDictionary, nil) == errSecSuccess
     }
     static func remove(_ id: String) -> Bool {
-        guard ["deepseek", "openrouter"].contains(id) else { return false }
+        guard id == "opencode" else { return false }
         let result = SecItemDelete([kSecClass as String: kSecClassGenericPassword, kSecAttrService as String: service, kSecAttrAccount as String: id] as CFDictionary)
-        let legacy = id != "openrouter" || CompanionKeychain.remove()
-        return (result == errSecSuccess || result == errSecItemNotFound) && legacy
+        return result == errSecSuccess || result == errSecItemNotFound
     }
     static func validToken(_ value: String) -> Bool { value.count >= 10 && value.count < 16384 && !value.contains(where: { $0.isWhitespace || $0.isNewline }) }
     static func json(_ path: String) -> [String: Any]? {
@@ -114,6 +112,48 @@ enum UsageSecrets {
         guard sqlite3_step(statement) == SQLITE_ROW, sqlite3_column_bytes(statement, 0) < 16384, let value = sqlite3_column_text(statement, 0) else { return nil }
         return String(cString: value)
     }
+    static func openCodeHeaders(_ value: [String: Any]?) -> [String: String]? {
+        guard let value else { return nil }
+        let metadata = value["metadata"] as? [String: Any] ?? [:]
+        if let server = metadata["server"] as? String,
+           !["https://opencode.ai/console", "https://console.opencode.ai"].contains(server.hasSuffix("/") ? String(server.dropLast()) : server) { return nil }
+        let kind = value["type"] as? String
+        guard let key = (kind == "oauth" ? value["access"] : ["key", "api"].contains(kind ?? "") ? value["key"] : nil) as? String, validToken(key) else { return nil }
+        var headers = ["Authorization": "Bearer " + key, "User-Agent": "DeepSeek-chan"]
+        if let org = metadata["orgID"] as? String, !org.isEmpty, org.count <= 256,
+           org.range(of: "^[A-Za-z0-9_-]+$", options: .regularExpression) != nil {
+            headers["x-org-id"] = org; headers["x-opencode-org-id"] = org
+        }
+        return headers
+    }
+    static func openCodeCredentials(home: String, env: [String: String]) -> [String: String]? {
+        if let saved = read("opencode"), let headers = openCodeHeaders(["type": "key", "key": saved]) { return headers }
+        let root = (env["XDG_DATA_HOME"] ?? home + "/.local/share") + "/opencode"
+        let file = root + "/opencode.db"
+        var info = stat()
+        if lstat(file, &info) == 0, (info.st_mode & S_IFMT) == S_IFREG {
+            var db: OpaquePointer?
+            if sqlite3_open_v2(file, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_NOMUTEX, nil) == SQLITE_OK {
+                defer { sqlite3_close(db) }; sqlite3_busy_timeout(db, 1000)
+                var statement: OpaquePointer?
+                let sql = "SELECT value FROM credential WHERE integration_id IN ('opencode-go','opencode') AND (active=1 OR active IS NULL) ORDER BY CASE integration_id WHEN 'opencode-go' THEN 0 ELSE 1 END, active DESC, time_created DESC LIMIT 1"
+                if sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK {
+                    defer { sqlite3_finalize(statement) }
+                    if sqlite3_step(statement) == SQLITE_ROW {
+                        guard sqlite3_column_bytes(statement, 0) <= 262144, let bytes = sqlite3_column_text(statement, 0) else { return nil }
+                        return openCodeHeaders(object(String(cString: bytes)))
+                    }
+                    var exists: OpaquePointer?
+                    if sqlite3_prepare_v2(db, "SELECT 1 FROM credential WHERE integration_id IN ('opencode-go','opencode') LIMIT 1", -1, &exists, nil) == SQLITE_OK {
+                        defer { sqlite3_finalize(exists) }
+                        if sqlite3_step(exists) == SQLITE_ROW { return nil }
+                    }
+                }
+            } else if let db { sqlite3_close(db) }
+        }
+        let legacy = json(root + "/auth.json")
+        return openCodeHeaders((legacy?["opencode-go"] ?? legacy?["opencode"]) as? [String: Any])
+    }
     static func credentials(_ id: String) -> [String: String]? {
         let home = FileManager.default.homeDirectoryForCurrentUser.path, env = ProcessInfo.processInfo.environment
         func bearer(_ value: String?) -> [String: String]? { guard let value, validToken(value) else { return nil }; return ["Authorization": "Bearer " + value] }
@@ -138,7 +178,7 @@ enum UsageSecrets {
             let cli = json(home + "/.cursor/auth.json")?["accessToken"] as? String
             guard let cookie = cursorCookie(clientKeychain("cursor-access-token")) ?? cursorCookie(cli) ?? cursorCookie(cursorDesktopToken(home: home)) else { return nil }
             return ["Cookie": cookie, "Origin": "https://cursor.com", "Referer": "https://cursor.com/dashboard"]
-        case "deepseek", "openrouter": return bearer(read(id))
+        case "opencode": return openCodeCredentials(home: home, env: env)
         default: return nil
         }
     }

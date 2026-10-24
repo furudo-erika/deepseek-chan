@@ -22,6 +22,35 @@ function cursorCookie(raw) {
   if (!token(raw)) return null;
   try { const claims=JSON.parse(Buffer.from(raw.split('.')[1],'base64url')); if (typeof claims.sub !== 'string' || !claims.sub || claims.sub.length>256) return null; return 'WorkosCursorSessionToken='+encodeURIComponent(claims.sub)+'%3A%3A'+raw; } catch { return null; }
 }
+// Only OpenCode's own credential entries are read; provider URLs are never taken from local data.
+function openCodeHeaders(value) {
+  if (!value || typeof value!=='object') return null;
+  const server=value.metadata?.server;
+  if (server && !['https://opencode.ai/console','https://console.opencode.ai'].includes(String(server).replace(/\/$/,''))) return null;
+  const key=value.type==='oauth'?value.access:['key','api'].includes(value.type)?value.key:null;
+  if (!token(key)) return null;
+  const headers={Authorization:'Bearer '+key,'User-Agent':'DeepSeek-chan'};
+  const org=value.metadata?.orgID;
+  if (typeof org==='string' && /^[A-Za-z0-9_-]{1,256}$/.test(org)) {headers['x-org-id']=org;headers['x-opencode-org-id']=org;}
+  return headers;
+}
+async function openCodeCredentials(home, readKey, env) {
+  const saved=await readKey('opencode');
+  if (token(saved)) return openCodeHeaders({type:'key',key:saved});
+  const root=path.join(env.XDG_DATA_HOME || path.join(home,'.local','share'),'opencode');
+  let db;
+  try {
+    const file=path.join(root,'opencode.db'), info=await fs.lstat(file);
+    if(info.isFile() && !info.isSymbolicLink()) {
+      const {DatabaseSync}=require('node:sqlite'); db=new DatabaseSync(file,{readOnly:true});db.exec('PRAGMA busy_timeout=1000');
+      const rows=db.prepare("SELECT value FROM credential WHERE integration_id IN ('opencode-go','opencode') AND (active=1 OR active IS NULL) ORDER BY CASE integration_id WHEN 'opencode-go' THEN 0 ELSE 1 END, active DESC, time_created DESC LIMIT 1").all();
+      if(rows.length) {try{return typeof rows[0].value==='string' && rows[0].value.length<=262144 ? openCodeHeaders(JSON.parse(rows[0].value)) : null;}catch{return null;}}
+      if(db.prepare("SELECT 1 FROM credential WHERE integration_id IN ('opencode-go','opencode') LIMIT 1").get())return null;
+    }
+  } catch {} finally {db?.close();}
+  const legacy=await readJSON(path.join(root,'auth.json'));
+  return openCodeHeaders(legacy?.['opencode-go'] ?? legacy?.opencode);
+}
 async function credentials(id, home, appData, readKey, env = process.env) {
   let value;
   if (id==='codex') {
@@ -45,8 +74,8 @@ async function credentials(id, home, appData, readKey, env = process.env) {
       try { const {DatabaseSync}=require('node:sqlite'); db=new DatabaseSync(path.join(desktop,'User','globalStorage','state.vscdb'),{readOnly:true});value=db.prepare("SELECT value FROM ItemTable WHERE key = 'cursorAuth/accessToken'").get()?.value; } catch {} finally { db?.close(); }
     }
     const cookie=cursorCookie(value);if(cookie)return {Cookie:cookie,Origin:'https://cursor.com',Referer:'https://cursor.com/dashboard'};
-  } else if (['deepseek','openrouter'].includes(id)) {
-    value=await readKey(id); if(token(value))return {Authorization:'Bearer '+value};
+  } else if (id==='opencode') {
+    return openCodeCredentials(home,readKey,env);
   }
   return null;
 }
@@ -92,4 +121,4 @@ class UsageService {
   }
   clear(id) {if(this.busy)this.pending=true;this.fingerprints.delete(id);const row=this.rows.find(r=>r.id===id);if(row)Object.assign(row,{meters:[],balances:[],updatedAt:null,status:'disconnected',message:row.guide,retryAt:null,generation:row.generation+1});this.lastAttempt=0;this.notify();}
 }
-module.exports={UsageService,credentials,cursorCookie,readJSON};
+module.exports={UsageService,credentials,cursorCookie,readJSON,openCodeHeaders};
